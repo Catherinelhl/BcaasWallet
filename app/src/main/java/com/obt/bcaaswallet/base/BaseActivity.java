@@ -35,7 +35,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void showToast(String toastInfo) {
         System.out.println(toastInfo);
-        Toast.makeText(BcaasApplication.context, toastInfo, Toast.LENGTH_LONG).show();
+        Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_LONG).show();
     }
 
     /**

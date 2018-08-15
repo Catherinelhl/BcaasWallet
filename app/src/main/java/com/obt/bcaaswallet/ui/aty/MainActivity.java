@@ -43,12 +43,12 @@ public class MainActivity extends BaseActivity {
         initCurrency();
         bottomTabBar = findViewById(R.id.tab_bar);
         bottomTabBar.init(getSupportFragmentManager(), 720, 1280)
-                .setImgSize(getResources().getDimensionPixelOffset(R.dimen.d32),
-                        getResources().getDimensionPixelOffset(R.dimen.d32))
-                .setFontSize(getResources().getDimensionPixelOffset(R.dimen.text_size_6))
-                .setTabPadding(getResources().getDimensionPixelOffset(R.dimen.d5),
+                .setImgSize(getResources().getDimension(R.dimen.d32),
+                        getResources().getDimension(R.dimen.d32))
+                .setFontSize(getResources().getDimension(R.dimen.text_size_6))
+                .setTabPadding(getResources().getDimension(R.dimen.d5),
                         getResources().getDimensionPixelOffset(R.dimen.d0),
-                        getResources().getDimensionPixelOffset(R.dimen.d5))
+                        getResources().getDimension(R.dimen.d5))
                 .setChangeColor(getResources().getColor(R.color.black),
                         getResources().getColor(R.color.grey))
                 .addTabItem(getString(R.string.main), R.mipmap.ic_launcher, MainFragment.class)

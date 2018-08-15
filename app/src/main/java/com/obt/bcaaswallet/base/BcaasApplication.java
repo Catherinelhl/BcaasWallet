@@ -8,12 +8,16 @@ import android.content.Context;
  * @since 2018/8/15
  */
 public class BcaasApplication extends Application {
+    private static BcaasApplication instance;
 
-    protected static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        context = this.getApplicationContext();
+        instance = this;
+    }
+
+    public static Context context() {
+        return instance.getApplicationContext();
     }
 }
