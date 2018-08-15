@@ -13,6 +13,9 @@ import com.obt.bcaaswallet.ui.frg.ScanFragment;
 import com.obt.bcaaswallet.ui.frg.SendFragment;
 import com.obt.bcaaswallet.ui.frg.SettingFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
@@ -22,6 +25,8 @@ import com.obt.bcaaswallet.ui.frg.SettingFragment;
 public class MainActivity extends BaseActivity {
 
     private BottomTabBar bottomTabBar;
+    private List<String> currency;
+
 
     @Override
     public void getArgs(Bundle bundle) {
@@ -35,6 +40,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        initCurrency();
         bottomTabBar = findViewById(R.id.tab_bar);
         bottomTabBar.init(getSupportFragmentManager(), 720, 1280)
                 .setImgSize(getResources().getDimensionPixelOffset(R.dimen.d32),
@@ -51,7 +57,14 @@ public class MainActivity extends BaseActivity {
                 .addTabItem(getString(R.string.send), R.mipmap.ic_launcher, SendFragment.class)
                 .addTabItem(getString(R.string.setting), R.mipmap.ic_launcher, SettingFragment.class);
 
+    }
 
+    private void initCurrency() {
+        currency = new ArrayList<>();
+        currency.add("BCC");
+        currency.add("TCC");
+        currency.add("BCL");
+        currency.add("TCH");
     }
 
     @Override
@@ -62,5 +75,9 @@ public class MainActivity extends BaseActivity {
                 showToast(position);
             }
         });
+    }
+
+    public List<String> getCurrency() {
+        return currency;
     }
 }

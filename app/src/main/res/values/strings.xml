@@ -28,4 +28,8 @@
     <string name="my_account_adress">我的账户地址</string>
     <string name="account_balance">账户余额</string>
     <string name="pending_transaction">待处理交易</string>
+    <string name="receive_account_address">收款账户地址</string>
+    <string name="account_address_eg">eg:kjahdgfahjbdfkjahbdnkajbdnkjhbajh==</string>
+    <string name="transaction_amount">交易数额</string>
+    <string name="input_pwd">请输入密码</string>
 </resources>

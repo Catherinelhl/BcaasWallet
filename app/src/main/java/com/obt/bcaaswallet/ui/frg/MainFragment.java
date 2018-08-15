@@ -6,17 +6,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.adapter.PendingTransactionAdapter;
 import com.obt.bcaaswallet.base.BaseFragment;
-import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.bean.TransactionsBean;
-
-import org.w3c.dom.Text;
+import com.obt.bcaaswallet.ui.aty.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,6 @@ public class MainFragment extends BaseFragment {
     private RecyclerView rvPendingTransaction;
     private EditText etAccountAddress;// 显示当前账户地址的容器
     private ArrayAdapter adapter;
-    private List<String> currency;
     private List<TransactionsBean> allCurrency;
     private PendingTransactionAdapter pendingTransactionAdapter;//待交易数据
     private List<TransactionsBean> transactionsBeanList;
@@ -58,19 +54,21 @@ public class MainFragment extends BaseFragment {
         etAccountAddress = view.findViewById(R.id.myAccountAddress);
         accountAddress = "asdjfnaks.jnfak.jdsnfkm===";
         etAccountAddress.setText(accountAddress);
-        //将可选内容与ArrayAdapter连接起来
-        adapter = new ArrayAdapter(this.context, R.layout.spinner_item, currency);
-//        ArrayAdapter.createFromResource(this, R.array.songs, android.R.layout.simple_spinner_item);
-
-        //设置下拉列表的风格
-        adapter.setDropDownViewResource(R.layout.dropdown_style);
-//        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        //将adapter2 添加到spinner中
-        spSelect.setAdapter(adapter);
+        initSpinnerAdapter();
         initTransactionsAdapter();
 
 
+    }
+
+    private void initSpinnerAdapter() {
+        //将可选内容与ArrayAdapter连接起来
+        adapter = new ArrayAdapter<>(this.context, R.layout.spinner_item, getCurrency());
+
+        //设置下拉列表的风格
+        adapter.setDropDownViewResource(R.layout.dropdown_style);
+
+        //将adapter2 添加到spinner中
+        spSelect.setAdapter(adapter);
     }
 
     private void initTransactionList() {
@@ -78,7 +76,7 @@ public class MainFragment extends BaseFragment {
         for (int i = 0; i < 4; i++) {
             TransactionsBean transactionsBean = new TransactionsBean(i + "asdkjfbakjhsdvfjahvfaghvdfh==",
                     allCurrency.get(i).getBalance(),
-                    currency.get(i / 2));
+                    ((MainActivity) activity).getCurrency().get(i / 2));
             transactionsBeanList.add(transactionsBean);
         }
     }
@@ -92,15 +90,10 @@ public class MainFragment extends BaseFragment {
 
     private void initCurrencyData() {
         allCurrency = new ArrayList<>();
-        currency = new ArrayList<>();
-        currency.add("BCC");
-        currency.add("TCC");
-        currency.add("BCL");
-        currency.add("TCH");
         Random random = new Random();
-        for (int i = 0; i < currency.size(); i++) {
+        for (int i = 0; i < getCurrency().size(); i++) {
             int rand = random.nextInt(9999) + 10000;
-            TransactionsBean transactionsBean = new TransactionsBean("asdfafas==", String.valueOf(rand), currency.get(i));
+            TransactionsBean transactionsBean = new TransactionsBean("asdfafas==", String.valueOf(rand), getCurrency().get(i));
             allCurrency.add(transactionsBean);
         }
 

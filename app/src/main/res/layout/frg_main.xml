@@ -12,9 +12,7 @@
 
     <EditText
         android:id="@+id/myAccountAddress"
-        style="@style/edittext_style"
-        android:layout_marginTop="@dimen/d20"
-        android:focusable="false" />
+        style="@style/edittext_style_nofocus" />
 
     <TextView
         style="@style/black_text_style"
@@ -33,7 +31,7 @@
             android:padding="@dimen/d2"
             android:dropDownHorizontalOffset="-10dp"
             android:dropDownVerticalOffset="2dp"
-            android:background="@drawable/spinner_bg"
+            android:background="@drawable/bg_spinner"
             android:popupBackground="@color/transparent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/d5"
