@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnUnlockWallet.setVisibility(StringU.notEmpty(s.toString()) ? View.VISIBLE : View.INVISIBLE);
+                btnUnlockWallet.setPressed(true);
 
             }
         });
