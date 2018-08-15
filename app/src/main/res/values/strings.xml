@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BcaasWallet</string>
+    <string name="bcaas_u">BCAAS</string>
+    <string name="bcaas_l">bcaas</string>
+    <string name="unlock">解锁</string>
+    <string name="password">密码</string>
+    <string name="create_new_wallet">创建新钱包</string>
+    <string name="import_wallet">导入钱包</string>
+</resources>
