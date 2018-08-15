@@ -2,6 +2,7 @@ package com.obt.bcaaswallet.ui.aty;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -16,13 +17,17 @@ import com.obt.bcaaswallet.contants.Contants;
  */
 public class BrandActivity extends BaseActivity {
 
+    @Override
+    public void getArgs(Bundle bundle) {
+
+    }
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            intentToActivity(LoginActivity.class);
+            intentToActivity(LoginActivity.class,true);
         }
     };
 
@@ -45,11 +50,5 @@ public class BrandActivity extends BaseActivity {
     @Override
     public void initListener() {
 
-    }
-
-    private void intentToActivity(Class classTo) {
-        Intent intent = new Intent();
-        intent.setClass(this, classTo);
-        startActivity(intent);
     }
 }

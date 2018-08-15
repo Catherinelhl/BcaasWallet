@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/d20">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d50"
+        android:text="@string/create_new_wallet"
+        android:textColor="@color/black" />
+
+    <View
+        style="@style/line_style"
+        android:layout_marginTop="@dimen/d10" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d20"
+        android:text="@string/account_address"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_account_address"
+        style="@style/edittext_style"
+        tool:hint="@string/account_address" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d20"
+        android:text="@string/backup_private_key"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/backup_private_key_detail"
+        android:textColor="@color/grey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d10">
+
+        <EditText
+            android:id="@+id/et_private_key"
+            style="@style/edittext_style"
+            android:inputType="textPassword"
+            android:paddingRight="@dimen/d40" />
+
+        <CheckBox
+            android:id="@+id/cbPwd"
+            android:layout_width="@dimen/d32"
+            android:layout_height="@dimen/d32"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/selector_cb_password"
+            android:checked="false"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d50"
+        android:text="@string/finish" />
+
+</LinearLayout>

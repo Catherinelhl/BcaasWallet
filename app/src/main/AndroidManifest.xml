@@ -18,6 +18,9 @@
         </activity>
         <activity android:name=".ui.aty.LoginActivity" />
         <activity android:name=".ui.aty.MainActivity" />
+        <activity android:name=".ui.aty.CreateWalletActivity" />
+        <activity android:name=".ui.aty.ImportWalletActivity" />
+        <activity android:name=".ui.aty.WalletCreatedSuccessActivity" />
 
     </application>
 
