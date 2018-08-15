@@ -27,7 +27,6 @@ public class MainActivity extends BaseActivity {
     private BottomTabBar bottomTabBar;
     private List<String> currency;
 
-
     @Override
     public void getArgs(Bundle bundle) {
 
@@ -43,12 +42,12 @@ public class MainActivity extends BaseActivity {
         initCurrency();
         bottomTabBar = findViewById(R.id.tab_bar);
         bottomTabBar.init(getSupportFragmentManager(), 720, 1280)
-                .setImgSize(getResources().getDimension(R.dimen.d32),
-                        getResources().getDimension(R.dimen.d32))
-                .setFontSize(getResources().getDimension(R.dimen.text_size_6))
-                .setTabPadding(getResources().getDimension(R.dimen.d5),
-                        getResources().getDimensionPixelOffset(R.dimen.d0),
-                        getResources().getDimension(R.dimen.d5))
+                .setImgSize(getResources().getDimensionPixelSize(R.dimen.d32),
+                        getResources().getDimensionPixelSize(R.dimen.d32))
+                .setFontSize(getResources().getDimensionPixelSize(R.dimen.text_size_6))
+                .setTabPadding(getResources().getDimensionPixelSize(R.dimen.d5),
+                        getResources().getDimensionPixelSize(R.dimen.d0),
+                        getResources().getDimensionPixelSize(R.dimen.d5))
                 .setChangeColor(getResources().getColor(R.color.black),
                         getResources().getColor(R.color.grey))
                 .addTabItem(getString(R.string.main), R.mipmap.ic_launcher, MainFragment.class)
