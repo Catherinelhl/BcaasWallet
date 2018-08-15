@@ -8,7 +8,7 @@
         layout="@layout/aty_brand"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d0"
-        android:layout_weight="1.2" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,15 +18,8 @@
         android:layout_weight="2"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_new_wallet"
-            android:textColor="@color/black" />
+        <include layout="@layout/inc_open_wallet_header" />
 
-        <View
-            style="@style/line_style"
-            android:layout_marginTop="@dimen/d10" />
 
         <EditText
             android:id="@+id/et_password"
@@ -56,6 +49,7 @@
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="@dimen/d0"
+                android:background="@drawable/selector_btn_style"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/cancel" />
@@ -63,6 +57,7 @@
             <Button
                 android:id="@+id/btn_sure"
                 android:layout_width="@dimen/d0"
+                android:background="@drawable/selector_btn_style"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/d50"
                 android:layout_weight="1"

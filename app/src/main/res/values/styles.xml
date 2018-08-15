@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.NoTitleBar.Fullscreen">
+    <style name="AppTheme" parent="android:Theme.NoTitleBar">
         <!-- Customize your theme here. -->
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:background">@color/white</item>
@@ -20,5 +20,27 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@drawable/bg_edittext</item>
+    </style>
+
+    <style name="black_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="grey_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="marquee_style">
+        <item name="android:singleLine">true</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:ellipsize">marquee</item>
     </style>
 </resources>

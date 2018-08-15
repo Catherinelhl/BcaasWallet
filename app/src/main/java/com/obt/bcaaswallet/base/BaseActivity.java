@@ -1,16 +1,16 @@
 package com.obt.bcaaswallet.base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,8 +29,13 @@ public abstract class BaseActivity extends Activity {
 
     public abstract void initListener();
 
+    public void showToast(int res) {
+        showToast(String.valueOf(res));
+    }
+
     public void showToast(String toastInfo) {
-        Toast.makeText(this, toastInfo, Toast.LENGTH_LONG).show();
+        System.out.println(toastInfo);
+        Toast.makeText(BcaasApplication.context, toastInfo, Toast.LENGTH_LONG).show();
     }
 
     /**

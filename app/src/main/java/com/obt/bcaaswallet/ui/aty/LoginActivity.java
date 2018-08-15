@@ -14,7 +14,7 @@ import com.obt.bcaaswallet.utils.StringU;
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
- *
+ * <p>
  * 是否以LoginActivity为当前账户登录的主要Activity，保持此activity不finish，然后跳转创建、或者导入
  * 钱包的界面，操作结束的时候，返回到当前页面，然后进入MainActivity。
  */

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
@@ -21,6 +22,7 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
     private EditText etAccountAddress;
     private EditText etPrivateKey;
     private Button btnFinish;
+    private TextView tvOpenWalletMethod;
     private CheckBox cbPassword;
     private String accountAddress, privateKey;// 账户地址，私钥
 
@@ -47,6 +49,8 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
         etPrivateKey.setText(privateKey);
         etPrivateKey.setFocusable(false);
         etAccountAddress.setFocusable(false);
+        tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
+        tvOpenWalletMethod.setText(getResources().getString(R.string.create_new_wallet));
     }
 
     @Override

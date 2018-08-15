@@ -15,4 +15,8 @@ public class StringU {
     public static boolean notEmpty(String content) {
         return !isEmpty(content);
     }
+
+    public static boolean equals(String str1, String str2) {
+        return TextUtils.equals(str1, str2);
+    }
 }

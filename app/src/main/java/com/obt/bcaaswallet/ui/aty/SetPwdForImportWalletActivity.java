@@ -8,13 +8,15 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.utils.StringU;
 
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
+ * <p>
+ * 为新导入的钱包设置密码
  */
-public class CreateWalletActivity extends BaseActivity {
-
+public class SetPwdForImportWalletActivity extends BaseActivity {
     private EditText etPassword;
     private EditText etPasswordConfirm;
     private TextView tvOpenWalletMethod;
@@ -23,7 +25,7 @@ public class CreateWalletActivity extends BaseActivity {
 
     @Override
     public int getContentView() {
-        return R.layout.aty_create_wallet;
+        return R.layout.aty_set_pwd_for_import_wallet;
     }
 
     @Override
@@ -38,7 +40,8 @@ public class CreateWalletActivity extends BaseActivity {
         btnCancel = findViewById(R.id.btn_cancel);
         btnSure = findViewById(R.id.btn_sure);
         tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
-        tvOpenWalletMethod.setText(getResources().getString(R.string.create_new_wallet));
+        tvOpenWalletMethod.setText(getResources().getString(R.string.import_wallet));
+
 
     }
 
@@ -47,14 +50,19 @@ public class CreateWalletActivity extends BaseActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO  点击取消，回到「登录钱包」的页面？
-                finish();
+                //TODO 清空所有的数据还是停留在当前页面？
             }
         });
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentToActivity(WalletCreatedSuccessActivity.class, true);
+                String password = etPassword.getText().toString();
+                String passwordConfirm = etPasswordConfirm.getText().toString();
+                if (StringU.equals(password, passwordConfirm)) {
+                    finish();//TODO 回到登录页面然后进入首页
+                } else {
+                    showToast(getString(R.string.confirm_two_pwd_is_consistent));
+                }
             }
         });
 
