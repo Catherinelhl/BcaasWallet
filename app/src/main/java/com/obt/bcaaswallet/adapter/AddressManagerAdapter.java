@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
-import com.obt.bcaaswallet.bean.SettingTypeBean;
+import com.obt.bcaaswallet.bean.AddressBean;
 import com.obt.bcaaswallet.listener.OnItemSelectListener;
 
 import java.util.List;
@@ -21,47 +21,49 @@ import java.util.List;
  * @author catherine.brainwilliam
  * @since 2018/8/15
  * <p>
- * 显示设置里面所有的选项
+ * 地址管理适配容器
  */
-public class SettingTypesAdapter extends RecyclerView.Adapter<SettingTypesAdapter.viewHolder> {
+public class AddressManagerAdapter extends RecyclerView.Adapter<AddressManagerAdapter.viewHolder> {
 
     private Context context;
-    private List<SettingTypeBean> settingTypes;
+    private List<AddressBean> addressBeans;
 
-    private OnItemSelectListener settingItemSelectListener;
+    private OnItemSelectListener onItemSelect;
 
-    public SettingTypesAdapter(Context context, List<SettingTypeBean> settingTypes) {
+    public AddressManagerAdapter(Context context, List<AddressBean> addressBeans) {
         this.context = context;
-        this.settingTypes = settingTypes;
+        this.addressBeans = addressBeans;
     }
 
-    public void setSettingItemSelectListener(OnItemSelectListener settingItemSelectListener) {
-        this.settingItemSelectListener = settingItemSelectListener;
+    public void setItemSelectListener(OnItemSelectListener settingItemSelectListener) {
+        this.onItemSelect = settingItemSelectListener;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_setting, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_address, viewGroup, false);
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder viewHolder, int i) {
-        if (settingTypes == null) return;
-        final SettingTypeBean types = settingTypes.get(i);
-        if (types == null) return;
-        viewHolder.tvSettingType.setText(types.getType());
-        viewHolder.ivDetail.setOnClickListener(new View.OnClickListener() {
+        if (addressBeans == null) return;
+        final AddressBean addressBean = addressBeans.get(i);
+        if (addressBean == null) return;
+        viewHolder.tvSettingType.setText(addressBean.getAccountAddress());
+        viewHolder.tvAlias.setText(addressBean.getAccountAliases());
+        addressBean.setPostion(i);
+        viewHolder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingItemSelectListener.onItemSelect(types);
+                onItemSelect.onItemSelect(addressBean);
             }
         });
         viewHolder.rlSettingTypes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingItemSelectListener.onItemSelect(types);
+                onItemSelect.onItemSelect(addressBean);
 
 
             }
@@ -71,19 +73,21 @@ public class SettingTypesAdapter extends RecyclerView.Adapter<SettingTypesAdapte
 
     @Override
     public int getItemCount() {
-        return settingTypes.size();
+        return addressBeans.size();
     }
 
 
     class viewHolder extends RecyclerView.ViewHolder {
         TextView tvSettingType;
-        AppCompatImageView ivDetail;
+        TextView tvAlias;
+        AppCompatImageView ivDelete;
         RelativeLayout rlSettingTypes;
 
         public viewHolder(View view) {
             super(view);
             tvSettingType = view.findViewById(R.id.tvSettingType);
-            ivDetail = view.findViewById(R.id.ivDetail);
+            tvAlias = view.findViewById(R.id.tvAlias);
+            ivDelete = view.findViewById(R.id.ivDelete);
             rlSettingTypes = view.findViewById(R.id.rlSettingTypes);
         }
     }

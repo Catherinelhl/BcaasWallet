@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity {
                 .addTabItem(getString(R.string.scan), R.mipmap.ic_launcher, ScanFragment.class)
                 .addTabItem(getString(R.string.send), R.mipmap.ic_launcher, SendFragment.class)
                 .addTabItem(getString(R.string.setting), R.mipmap.ic_launcher, SettingFragment.class);
+        setMainTitle();
 
     }
 
@@ -150,6 +151,10 @@ public class MainActivity extends BaseActivity {
     public void switchTab(int position) {
         if (tabBar == null) return;
         tabBar.setCurrentTab(position);
+        setMainTitle();
+    }
+
+    private void setMainTitle() {
         tvTitle.setText(getResources().getString(R.string.bcaas_u));
         tvTitle.setBackgroundColor(getResources().getColor(R.color.red2));
         tvTitle.setTextColor(getResources().getColor(R.color.white));

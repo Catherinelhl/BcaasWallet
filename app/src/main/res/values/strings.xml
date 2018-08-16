@@ -39,4 +39,6 @@
     <string name="email_json">邮件发送Json文件</string>
     <string name="email_json_rule">可通过邮件发送JSON文件(钱包加密文件)，包含私钥，公钥等重要信息，当APP被删除时，可用来重新导入钱包</string>
     <string name="send_email">发送邮件</string>
+    <string name="address_of_coinan">币安地址</string>
+    <string name="address_mamager">地址管理</string>
 </resources>

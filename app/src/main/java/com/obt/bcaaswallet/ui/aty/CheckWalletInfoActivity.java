@@ -84,6 +84,7 @@ public class CheckWalletInfoActivity extends BaseActivity {
     @Override
     public void initViews() {
         setTitle();
+        //TODO 需要模拟一个账户，然后用一个数据类来存储当前所有的账户相关信息
         accountAddress = "ksdnfmlaksdmga===";
         privatKey = "90483915yu2uthfjnfdlakz";
         ibBack.setVisibility(View.VISIBLE);

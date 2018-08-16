@@ -2,6 +2,7 @@ package com.obt.bcaaswallet.ui.aty;
 
 import android.os.Bundle;
 
+import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 
 /**
@@ -13,7 +14,7 @@ import com.obt.bcaaswallet.base.BaseActivity;
 public class InsertAddressActivity extends BaseActivity {
     @Override
     public int getContentView() {
-        return 0;
+        return R.layout.aty_insert_address;
     }
 
     @Override

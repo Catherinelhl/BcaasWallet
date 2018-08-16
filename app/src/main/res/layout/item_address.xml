@@ -2,8 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlSettingTypes"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/d38"
+    android:layout_height="@dimen/d48"
     android:layout_margin="@dimen/d8">
+
+    <TextView
+        android:id="@+id/tvAlias"
+        style="@style/black_text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/d10"
+        android:text="@string/address_of_coinan"
+        android:textSize="@dimen/text_size_17" />
 
     <TextView
         android:id="@+id/tvSettingType"
@@ -11,19 +20,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvAlias"
         android:layout_marginLeft="@dimen/d5"
         android:layout_marginRight="@dimen/d5"
-        android:layout_toLeftOf="@+id/ivDetail"
+        android:layout_toLeftOf="@+id/ivDelete"
         android:background="@color/transparent"
         android:text="as,dkfna.djsfnak"
         android:textColor="@color/black2" />
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/ivDetail"
+        android:id="@+id/ivDelete"
         android:layout_width="@dimen/d20"
         android:layout_height="@dimen/d20"
+        android:layout_alignBottom="@+id/tvSettingType"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/icon_detail" />
+        android:src="@mipmap/icon_delete" />
 
     <View
         android:layout_width="match_parent"
