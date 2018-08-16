@@ -126,14 +126,12 @@ public class MainActivity extends BaseActivity {
                         title = getResources().getString(R.string.setting);
                         color = getResources().getColor(R.color.transparent);
                         textColor = getResources().getColor(R.color.black);
-
                         break;
 
                 }
                 tvTitle.setText(title);
                 tvTitle.setBackgroundColor(color);
                 tvTitle.setTextColor(textColor);
-                tvTitle.setTypeface(Typeface.DEFAULT_BOLD);
 
 
             }
@@ -155,7 +153,6 @@ public class MainActivity extends BaseActivity {
         tvTitle.setText(getResources().getString(R.string.bcaas_u));
         tvTitle.setBackgroundColor(getResources().getColor(R.color.red2));
         tvTitle.setTextColor(getResources().getColor(R.color.white));
-        tvTitle.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
 }

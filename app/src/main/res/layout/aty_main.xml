@@ -6,28 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.aty.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d48">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@color/red2"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:padding="@dimen/d5"
-            android:text="@string/bcaas_u" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d0.2"
-            android:layout_alignParentBottom="true"
-            android:background="@color/light_grey" />
-
-    </RelativeLayout>
+    <include layout="@layout/inc_header" />
 
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/tab_bar"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/et_private_key"
+        style="@style/edittext_style"
+        android:layout_marginTop="@dimen/d10"
+        android:inputType="textPassword"
+        android:paddingRight="@dimen/d40" />
+
+    <CheckBox
+        android:id="@+id/cbPwd"
+        android:layout_width="@dimen/d32"
+        android:layout_height="@dimen/d32"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:button="@drawable/selector_cb_password"
+        android:checked="false"
+        android:gravity="center" />
+</RelativeLayout>

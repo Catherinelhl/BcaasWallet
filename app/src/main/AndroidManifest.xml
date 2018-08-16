@@ -23,6 +23,9 @@
         <activity android:name=".ui.aty.ImportWalletActivity" />
         <activity android:name=".ui.aty.WalletCreatedSuccessActivity" />
         <activity android:name=".ui.aty.SetPwdForImportWalletActivity" />
+        <activity android:name=".ui.aty.CheckWalletInfoActivity" />
+        <activity android:name=".ui.aty.AddressManagerActivity" />
+        <activity android:name=".ui.aty.InsertAddressActivity" />
 
     </application>
 

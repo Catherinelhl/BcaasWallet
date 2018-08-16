@@ -3,6 +3,7 @@ package com.obt.bcaaswallet.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -68,10 +69,21 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract void initListener();
 
+
+    public void showToast(String info) {
+        if (activity == null) return;
+        ((BaseActivity) activity).showToast(info);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public void intentToActivity(Bundle bundle, Class classTo, Boolean finishFrom) {//跳转到另外一个界面
+        if (activity == null) return;
+        ((BaseActivity) activity).intentToActivity(bundle, classTo, finishFrom);
     }
 
 }

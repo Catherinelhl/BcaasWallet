@@ -35,29 +35,7 @@
         android:text="@string/backup_private_key_detail"
         android:textColor="@color/grey" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d10">
-
-        <EditText
-            android:id="@+id/et_private_key"
-            style="@style/edittext_style"
-            android:layout_marginTop="@dimen/d10"
-            android:inputType="textPassword"
-            android:paddingRight="@dimen/d40" />
-
-        <CheckBox
-            android:id="@+id/cbPwd"
-            android:layout_width="@dimen/d32"
-            android:layout_height="@dimen/d32"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_cb_password"
-            android:checked="false"
-            android:gravity="center" />
-    </RelativeLayout>
-
+   <include layout="@layout/inc_et_private_key"/>
     <Button
         android:id="@+id/btn_finish"
         android:layout_width="match_parent"

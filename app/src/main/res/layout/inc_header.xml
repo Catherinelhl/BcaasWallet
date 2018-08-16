@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d48">
+
+    <ImageButton
+        android:id="@+id/ibBack"
+        android:layout_width="@dimen/d48"
+        android:layout_height="@dimen/d48"
+        android:background="@color/transparent"
+        android:paddingLeft="@dimen/d10"
+        android:paddingRight="@dimen/d10"
+        android:src="@mipmap/icon_back"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/title_style"
+        android:layout_centerInParent="true"
+        android:background="@color/red2"
+        android:gravity="center"
+        android:padding="@dimen/d5"
+        android:text="@string/bcaas_u"
+        android:textColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/ibRight"
+        android:layout_width="@dimen/d48"
+        android:layout_height="@dimen/d48"
+        android:background="@color/transparent"
+        android:paddingLeft="@dimen/d10"
+        android:paddingRight="@dimen/d10"
+        android:src="@mipmap/icon_insert"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d0.2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_grey" />
+
+</RelativeLayout>

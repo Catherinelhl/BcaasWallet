@@ -32,4 +32,11 @@
     <string name="account_address_eg">eg:kjahdgfahjbdfkjahbdnkajbdnkjhbajh==</string>
     <string name="transaction_amount">交易数额</string>
     <string name="input_pwd">请输入密码</string>
+    <string name="check_wallet_info">查看钱包信息</string>
+    <string name="wallet_info">钱包信息</string>
+    <string name="private_key">私钥</string>
+    <string name="save_private_key_hint">建议将私钥写在纸上，私密保存</string>
+    <string name="email_json">邮件发送Json文件</string>
+    <string name="email_json_rule">可通过邮件发送JSON文件(钱包加密文件)，包含私钥，公钥等重要信息，当APP被删除时，可用来重新导入钱包</string>
+    <string name="send_email">发送邮件</string>
 </resources>

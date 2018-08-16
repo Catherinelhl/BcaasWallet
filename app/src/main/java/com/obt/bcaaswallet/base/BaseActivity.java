@@ -41,7 +41,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void showToast(String toastInfo) {
         System.out.println(toastInfo);
-        Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_LONG).show();
+        Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -83,5 +83,10 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

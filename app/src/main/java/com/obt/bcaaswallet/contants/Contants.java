@@ -19,6 +19,15 @@ public class Contants {
 
     }
 
+    public enum SettingType {//定义一下设置的类型
+        CHECKWALLETINFO,
+        MODIFYPOSSWORD,
+        MODIFYAUTH,
+        ADRESSMANNAGE
+    }
+
     public static class KeyMaps {
+        public static final String CURRENCY="currency";
+        public static final String ALLCURRENCY="allCurrency";
     }
 }
