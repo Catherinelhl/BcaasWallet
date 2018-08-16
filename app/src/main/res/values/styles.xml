@@ -17,9 +17,8 @@
 
     <style name="edittext_style">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/d34</item>
+        <item name="android:layout_height">@dimen/d38</item>
         <item name="android:singleLine">true</item>
-        <item name="android:layout_marginTop">@dimen/d10</item>
         <item name="android:background">@drawable/bg_edittext</item>
     </style>
     <style name="edittext_style_nofocus" parent="edittext_style">

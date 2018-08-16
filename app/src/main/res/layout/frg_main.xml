@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/d32">
+    android:paddingLeft="@dimen/d32"
+    android:paddingRight="@dimen/d32">
 
     <TextView
         style="@style/black_text_style"
+        android:layout_marginTop="@dimen/d20"
         android:text="@string/my_account_adress" />
 
     <EditText
         android:id="@+id/myAccountAddress"
+        android:layout_marginTop="@dimen/d10"
         style="@style/edittext_style_nofocus" />
 
     <TextView
@@ -27,24 +30,24 @@
         <Spinner
             android:id="@+id/sp_select"
             android:layout_width="@dimen/d0"
-            android:spinnerMode="dropdown"
-            android:padding="@dimen/d2"
-            android:dropDownHorizontalOffset="-10dp"
-            android:dropDownVerticalOffset="2dp"
-            android:background="@drawable/bg_spinner"
-            android:popupBackground="@color/transparent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/d5"
-            android:layout_weight="1.1" />
+            android:layout_weight="1.1"
+            android:background="@drawable/bg_spinner"
+            android:dropDownHorizontalOffset="-10dp"
+            android:dropDownVerticalOffset="2dp"
+            android:padding="@dimen/d2"
+            android:popupBackground="@color/transparent"
+            android:spinnerMode="dropdown" />
 
         <TextView
             android:id="@+id/tv_balance"
             style="@style/black_text_style"
             android:layout_width="@dimen/d0"
             android:layout_margin="@dimen/d5"
-            android:gravity="center"
             android:layout_marginLeft="@dimen/d10"
             android:layout_weight="1"
+            android:gravity="center"
             tools:text="2006.855000 " />
 
         <TextView

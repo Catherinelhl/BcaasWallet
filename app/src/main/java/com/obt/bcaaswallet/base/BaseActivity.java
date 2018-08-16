@@ -6,17 +6,23 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
 public abstract class BaseActivity extends FragmentActivity {
 
+    private Unbinder unbinder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getArgs(getIntent().getExtras());
         setContentView(getContentView());
+        unbinder = ButterKnife.bind(this);
         initViews();
         initListener();
     }
@@ -73,5 +79,9 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
 }

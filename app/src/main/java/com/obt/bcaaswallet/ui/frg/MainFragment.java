@@ -34,7 +34,6 @@ public class MainFragment extends BaseFragment {
     private RecyclerView rvPendingTransaction;
     private EditText etAccountAddress;// 显示当前账户地址的容器
     private ArrayAdapter adapter;
-    private List<TransactionsBean> allCurrency;
     private PendingTransactionAdapter pendingTransactionAdapter;//待交易数据
     private List<TransactionsBean> transactionsBeanList;
 
@@ -45,7 +44,6 @@ public class MainFragment extends BaseFragment {
 
     @Override
     public void initViews(View view) {
-        initCurrencyData();
         initTransactionList();
         spSelect = view.findViewById(R.id.sp_select);
         rvPendingTransaction = view.findViewById(R.id.rvPendingTransaction);
@@ -56,18 +54,14 @@ public class MainFragment extends BaseFragment {
         etAccountAddress.setText(accountAddress);
         initSpinnerAdapter();
         initTransactionsAdapter();
-
-
     }
 
     private void initSpinnerAdapter() {
         //将可选内容与ArrayAdapter连接起来
         adapter = new ArrayAdapter<>(this.context, R.layout.spinner_item, getCurrency());
-
         //设置下拉列表的风格
         adapter.setDropDownViewResource(R.layout.dropdown_style);
-
-        //将adapter2 添加到spinner中
+        //将adapter 添加到spinner中
         spSelect.setAdapter(adapter);
     }
 
@@ -75,8 +69,8 @@ public class MainFragment extends BaseFragment {
         transactionsBeanList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             TransactionsBean transactionsBean = new TransactionsBean(i + "asdkjfbakjhsdvfjahvfaghvdfh==",
-                    allCurrency.get(i).getBalance(),
-                    ((MainActivity) activity).getCurrency().get(i / 2));
+                    getAllTransactionData().get(i).getBalance(),
+                    getCurrency().get(i / 2));
             transactionsBeanList.add(transactionsBean);
         }
     }
@@ -88,16 +82,6 @@ public class MainFragment extends BaseFragment {
         rvPendingTransaction.setAdapter(pendingTransactionAdapter);
     }
 
-    private void initCurrencyData() {
-        allCurrency = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < getCurrency().size(); i++) {
-            int rand = random.nextInt(9999) + 10000;
-            TransactionsBean transactionsBean = new TransactionsBean("asdfafas==", String.valueOf(rand), getCurrency().get(i));
-            allCurrency.add(transactionsBean);
-        }
-
-    }
 
     @Override
     public void initListener() {
@@ -106,7 +90,7 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tvCurrency.setText(String.valueOf(adapter.getItem(position)));
-                tvBalance.setText(allCurrency.get(position).getBalance());
+                tvBalance.setText(getAllTransactionData().get(position).getBalance());
             }
 
             @Override

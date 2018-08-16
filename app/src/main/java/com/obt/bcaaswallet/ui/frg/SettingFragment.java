@@ -21,7 +21,6 @@ public class SettingFragment extends BaseFragment {
     @Override
     public void initViews(View view) {
 
-
     }
 
     @Override

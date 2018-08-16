@@ -18,6 +18,7 @@
     <EditText
         android:id="@+id/et_account_address"
         style="@style/edittext_style"
+        android:layout_marginTop="@dimen/d10"
         android:focusable="false"
         tool:hint="@string/account_address" />
 
@@ -42,6 +43,7 @@
         <EditText
             android:id="@+id/et_private_key"
             style="@style/edittext_style"
+            android:layout_marginTop="@dimen/d10"
             android:inputType="textPassword"
             android:paddingRight="@dimen/d40" />
 

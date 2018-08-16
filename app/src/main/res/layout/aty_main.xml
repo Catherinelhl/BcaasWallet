@@ -17,6 +17,7 @@
             android:layout_centerInParent="true"
             android:background="@color/red2"
             android:gravity="center"
+            android:textColor="@color/white"
             android:padding="@dimen/d5"
             android:text="@string/bcaas_u" />
 
