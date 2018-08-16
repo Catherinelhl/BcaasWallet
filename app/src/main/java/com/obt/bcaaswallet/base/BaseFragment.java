@@ -11,9 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.obt.bcaaswallet.bean.TransactionsBean;
 import com.obt.bcaaswallet.ui.aty.MainActivity;
 
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @author catherine.brainwilliam
@@ -25,6 +29,8 @@ public abstract class BaseFragment extends Fragment {
     protected Context context;
     protected Activity activity;
     private List<String> currency;
+    private List<TransactionsBean> allTransactionData;
+    private Unbinder unbinder;
 
     @Nullable
     @Override
@@ -32,15 +38,18 @@ public abstract class BaseFragment extends Fragment {
         if (rootView == null) {
             rootView = inflater.inflate(getLayoutRes(), null);
         }
+        unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        context=getContext();
-        activity=getActivity();
-        currency= ((MainActivity) activity).getCurrency();
+        context = getContext();
+        activity = getActivity();
+        assert activity != null;
+        currency = ((MainActivity) activity).getCurrency();
+        allTransactionData = ((MainActivity) activity).getAllCurrencyData();
         initViews(view);
         initListener();
     }
@@ -49,9 +58,20 @@ public abstract class BaseFragment extends Fragment {
         return currency;
     }
 
+    protected List<TransactionsBean> getAllTransactionData() {
+        return allTransactionData;
+    }
+
     public abstract int getLayoutRes();//得到当前的layoutRes
 
     public abstract void initViews(View view);
 
     public abstract void initListener();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
 }
