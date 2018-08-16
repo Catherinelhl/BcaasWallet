@@ -1,7 +1,6 @@
 package com.obt.bcaaswallet.ui.aty;
 
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,14 +14,12 @@ import com.obt.bcaaswallet.ui.frg.ReceiveFragment;
 import com.obt.bcaaswallet.ui.frg.ScanFragment;
 import com.obt.bcaaswallet.ui.frg.SendFragment;
 import com.obt.bcaaswallet.ui.frg.SettingFragment;
-import com.obt.bcaaswallet.utils.StringU;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -38,6 +35,8 @@ public class MainActivity extends BaseActivity {
     BottomTabBar tabBar;
     private List<String> currency;//获取所有的币种
     private List<TransactionsBean> allCurrency;//获取所有的币种以及相关的交易信息
+
+    private String addressOfUser;//用户的账户地址
 
 
     @Override
@@ -55,19 +54,19 @@ public class MainActivity extends BaseActivity {
         initCurrency();
         initCurrencyData();
         tabBar.init(getSupportFragmentManager(), 720, 1280)
-                .setImgSize(72,
-                        72)
+                .setImgSize(50,
+                        50)
                 .setFontSize(16)
-                .setTabPadding(5,
-                        getResources().getDimensionPixelOffset(R.dimen.d0),
-                        5)
+                .setTabPadding(getResources().getDimensionPixelOffset(R.dimen.d4),
+                        getResources().getDimensionPixelOffset(R.dimen.d3),
+                        getResources().getDimensionPixelOffset(R.dimen.d4))
                 .setChangeColor(getResources().getColor(R.color.black),
-                        getResources().getColor(R.color.grey))
-                .addTabItem(getString(R.string.main), R.mipmap.ic_launcher, MainFragment.class)
-                .addTabItem(getString(R.string.receive), R.mipmap.ic_launcher, ReceiveFragment.class)
-                .addTabItem(getString(R.string.scan), R.mipmap.ic_launcher, ScanFragment.class)
-                .addTabItem(getString(R.string.send), R.mipmap.ic_launcher, SendFragment.class)
-                .addTabItem(getString(R.string.setting), R.mipmap.ic_launcher, SettingFragment.class);
+                        getResources().getColor(R.color.black2c))
+                .addTabItem(getString(R.string.main), R.mipmap.icon_home_f, R.mipmap.icon_home, MainFragment.class)
+                .addTabItem(getString(R.string.receive), R.mipmap.icon_receive_f, R.mipmap.icon_receive, ReceiveFragment.class)
+                .addTabItem(getString(R.string.scan), R.mipmap.icon_scan_f, R.mipmap.icon_scan, ScanFragment.class)
+                .addTabItem(getString(R.string.send), R.mipmap.icon_send_f, R.mipmap.icon_send, SendFragment.class)
+                .addTabItem(getString(R.string.setting), R.mipmap.icon_setting_f, R.mipmap.icon_setting, SettingFragment.class);
         setMainTitle();
 
     }
@@ -160,4 +159,8 @@ public class MainActivity extends BaseActivity {
         tvTitle.setTextColor(getResources().getColor(R.color.white));
     }
 
+    public String getAddressOfUser() {
+        addressOfUser = "ajkdbfnaskdjbfjhasdbf===";
+        return addressOfUser;
+    }
 }

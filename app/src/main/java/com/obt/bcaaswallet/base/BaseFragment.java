@@ -86,4 +86,9 @@ public abstract class BaseFragment extends Fragment {
         ((BaseActivity) activity).intentToActivity(bundle, classTo, finishFrom);
     }
 
+    public String getAddressOfUser() {//获取用户的账户地址
+        if (activity == null) return null;
+        return ((MainActivity) activity).getAddressOfUser();
+    }
+
 }

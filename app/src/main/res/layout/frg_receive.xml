@@ -2,6 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivQRCode"
+        android:layout_width="@dimen/d200"
+        android:layout_height="@dimen/d200"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvMyAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/d32"
+        android:layout_marginRight="@dimen/d32"
+        android:layout_marginTop="@dimen/d20"
+        android:gravity="center" />
+
 
 </LinearLayout>
