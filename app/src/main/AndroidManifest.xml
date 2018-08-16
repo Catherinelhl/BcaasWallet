@@ -26,6 +26,7 @@
         <activity android:name=".ui.aty.CheckWalletInfoActivity" />
         <activity android:name=".ui.aty.AddressManagerActivity" />
         <activity android:name=".ui.aty.InsertAddressActivity" />
+        <activity android:name=".ui.aty.SendToConfirmPwdActivity" />
 
     </application>
 

@@ -1,5 +1,7 @@
 package com.obt.bcaaswallet.ui.frg;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +13,9 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseFragment;
+import com.obt.bcaaswallet.contants.Contants;
 import com.obt.bcaaswallet.ui.aty.MainActivity;
+import com.obt.bcaaswallet.ui.aty.SendToConfirmPwdActivity;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
@@ -37,26 +41,21 @@ public class SendFragment extends BaseFragment {
     Spinner spSelectAccountAddress;//选择收款账户地址
     @BindView(R.id.tv_eg)
     TextView tvEg;
-    @BindView(R.id.llTransactionSelectInfo)
-    LinearLayout llTransactionSelectInfo;//将「确定」状态下需要隐藏的布局用一个容器包装起来
     @BindView(R.id.tvTransactionAmount)
     TextView tvTransactionAmount;//我的交易数额
     @BindView(R.id.etTransactionAmount)
     EditText etTransactionAmount;
     @BindView(R.id.spSelectReceiveCurrency)
     Spinner spSelectReceiveCurrency;//选择交易发送的币种
-    @BindView(R.id.tvInputPwd)
-    TextView tvInputPwd;//「请输入当前密码」
-    @BindView(R.id.etInputPwd)
-    EditText etInputPwd;//请输入当前密码输入框
     @BindView(R.id.btnSend)
     Button btnSend;
 
-    private String currentStatus;//存储当前界面操作的状态，主要用于区分「发送」、「确定」两种状态
     private String myAccountAddress;//得到当前的账户地址
     private ArrayAdapter currencyAdapter;//声明用于填充币种的适配
     private ArrayAdapter allAccountAddressAdapter;//声明用于填充所有可选账户的地址
 
+    private String receiveAddress;//收款的账户地址
+    private String receiveCurrency;//收款的币种
 
     @Override
     public int getLayoutRes() {
@@ -106,20 +105,12 @@ public class SendFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 //TODO  如果当前页面用户进行了点击切换其他的页面，是否需要保存当前的数据状态
-                //得到当前操作的信息，然后保存，显示输入密码的view，最后确定
-                String btnStatus = btnSend.getText().toString();
-                boolean isSend = StringU.equals(btnStatus, getResources().getString(R.string.send));//是否是「发送」的状态
-                //将当前按钮设置为「确定」，修改当前界面的状态
-                btnSend.setText(getResources().getString(isSend ? R.string.sure : R.string.send));
-                if (isSend) {
-                } else {
-                    //点击「确定」，保存数据，发起请求；回到首页,并将当前页面的状态初始化
-                    ((MainActivity) activity).switchTab(0);
-                }
-                showSelectInfoView(!isSend);
-                showInputPwdView(isSend);
-                removeEtTransactionAmountInfoFocus(isSend);
-                currentStatus = btnStatus;
+                //将当前页面的数据传输到下一个页面进行失焦显示
+                Bundle bundle = new Bundle();
+                bundle.putString(Contants.KeyMaps.RECEIVEADDRESS, receiveAddress);
+                bundle.putString(Contants.KeyMaps.RECEIVECURRENCY, receiveCurrency);
+                bundle.putString(Contants.KeyMaps.TRANSACTIONAMOUNT, etTransactionAmount.getText().toString());
+                intentToActivity(bundle, SendToConfirmPwdActivity.class, false);
             }
         });
         spSelectDisplayCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -139,6 +130,7 @@ public class SendFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //存储当前选中的用于交易的币种信息
+                receiveCurrency = String.valueOf(currencyAdapter.getItem(position));
 
             }
 
@@ -150,7 +142,7 @@ public class SendFragment extends BaseFragment {
         spSelectAccountAddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                receiveAddress = String.valueOf(allAccountAddressAdapter.getItem(position));
             }
 
             @Override
@@ -162,19 +154,8 @@ public class SendFragment extends BaseFragment {
 
     }
 
-    private void showSelectInfoView(boolean isShow) {//是否显示选择信息View
-        llTransactionSelectInfo.setVisibility(isShow ? View.VISIBLE : View.GONE);
-    }
-
-    private void showInputPwdView(boolean isShow) {//是否显示交易密码的View
-        tvInputPwd.setVisibility(isShow ? View.VISIBLE : View.GONE);
-        etInputPwd.setVisibility(isShow ? View.VISIBLE : View.GONE);
-
-    }
-
-    private void removeEtTransactionAmountInfoFocus(boolean isRemove) {//移除操作交易信息的焦点
-        etTransactionAmount.setFocusable(false);
-        spSelectReceiveCurrency.setFocusable(false);
-        spSelectReceiveCurrency.setEnabled(false);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

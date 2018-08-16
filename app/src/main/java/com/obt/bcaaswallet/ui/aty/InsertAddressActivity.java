@@ -70,11 +70,8 @@ public class InsertAddressActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 String address = s.toString();
                 String addressName = etAddressName.getText().toString();
-                if (StringU.notEmpty(address) && StringU.notEmpty(addressName)) {
-                    btnSave.setPressed(true);
-                }
-
-
+                boolean hasPressed = StringU.notEmpty(address) && StringU.notEmpty(addressName);
+                btnSave.setPressed(hasPressed);
             }
         });
         etAddressName.addTextChangedListener(new TextWatcher() {
@@ -92,9 +89,8 @@ public class InsertAddressActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 String addressName = s.toString();
                 String address = etAddress.getText().toString();
-                if (StringU.notEmpty(address) && StringU.notEmpty(addressName)) {
-                    btnSave.setPressed(true);
-                }
+                boolean hasPressed = StringU.notEmpty(address) && StringU.notEmpty(addressName);
+                btnSave.setPressed(hasPressed);
 
 
             }
@@ -114,6 +110,7 @@ public class InsertAddressActivity extends BaseActivity {
                     showToast("请输入地址的相关信息。");
                     return;
                 } else {
+                    //TODO 保存时需要查看账户名称
                     finish();
                 }
             }

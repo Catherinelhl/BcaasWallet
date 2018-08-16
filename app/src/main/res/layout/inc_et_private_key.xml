@@ -6,6 +6,7 @@
     <EditText
         android:id="@+id/et_private_key"
         style="@style/edittext_style"
+        android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/d10"
         android:inputType="textPassword"
         android:paddingRight="@dimen/d40" />
@@ -16,6 +17,7 @@
         android:layout_height="@dimen/d32"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:background="@color/transparent"
         android:button="@drawable/selector_cb_password"
         android:checked="false"
         android:gravity="center" />

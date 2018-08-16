@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/inc_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/d32"
+        android:layout_marginRight="@dimen/d32"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/black_text_style"
+                android:layout_marginTop="@dimen/d20"
+                android:text="@string/my_account_adress" />
+
+            <EditText
+                android:id="@+id/etMyAccountAddress"
+                style="@style/edittext_style_nofocus"
+                android:layout_marginTop="@dimen/d10"
+                android:enabled="false" />
+
+
+            <TextView
+                style="@style/black_text_style"
+                android:layout_marginTop="@dimen/d40"
+                android:text="@string/transaction_amount" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d45"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etTransactionAmount"
+                    style="@style/edittext_style"
+                    android:layout_width="@dimen/d0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/tvCurrency"
+                    android:layout_width="@dimen/d0"
+                    android:padding="@dimen/d3"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d5"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_spinner" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/black_text_style"
+                android:layout_marginTop="@dimen/d40"
+                android:text="@string/input_pwd" />
+
+            <EditText
+                android:id="@+id/etInputPwd"
+                style="@style/edittext_style"
+                android:layout_marginTop="@dimen/d20" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d40"
+                android:background="@drawable/selector_btn_style"
+                android:text="@string/sure" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

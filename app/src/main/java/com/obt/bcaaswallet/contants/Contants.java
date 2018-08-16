@@ -27,7 +27,10 @@ public class Contants {
     }
 
     public static class KeyMaps {
-        public static final String CURRENCY="currency";
-        public static final String ALLCURRENCY="allCurrency";
+        public static final String CURRENCY = "currency";//币种
+        public static final String ALLCURRENCY = "allCurrency";//所有币种
+        public static final String RECEIVEADDRESS = "receiveAddress";//接收方的账户地址
+        public static final String RECEIVECURRENCY = "receiveCurrency";//接收方到币种
+        public static final String TRANSACTIONAMOUNT = "transactionAmount";//交易数额
     }
 }

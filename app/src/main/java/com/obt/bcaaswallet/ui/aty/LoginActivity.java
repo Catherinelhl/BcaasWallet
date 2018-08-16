@@ -59,7 +59,8 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                btnUnlockWallet.setPressed(true);
+                String pwd=s.toString();
+                btnUnlockWallet.setPressed(StringU.notEmpty(pwd));
 
             }
         });

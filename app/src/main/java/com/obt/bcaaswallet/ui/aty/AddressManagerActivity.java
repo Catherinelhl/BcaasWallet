@@ -76,6 +76,7 @@ public class AddressManagerActivity extends BaseActivity implements AddressManag
                 if (type instanceof AddressBean) {
                     AddressBean addressBean = (AddressBean) type;
                     int position = addressBean.getPostion();
+                    //TODO 删除地址需要再次弹框进行确认
                     //响应删除事件
                     if (addressBeans != null) {
                         if (position < addressBeans.size()) {
