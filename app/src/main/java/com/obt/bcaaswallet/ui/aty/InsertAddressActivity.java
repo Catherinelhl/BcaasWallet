@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.database.Address;
+import com.obt.bcaaswallet.event.NotifyAddressData;
+import com.obt.bcaaswallet.presenter.InsertAddressPresenterImp;
+import com.obt.bcaaswallet.ui.contracts.InsertAddressContract;
+import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
@@ -22,7 +27,7 @@ import butterknife.ButterKnife;
  * <p>
  * 新增地址
  */
-public class InsertAddressActivity extends BaseActivity {
+public class InsertAddressActivity extends BaseActivity implements InsertAddressContract.View {
     @BindView(R.id.ibBack)
     ImageButton ibBack;
     @BindView(R.id.tv_title)
@@ -36,6 +41,9 @@ public class InsertAddressActivity extends BaseActivity {
     @BindView(R.id.btnSave)
     Button btnSave;
 
+
+    private InsertAddressContract.Presenter presenter;
+
     @Override
     public int getContentView() {
         return R.layout.aty_insert_address;
@@ -48,6 +56,7 @@ public class InsertAddressActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        presenter = new InsertAddressPresenterImp(this);
         ibBack.setVisibility(View.VISIBLE);
         tvTitle.setText(R.string.insert_address);
 
@@ -106,15 +115,30 @@ public class InsertAddressActivity extends BaseActivity {
             public void onClick(View v) {
                 String alias = etAddressName.getText().toString();
                 String address = etAddress.getText().toString();
+                Address addressBean = new Address();
+                addressBean.setAlias(alias);
+                addressBean.setAddress(address);
                 if (StringU.isEmpty(alias) || StringU.isEmpty(address)) {
                     showToast("请输入地址的相关信息。");
                     return;
                 } else {
                     //TODO 保存时需要查看账户名称
-                    finish();
+                    presenter.saveData(addressBean);
                 }
             }
         });
+
+    }
+
+    @Override
+    public void saveDataSuccess() {
+        OttoU.getInstance().post(new NotifyAddressData(true));
+        finish();
+    }
+
+    @Override
+    public void saveDataFailure() {
+        showToast(getString(R.string.save_data_failure));
 
     }
 

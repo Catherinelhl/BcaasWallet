@@ -40,12 +40,17 @@ This is the private key of your wallet. When the password is forgotten, you can 
     <string name="email_json">Mail to send Json file</string>
     <string name="email_json_rule">JSON files (wallet encrypted files) can be sent by mail, containing important information such as private key, public key, etc. When APP is deleted, it can be used to re-import the wallet.</string>
     <string name="send_email">Send mail</string>
-    <string name="address_mamager">Address management</string>
     <string name="address_name">title of account</string>
     <string name="address">Address</string>
-    <string name="adress_eg">eg:asdjbfnkajsdfkjadnsf</string>
+    <string name="address_eg">eg:asdjbfnkajsdfkjadnsf</string>
     <string name="please_input_address">Please input address.</string>
     <string name="please_input_address_alias">Please enter an account alias.</string>
     <string name="save">Save</string>
     <string name="insert_address">New address</string>
+    <string name="modify_password">Change password</string>
+    <string name="modify_authorized_representatives">Modify authorized representatives</string>
+    <string name="address_manager">Address management</string>
+    <string name="save_data_failure">Failed to save data.</string>
+    <string name="loading">Loading</string>
+
 </resources>

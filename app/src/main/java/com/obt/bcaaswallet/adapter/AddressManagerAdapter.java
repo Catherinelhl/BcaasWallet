@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
-import com.obt.bcaaswallet.bean.AddressBean;
+import com.obt.bcaaswallet.database.Address;
 import com.obt.bcaaswallet.listener.OnItemSelectListener;
 
 import java.util.List;
@@ -26,13 +26,17 @@ import java.util.List;
 public class AddressManagerAdapter extends RecyclerView.Adapter<AddressManagerAdapter.viewHolder> {
 
     private Context context;
-    private List<AddressBean> addressBeans;
+    private List<Address> addressBeans;
 
     private OnItemSelectListener onItemSelect;
 
-    public AddressManagerAdapter(Context context, List<AddressBean> addressBeans) {
+    public AddressManagerAdapter(Context context) {
         this.context = context;
+    }
+
+    public void addList(List<Address> addressBeans) {
         this.addressBeans = addressBeans;
+        notifyDataSetChanged();
     }
 
     public void setItemSelectListener(OnItemSelectListener settingItemSelectListener) {
@@ -49,11 +53,10 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<AddressManagerAd
     @Override
     public void onBindViewHolder(@NonNull viewHolder viewHolder, int i) {
         if (addressBeans == null) return;
-        final AddressBean addressBean = addressBeans.get(i);
+        final Address addressBean = addressBeans.get(i);
         if (addressBean == null) return;
-        viewHolder.tvSettingType.setText(addressBean.getAccountAddress());
-        viewHolder.tvAlias.setText(addressBean.getAccountAliases());
-        addressBean.setPostion(i);
+        viewHolder.tvSettingType.setText(addressBean.getAddress());
+        viewHolder.tvAlias.setText(addressBean.getAlias());
         viewHolder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

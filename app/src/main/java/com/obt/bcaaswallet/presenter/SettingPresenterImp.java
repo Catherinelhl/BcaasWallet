@@ -1,5 +1,7 @@
 package com.obt.bcaaswallet.presenter;
 
+import com.obt.bcaaswallet.R;
+import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
 import com.obt.bcaaswallet.contants.Contants;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
@@ -11,22 +13,22 @@ import java.util.List;
  * @author catherine.brainwilliam
  * @since 2018/8/16
  */
-public class SettingPresenterImp implements SettingContract.Presenter {
+public class SettingPresenterImp extends BasePresenterImp implements SettingContract.Presenter {
 
     private SettingContract.View viewInterface;
 
     public SettingPresenterImp(SettingContract.View view) {
+        super();
         this.viewInterface = view;
     }
 
     @Override
     public List<SettingTypeBean> initSettingTypes() {
         List<SettingTypeBean> settingTypes = new ArrayList<>();
-        //TODO  应用当前的上下文
-        SettingTypeBean settingTypeBean=new SettingTypeBean("查看钱包信息", Contants.SettingType.CHECKWALLETINFO);
-        SettingTypeBean settingTypeBean2=new SettingTypeBean("修改密码", Contants.SettingType.MODIFYPOSSWORD);
-        SettingTypeBean settingTypeBean3=new SettingTypeBean("修改授权代表", Contants.SettingType.MODIFYAUTH);
-        SettingTypeBean settingTypeBean4=new SettingTypeBean("地址管理", Contants.SettingType.ADRESSMANNAGE);
+        SettingTypeBean settingTypeBean = new SettingTypeBean(getString(R.string.check_wallet_info), Contants.SettingType.CHECKWALLETINFO);
+        SettingTypeBean settingTypeBean2 = new SettingTypeBean(getString(R.string.modify_password), Contants.SettingType.MODIFYPOSSWORD);
+        SettingTypeBean settingTypeBean3 = new SettingTypeBean(getString(R.string.modify_authorized_representatives), Contants.SettingType.MODIFYAUTH);
+        SettingTypeBean settingTypeBean4 = new SettingTypeBean(getString(R.string.address_manager), Contants.SettingType.ADRESSMANNAGE);
         settingTypes.add(settingTypeBean);
         settingTypes.add(settingTypeBean2);
         settingTypes.add(settingTypeBean3);

@@ -39,12 +39,16 @@
     <string name="email_json">邮件发送Json文件</string>
     <string name="email_json_rule">可通过邮件发送JSON文件(钱包加密文件)，包含私钥，公钥等重要信息，当APP被删除时，可用来重新导入钱包</string>
     <string name="send_email">发送邮件</string>
-    <string name="address_mamager">地址管理</string>
     <string name="address_name">账户名称</string>
     <string name="address">地址</string>
-    <string name="adress_eg">eg:asdjbfnkajsdfkjadnsf</string>
+    <string name="address_eg">eg:asdjbfnkajsdfkjadnsf</string>
     <string name="please_input_address">请输入地址</string>
     <string name="please_input_address_alias">请输入账户别名</string>
     <string name="save">保存</string>
     <string name="insert_address">新增地址</string>
+    <string name="modify_password">修改密码</string>
+    <string name="modify_authorized_representatives">修改授权代表</string>
+    <string name="address_manager">地址管理</string>
+    <string name="save_data_failure">保存数据失败!</string>
+    <string name="loading">Loading</string>
 </resources>

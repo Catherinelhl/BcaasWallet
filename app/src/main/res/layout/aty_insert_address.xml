@@ -39,7 +39,7 @@
         style="@style/grey_text_style"
         android:layout_marginLeft="@dimen/d32"
         android:layout_marginRight="@dimen/d32"
-        android:text="@string/adress_eg" />
+        android:text="@string/address_eg" />
 
     <Button
         android:id="@+id/btnSave"

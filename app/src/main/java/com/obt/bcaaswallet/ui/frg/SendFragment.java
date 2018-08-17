@@ -118,6 +118,7 @@ public class SendFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tvCurrency.setText(String.valueOf(currencyAdapter.getItem(position)));
+                //TODO  餘額顯示保留6個精度，如果當前顯示不下文本的長度，長按文本彈出浮窗進行顯示
                 tvBalance.setText(getAllTransactionData().get(position).getBalance());
             }
 

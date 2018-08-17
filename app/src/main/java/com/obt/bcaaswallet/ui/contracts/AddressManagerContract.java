@@ -1,7 +1,6 @@
 package com.obt.bcaaswallet.ui.contracts;
 
-import com.obt.bcaaswallet.bean.AddressBean;
-import com.obt.bcaaswallet.bean.SettingTypeBean;
+import com.obt.bcaaswallet.database.Address;
 
 import java.util.List;
 
@@ -12,8 +11,11 @@ import java.util.List;
  */
 public interface AddressManagerContract {
     interface View{
+        void getAddresses(List<Address> addresses);
+        void noData();
     }
     interface Presenter{
-        List<AddressBean> initAddressList();
+        void queryAllAddresses();
+        void deleteSingleAddress(Address addressBean);
     }
 }

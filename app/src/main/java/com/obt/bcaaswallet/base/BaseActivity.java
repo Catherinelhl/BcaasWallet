@@ -15,10 +15,9 @@ import butterknife.Unbinder;
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity implements BaseView {
 
     private Unbinder unbinder;
-
 
 
     @Override
@@ -93,5 +92,15 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void showLoadingDialog(String loading) {
+        // TODO: 2018/8/17 需要自定义一个加载弹框
+    }
+
+    @Override
+    public void hideLoadingDialog() {
+
     }
 }
