@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
     <color name="title_black">#1D2124</color>
+    <color name="title_black30">#301D2124</color>
     <color name="value_black70">#701D2124</color>
     <color name="transparent">#00000000</color>
     <color name="transparent05">#05000000</color>
@@ -18,6 +19,7 @@
     <color name="white">#ffffff</color>
     <color name="white2">#D5D5D5</color>
     <color name="red">#ff0000</color>
+    <color name="theme_red">#B9201A</color>
     <color name="red2">#ee0304</color>
     <color name="grey">#888888</color>
     <color name="theme_grey">#fff2f2f2</color>

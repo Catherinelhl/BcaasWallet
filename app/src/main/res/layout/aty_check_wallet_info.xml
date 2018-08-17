@@ -101,11 +101,9 @@
             android:text="@string/email_json_rule" />
 
         <Button
+            style="@style/btn_style"
             android:id="@+id/btnSendEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d40"
-            android:background="@drawable/selector_btn_style"
             android:text="@string/send_email" />
 
     </LinearLayout>

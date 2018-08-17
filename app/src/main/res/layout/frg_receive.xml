@@ -15,12 +15,11 @@
 
     <TextView
         android:id="@+id/tvMyAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/item_text_style"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/d32"
         android:layout_marginRight="@dimen/d32"
-        android:layout_marginTop="@dimen/d10"
+        android:layout_marginTop="@dimen/d5"
         android:gravity="center" />
 
 

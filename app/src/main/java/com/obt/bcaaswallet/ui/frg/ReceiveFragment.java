@@ -2,7 +2,9 @@ package com.obt.bcaaswallet.ui.frg;
 
 import android.graphics.Bitmap;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
@@ -42,8 +44,9 @@ public class ReceiveFragment extends BaseFragment {
     }
 
     private void makeQRCodeByAddress(String address) {
-        Bitmap qrCode = EncodingUtils.createQRCode(address, 500, 500,
-                null);//mCheckBox.isChecked() ? BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher) :
+        Bitmap qrCode = EncodingUtils.createQRCode(address, context.getResources().getDimensionPixelOffset(R.dimen.d200),
+                context.getResources().getDimensionPixelOffset(R.dimen.d200), null);
+        ;//mCheckBox.isChecked() ? BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher) :
         ivQRCode.setImageBitmap(qrCode);
     }
 

@@ -13,22 +13,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/d0"
-        android:layout_marginLeft="@dimen/d32"
-        android:layout_marginRight="@dimen/d32"
         android:layout_weight="2">
 
         <EditText
             android:id="@+id/et_password"
             style="@style/edittext_style"
+            android:layout_marginLeft="@dimen/d16"
+            android:layout_marginRight="@dimen/d16"
             android:hint="@string/password" />
 
         <Button
             android:id="@+id/btn_unlock_wallet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/btn_style"
             android:layout_below="@+id/et_password"
             android:layout_marginTop="@dimen/d20"
-            android:background="@drawable/selector_btn_style"
             android:text="@string/unlock" />
 
         <View
@@ -40,6 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_unlock_wallet"
+            android:layout_marginLeft="@dimen/d16"
+            android:layout_marginRight="@dimen/d16"
             android:layout_marginTop="@dimen/d40">
 
             <Button

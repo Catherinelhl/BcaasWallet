@@ -1,11 +1,14 @@
 package com.obt.bcaaswallet.ui.frg;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +23,8 @@ import com.obt.bcaaswallet.ui.aty.SendToConfirmPwdActivity;
 import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @author catherine.brainwilliam
@@ -27,29 +32,25 @@ import butterknife.BindView;
  * 发送页面
  */
 public class SendFragment extends BaseFragment {
-
-    @BindView(R.id.etMyAccountAddress)
-    EditText etMyAccountAddress;//我的账户地址显示容器
-    @BindView(R.id.spSelectDisplayCurrency)
-    Spinner spSelectDisplayCurrency;//选择当前查询显示的币种
-    @BindView(R.id.tv_balance)
+    @BindView(R.id.tvMyAccountAddressValue)
+    TextView tvMyAccountAddressValue;//我的账户地址显示容器
+    @BindView(R.id.tvBalance)
     TextView tvBalance;
-    @BindView(R.id.tvCurrency)
-    TextView tvCurrency;
+    @BindView(R.id.sp_select)
+    Spinner spSelect;////选择当前查询显示的币种
     @BindView(R.id.v_line)
     View vLine;
     @BindView(R.id.spSelectAccountAddress)
     Spinner spSelectAccountAddress;//选择收款账户地址
     @BindView(R.id.tv_eg)
     TextView tvEg;
-    @BindView(R.id.tvTransactionAmount)
-    TextView tvTransactionAmount;//我的交易数额
-    @BindView(R.id.etTransactionAmount)
-    EditText etTransactionAmount;
     @BindView(R.id.spSelectReceiveCurrency)
     Spinner spSelectReceiveCurrency;//选择交易发送的币种
+    @BindView(R.id.etTransactionAmount)
+    EditText etTransactionAmount;//我的交易数额
     @BindView(R.id.btnSend)
     Button btnSend;
+
 
     private String myAccountAddress;//得到当前的账户地址
     private ArrayAdapter currencyAdapter;//声明用于填充币种的适配
@@ -66,8 +67,7 @@ public class SendFragment extends BaseFragment {
     @Override
     public void initViews(View view) {
         myAccountAddress = "3672783jshadgvhbnjbvjf===";
-        etMyAccountAddress.setText(myAccountAddress);
-        etMyAccountAddress.setFocusable(false);
+        tvMyAccountAddressValue.setText(myAccountAddress);
         initData();
 
     }
@@ -95,7 +95,7 @@ public class SendFragment extends BaseFragment {
         //设置下拉列表的风格
         currencyAdapter.setDropDownViewResource(R.layout.dropdown_style);
         //将adapter 添加到spinner中
-        spSelectDisplayCurrency.setAdapter(currencyAdapter);
+        spSelect.setAdapter(currencyAdapter);
         spSelectReceiveCurrency.setAdapter(currencyAdapter);
     }
 
@@ -114,10 +114,10 @@ public class SendFragment extends BaseFragment {
                 intentToActivity(bundle, SendToConfirmPwdActivity.class, false);
             }
         });
-        spSelectDisplayCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tvCurrency.setText(String.valueOf(currencyAdapter.getItem(position)));
+//                tvCurrency.setText(String.valueOf(currencyAdapter.getItem(position)));
                 //TODO  餘額顯示保留6個精度，如果當前顯示不下文本的長度，長按文本彈出浮窗進行顯示
                 tvBalance.setText(getAllTransactionData().get(position).getBalance());
             }
@@ -172,4 +172,5 @@ public class SendFragment extends BaseFragment {
         //TODO commitAllowingStateLoss  Can not perform this action after onSaveInstanceState这里Otto暂时会报这个错
         ((MainActivity) activity).switchTab(0);
     }
+
 }

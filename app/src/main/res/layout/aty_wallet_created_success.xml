@@ -38,10 +38,8 @@
    <include layout="@layout/inc_et_private_key"/>
     <Button
         android:id="@+id/btn_finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_style"
         android:layout_marginTop="@dimen/d50"
-        android:background="@drawable/selector_btn_style"
         android:text="@string/finish" />
 
 </LinearLayout>

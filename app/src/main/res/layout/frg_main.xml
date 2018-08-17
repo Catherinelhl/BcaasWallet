@@ -3,21 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme_grey"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/d32"
-    android:paddingRight="@dimen/d32">
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d0"
-        android:layout_marginLeft="@dimen/d10"
-        android:layout_marginRight="@dimen/d10"
-        android:layout_marginTop="@dimen/d20"
-        android:layout_weight="1"
-        android:background="@drawable/bg_white_layout"
-        android:paddingLeft="@dimen/d12"
-        android:paddingRight="@dimen/d12">
+        style="@style/bg_white_style"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/tvMyAddressKey"
@@ -28,6 +18,7 @@
         <TextView
             android:id="@+id/tvMyAccountAddressValue"
             style="@style/black_text_style"
+            android:layout_marginLeft="@dimen/d10"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/d16"
             android:layout_toRightOf="@+id/tvMyAddressKey"
@@ -49,6 +40,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/tvMyAddressKey"
             android:layout_marginTop="@dimen/d2"
+            android:layout_marginLeft="@dimen/d10"
             android:layout_toRightOf="@+id/tvCurrencyKey"
             android:gravity="bottom|right"
             android:orientation="horizontal">
@@ -79,6 +71,7 @@
         <TextView
             android:id="@+id/tvBalance"
             style="@style/black_text_style"
+            android:layout_marginLeft="@dimen/d10"
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/tvCurrencyKey"
@@ -91,17 +84,9 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d0"
-        android:layout_marginBottom="@dimen/d10"
-        android:layout_marginLeft="@dimen/d10"
-        android:layout_marginRight="@dimen/d10"
-        android:layout_marginTop="@dimen/d20"
+        style="@style/bg_white_style"
         android:layout_weight="3"
-        android:background="@drawable/bg_white_layout"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/d12"
-        android:paddingRight="@dimen/d12">
+        android:orientation="vertical">
 
         <TextView
             style="@style/black_text_style"
