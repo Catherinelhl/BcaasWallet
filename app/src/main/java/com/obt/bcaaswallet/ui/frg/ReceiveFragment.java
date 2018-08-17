@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseFragment;
-import com.obt.bcaaswallet.qrcode.encoding.EncodingU;
 import com.obt.bcaaswallet.utils.StringU;
+import com.obt.qrcode.encoding.EncodingUtils;
 
 import butterknife.BindView;
 
@@ -42,7 +42,7 @@ public class ReceiveFragment extends BaseFragment {
     }
 
     private void makeQRCodeByAddress(String address) {
-        Bitmap qrCode = EncodingU.createQRCode(address, 500, 500,
+        Bitmap qrCode = EncodingUtils.createQRCode(address, 500, 500,
                 null);//mCheckBox.isChecked() ? BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher) :
         ivQRCode.setImageBitmap(qrCode);
     }

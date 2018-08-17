@@ -1,10 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.NoTitleBar">
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
         <!-- Customize your theme here. -->
         <item name="android:fitsSystemWindows">true</item>
-        <item name="android:background">@color/white</item>
     </style>
 
     <!-- 普通分割线的样式-->

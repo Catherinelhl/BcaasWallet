@@ -1,7 +1,10 @@
 package com.obt.bcaaswallet.ui.aty;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ import com.obt.bcaaswallet.ui.frg.ReceiveFragment;
 import com.obt.bcaaswallet.ui.frg.ScanFragment;
 import com.obt.bcaaswallet.ui.frg.SendFragment;
 import com.obt.bcaaswallet.ui.frg.SettingFragment;
+import com.obt.qrcode.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,13 +118,13 @@ public class MainActivity extends BaseActivity {
                         title = getResources().getString(R.string.scan);
                         color = getResources().getColor(R.color.transparent);
                         textColor = getResources().getColor(R.color.black);
-
+                        intentToCaptureAty();
                         break;
                     case 3:
                         title = getResources().getString(R.string.send);
                         color = getResources().getColor(R.color.transparent);
                         textColor = getResources().getColor(R.color.black);
-
+                        showToast("asdfasd");
                         break;
                     case 4:
                         title = getResources().getString(R.string.setting);
@@ -136,6 +140,11 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void intentToCaptureAty() {
+        startActivityForResult(new Intent(this, CaptureActivity.class), 0);
+
     }
 
     public List<String> getCurrency() {
@@ -162,5 +171,21 @@ public class MainActivity extends BaseActivity {
     public String getAddressOfUser() {
         addressOfUser = "ajkdbfnaskdjbfjhasdbf===";
         return addressOfUser;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (data == null) return;
+            Bundle bundle = data.getExtras();
+            if (bundle != null) {
+                String result = bundle.getString("result");
+                //TODO 存储当前的扫描结果？
+                tabBar.setCurrentTab(3);//扫描成功，然后将当前扫描数据存储，然后跳转到发送页面
+            }
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.obt.bcaaswallet.qrcode.encoding;
+package com.obt.qrcode.encoding;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 二维码生成工具类
  */
-public class EncodingU {
+public class EncodingUtils {
 
     /**
      * 创建二维码
