@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -13,11 +12,11 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.adapter.PendingTransactionAdapter;
 import com.obt.bcaaswallet.base.BaseFragment;
 import com.obt.bcaaswallet.bean.TransactionsBean;
-import com.obt.bcaaswallet.ui.aty.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import butterknife.BindView;
 
 /**
  * @author catherine.brainwilliam
@@ -26,16 +25,22 @@ import java.util.Random;
  * '首页
  */
 public class MainFragment extends BaseFragment {
+    @BindView(R.id.tvMyAccountAddressValue)
+    TextView tvMyAccountAddressValue;
+    @BindView(R.id.sp_select)
+    Spinner spSelect;
+    @BindView(R.id.tvBalance)
+    TextView tvBalance;
+    @BindView(R.id.rvPendingTransaction)
+    RecyclerView rvPendingTransaction;
+
     private String accountAddress;//我的账户地址
     private String balance;//当前币种下面的余额
 
-    private Spinner spSelect;
-    private TextView tvBalance, tvCurrency;
-    private RecyclerView rvPendingTransaction;
-    private EditText etAccountAddress;// 显示当前账户地址的容器
     private ArrayAdapter adapter;
     private PendingTransactionAdapter pendingTransactionAdapter;//待交易数据
     private List<TransactionsBean> transactionsBeanList;
+
 
     @Override
     public int getLayoutRes() {
@@ -46,14 +51,19 @@ public class MainFragment extends BaseFragment {
     public void initViews(View view) {
         initTransactionList();
         spSelect = view.findViewById(R.id.sp_select);
-        rvPendingTransaction = view.findViewById(R.id.rvPendingTransaction);
-        tvBalance = view.findViewById(R.id.tv_balance);
-        tvCurrency = view.findViewById(R.id.tvCurrency);
-        etAccountAddress = view.findViewById(R.id.myAccountAddress);
         accountAddress = "asdjfnaks.jnfak.jdsnfkm===";
-        etAccountAddress.setText(accountAddress);
+        tvMyAccountAddressValue.setText(accountAddress);
         initSpinnerAdapter();
         initTransactionsAdapter();
+        getCurrentCurrency();
+    }
+
+    private void getCurrentCurrency() {
+        if (getCurrency() == null) return;
+        if (getCurrency().size() > 0) {
+            tvBalance.setText(getAllTransactionData().get(0).getBalance());
+
+        }
     }
 
     private void initSpinnerAdapter() {
@@ -67,10 +77,11 @@ public class MainFragment extends BaseFragment {
 
     private void initTransactionList() {
         transactionsBeanList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        // TODO: 2018/8/17 暂时是假数据
+        for (int i = 0; i < 50; i++) {
             TransactionsBean transactionsBean = new TransactionsBean(i + "asdkjfbakjhsdvfjahvfaghvdfh==",
-                    getAllTransactionData().get(i).getBalance(),
-                    getCurrency().get(i / 2));
+                    getAllTransactionData().get(i % getAllTransactionData().size()).getBalance(),
+                    getCurrency().get(i % getCurrency().size()));
             transactionsBeanList.add(transactionsBean);
         }
     }
@@ -89,7 +100,6 @@ public class MainFragment extends BaseFragment {
         spSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tvCurrency.setText(String.valueOf(adapter.getItem(position)));
                 tvBalance.setText(getAllTransactionData().get(position).getBalance());
             }
 

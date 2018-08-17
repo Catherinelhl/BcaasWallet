@@ -19,7 +19,6 @@ import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 public class InsertAddressActivity extends BaseActivity implements InsertAddressContract.View {
     @BindView(R.id.ibBack)
     ImageButton ibBack;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;

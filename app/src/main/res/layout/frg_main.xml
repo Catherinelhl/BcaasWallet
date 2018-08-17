@@ -3,75 +3,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_grey"
     android:orientation="vertical"
     android:paddingLeft="@dimen/d32"
     android:paddingRight="@dimen/d32">
 
-    <TextView
-        style="@style/black_text_style"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d0"
+        android:layout_marginLeft="@dimen/d10"
+        android:layout_marginRight="@dimen/d10"
         android:layout_marginTop="@dimen/d20"
-        android:text="@string/my_account_adress" />
+        android:layout_weight="1"
+        android:background="@drawable/bg_white_layout"
+        android:paddingLeft="@dimen/d12"
+        android:paddingRight="@dimen/d12">
 
-    <EditText
-        android:id="@+id/myAccountAddress"
-        android:layout_marginTop="@dimen/d10"
-        style="@style/edittext_style_nofocus" />
+        <TextView
+            android:id="@+id/tvMyAddressKey"
+            style="@style/black_text_style"
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/my_account_address" />
 
-    <TextView
-        style="@style/black_text_style"
-        android:layout_marginTop="@dimen/d30"
-        android:text="@string/account_balance" />
+        <TextView
+            android:id="@+id/tvMyAccountAddressValue"
+            style="@style/black_text_style"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/d16"
+            android:layout_toRightOf="@+id/tvMyAddressKey"
+            android:gravity="center|right"
+            android:textColor="@color/value_black70" />
+
+        <TextView
+            android:id="@+id/tvCurrencyKey"
+            style="@style/black_text_style"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/tvMyAddressKey"
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/currency" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvCurrencyKey"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvMyAddressKey"
+            android:layout_marginTop="@dimen/d2"
+            android:layout_toRightOf="@+id/tvCurrencyKey"
+            android:gravity="bottom|right"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/sp_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_spinner"
+                android:dropDownHorizontalOffset="-10dp"
+                android:dropDownVerticalOffset="@dimen/d1"
+                android:gravity="left|center"
+                android:minWidth="@dimen/d70"
+                android:padding="@dimen/d1"
+                android:popupBackground="@color/transparent"
+                android:spinnerMode="dropdown" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvBalanceKey"
+            style="@style/black_text_style"
+            android:layout_below="@+id/tvCurrencyKey"
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/account_balance" />
+
+        <TextView
+            android:id="@+id/tvBalance"
+            style="@style/black_text_style"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvCurrencyKey"
+            android:layout_marginTop="@dimen/d16"
+            android:layout_toRightOf="@+id/tvBalanceKey"
+            android:gravity="center|right"
+            tools:text="2006.855000 " />
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/sp_select"
-            android:layout_width="@dimen/d0"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/d5"
-            android:layout_weight="1.1"
-            android:background="@drawable/bg_spinner"
-            android:dropDownHorizontalOffset="-10dp"
-            android:dropDownVerticalOffset="2dp"
-            android:padding="@dimen/d2"
-            android:popupBackground="@color/transparent"
-            android:spinnerMode="dropdown" />
+        android:layout_height="@dimen/d0"
+        android:layout_marginBottom="@dimen/d10"
+        android:layout_marginLeft="@dimen/d10"
+        android:layout_marginRight="@dimen/d10"
+        android:layout_marginTop="@dimen/d20"
+        android:layout_weight="3"
+        android:background="@drawable/bg_white_layout"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/d12"
+        android:paddingRight="@dimen/d12">
 
         <TextView
-            android:id="@+id/tv_balance"
             style="@style/black_text_style"
-            android:layout_width="@dimen/d0"
-            android:layout_margin="@dimen/d5"
-            android:layout_marginLeft="@dimen/d10"
-            android:layout_weight="1"
-            android:gravity="center"
-            tools:text="2006.855000 " />
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/pending_transaction" />
 
-        <TextView
-            android:id="@+id/tvCurrency"
-            style="@style/black_text_style"
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/d5"
-            tools:text="BCC" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPendingTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/d8"
+            android:scrollbars="none"
+            tools:listitem="@layout/item_transaction" />
     </LinearLayout>
 
-    <TextView
-        style="@style/black_text_style"
-        android:layout_marginTop="@dimen/d40"
-        android:text="@string/pending_transaction" />
-
-    <View
-        style="@style/line_style"
-        android:layout_marginTop="@dimen/d10" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvPendingTransaction"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        tools:listitem="@layout/item_transaction" />
 
 </LinearLayout>

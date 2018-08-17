@@ -34,7 +34,7 @@ import butterknife.BindView;
 public class CheckWalletInfoActivity extends BaseActivity {
     @BindView(R.id.ibBack)
     ImageButton ibBack;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/d48">
+    android:layout_height="@dimen/d48"
+    android:background="@color/white">
 
     <ImageButton
         android:id="@+id/ibBack"
@@ -15,7 +16,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tvTitle"
         style="@style/title_style"
         android:layout_centerInParent="true"
         android:gravity="center"
@@ -33,10 +34,5 @@
         android:src="@mipmap/icon_insert"
         android:visibility="gone" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d0.2"
-        android:layout_alignParentBottom="true"
-        android:background="@color/light_grey" />
 
 </RelativeLayout>

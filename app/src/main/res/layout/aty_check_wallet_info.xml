@@ -17,7 +17,7 @@
         <TextView
             style="@style/black_text_style"
             android:layout_marginTop="@dimen/d20"
-            android:text="@string/my_account_adress" />
+            android:text="@string/my_account_address" />
 
         <EditText
             android:id="@+id/etMyAccountAddress"

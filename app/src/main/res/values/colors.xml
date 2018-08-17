@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
+    <color name="title_black">#1D2124</color>
+    <color name="value_black70">#701D2124</color>
     <color name="transparent">#00000000</color>
     <color name="transparent05">#05000000</color>
     <color name="transparent10">#10000000</color>
@@ -18,6 +20,8 @@
     <color name="red">#ff0000</color>
     <color name="red2">#ee0304</color>
     <color name="grey">#888888</color>
+    <color name="theme_grey">#fff2f2f2</color>
+    <color name="theme_grey_line">#fffefefe</color>
     <color name="grey50">#50888888</color>
     <color name="grey2">#55999999</color>
     <color name="grey3">#55111111</color>
@@ -28,5 +32,7 @@
     <color name="light_green2">#76afcf</color>
     <color name="light_red2">#dd6495</color>
     <color name="light_green">#72d3b4</color>
+
+
 
 </resources>

@@ -31,7 +31,7 @@ import butterknife.BindView;
 public class AddressManagerActivity extends BaseActivity implements AddressManagerContract.View {
     @BindView(R.id.ibBack)
     ImageButton ibBack;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;

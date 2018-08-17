@@ -25,8 +25,8 @@
     <string name="scan">掃描</string>
     <string name="send">發送</string>
     <string name="setting">設置</string>
-    <string name="my_account_adress">我的帳戶地址</string>
-    <string name="account_balance">帳戶餘額</string>
+    <string name="my_account_address">我的帳戶地址：</string>
+    <string name="account_balance">帳戶餘額：</string>
     <string name="pending_transaction">待處理交易</string>
     <string name="receive_account_address">收款帳戶地址</string>
     <string name="account_address_eg">eg:kjahdgfahjbdfkjahbdnkajbdnkjhbajh==</string>

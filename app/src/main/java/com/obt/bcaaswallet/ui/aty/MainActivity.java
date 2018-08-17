@@ -37,7 +37,7 @@ import butterknife.BindView;
  */
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.tab_bar)
     BottomTabBar tabBar;
@@ -104,44 +104,28 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabChange(int position, String name, View view) {
                 String title = getResources().getString(R.string.bcaas_u);
-                int color = getResources().getColor(R.color.red2);
-                int textColor = getResources().getColor(R.color.white);
                 switch (position) {
                     case 0:
                         title = getResources().getString(R.string.bcaas_u);
-                        color = getResources().getColor(R.color.red2);
-                        textColor = getResources().getColor(R.color.white);
                         break;
                     case 1:
                         title = getResources().getString(R.string.receive);
-                        color = getResources().getColor(R.color.transparent);
-                        textColor = getResources().getColor(R.color.black);
-
                         break;
                     case 2:
                         title = getResources().getString(R.string.scan);
-                        color = getResources().getColor(R.color.transparent);
-                        textColor = getResources().getColor(R.color.black);
                         switchTab(0);
+                        setMainTitle();
                         intentToCaptureAty();
                         break;
                     case 3:
                         title = getResources().getString(R.string.send);
-                        color = getResources().getColor(R.color.transparent);
-                        textColor = getResources().getColor(R.color.black);
                         break;
                     case 4:
                         title = getResources().getString(R.string.setting);
-                        color = getResources().getColor(R.color.transparent);
-                        textColor = getResources().getColor(R.color.black);
                         break;
 
                 }
                 tvTitle.setText(title);
-                tvTitle.setBackgroundColor(color);
-                tvTitle.setTextColor(textColor);
-
-
             }
         });
     }
@@ -163,12 +147,13 @@ public class MainActivity extends BaseActivity {
     public void switchTab(int position) {
         if (tabBar == null) return;
         tabBar.setCurrentTab(position);
+        if (position == 0) {
+            setMainTitle();
+        }
     }
 
     private void setMainTitle() {
         tvTitle.setText(getResources().getString(R.string.bcaas_u));
-        tvTitle.setBackgroundColor(getResources().getColor(R.color.red2));
-        tvTitle.setTextColor(getResources().getColor(R.color.white));
     }
 
     public String getAddressOfUser() {

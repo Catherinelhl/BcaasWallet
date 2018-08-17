@@ -26,8 +26,8 @@ This is the private key of your wallet. When the password is forgotten, you can 
     <string name="scan">Scan</string>
     <string name="send">Send</string>
     <string name="setting">Setting</string>
-    <string name="my_account_adress">My account address</string>
-    <string name="account_balance">Account balance</string>
+    <string name="my_account_address">My account address：</string>
+    <string name="account_balance">Account balance:</string>
     <string name="pending_transaction">Pending transaction</string>
     <string name="receive_account_address">Address of receiving account</string>
     <string name="account_address_eg">eg:kjahdgfahjbdfkjahbdnkajbdnkjhbajh==</string>

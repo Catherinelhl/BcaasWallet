@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
@@ -40,7 +39,7 @@ public class SendToConfirmPwdActivity extends BaseActivity {
     Button btnSend;
     @BindView(R.id.ibBack)
     ImageButton ibBack;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;
