@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/d10"
-        android:text="@string/address_of_coinan"
         android:textSize="@dimen/text_size_17" />
 
     <TextView
