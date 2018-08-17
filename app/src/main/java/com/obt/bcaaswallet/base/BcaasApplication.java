@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.obt.bcaaswallet.utils.OttoU;
+
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
@@ -19,6 +21,7 @@ public class BcaasApplication extends Application {
         super.onCreate();
         instance = this;
         getScreenMeasure();
+        OttoU.getInstance().register(this);
     }
 
     /*得到当前屏幕的尺寸*/

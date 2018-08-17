@@ -1,22 +1,23 @@
 package com.obt.bcaaswallet.ui.frg;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
+import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.base.BaseFragment;
 import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.event.SwitchTab;
+import com.obt.bcaaswallet.event.UpdateAddressEvent;
 import com.obt.bcaaswallet.ui.aty.MainActivity;
 import com.obt.bcaaswallet.ui.aty.SendToConfirmPwdActivity;
-import com.obt.bcaaswallet.utils.StringU;
+import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 
@@ -154,8 +155,20 @@ public class SendFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    @Subscribe
+    public void updateAddressEvent(UpdateAddressEvent updateAddressEvent) {
+        System.out.println("UpdateAddressEvent" + updateAddressEvent);
+        if (updateAddressEvent == null) return;
+        String result = updateAddressEvent.getResult();
+        ((BaseActivity) activity).showToast(result);
+        showToast(result);
+    }
+
+    @Subscribe
+    public void switchTab(SwitchTab switchTab) {
+        if (switchTab == null) return;
+        if (activity == null) return;
+        //TODO commitAllowingStateLoss  Can not perform this action after onSaveInstanceState这里Otto暂时会报这个错
+        ((MainActivity) activity).switchTab(0);
     }
 }

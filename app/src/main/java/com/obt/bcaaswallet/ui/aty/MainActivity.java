@@ -12,12 +12,16 @@ import com.hjm.bottomtabbar.BottomTabBar;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.bean.TransactionsBean;
+import com.obt.bcaaswallet.event.SwitchTab;
+import com.obt.bcaaswallet.event.UpdateAddressEvent;
 import com.obt.bcaaswallet.ui.frg.MainFragment;
 import com.obt.bcaaswallet.ui.frg.ReceiveFragment;
 import com.obt.bcaaswallet.ui.frg.ScanFragment;
 import com.obt.bcaaswallet.ui.frg.SendFragment;
 import com.obt.bcaaswallet.ui.frg.SettingFragment;
+import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.qrcode.activity.CaptureActivity;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,13 +122,13 @@ public class MainActivity extends BaseActivity {
                         title = getResources().getString(R.string.scan);
                         color = getResources().getColor(R.color.transparent);
                         textColor = getResources().getColor(R.color.black);
+                        switchTab(0);
                         intentToCaptureAty();
                         break;
                     case 3:
                         title = getResources().getString(R.string.send);
                         color = getResources().getColor(R.color.transparent);
                         textColor = getResources().getColor(R.color.black);
-                        showToast("asdfasd");
                         break;
                     case 4:
                         title = getResources().getString(R.string.setting);
@@ -159,7 +163,6 @@ public class MainActivity extends BaseActivity {
     public void switchTab(int position) {
         if (tabBar == null) return;
         tabBar.setCurrentTab(position);
-        setMainTitle();
     }
 
     private void setMainTitle() {
@@ -183,9 +186,24 @@ public class MainActivity extends BaseActivity {
             if (bundle != null) {
                 String result = bundle.getString("result");
                 //TODO 存储当前的扫描结果？
-                tabBar.setCurrentTab(3);//扫描成功，然后将当前扫描数据存储，然后跳转到发送页面
+                switchTab(3);//扫描成功，然后将当前扫描数据存储，然后跳转到发送页面
+                OttoU.getInstance().post(new UpdateAddressEvent(result));
             }
         }
-
     }
+
+    @Subscribe
+    public void updateAddressEvent(UpdateAddressEvent updateAddressEvent) {
+        System.out.println("UpdateAddressEvent" + updateAddressEvent);
+        if (updateAddressEvent == null) return;
+        String result = updateAddressEvent.getResult();
+        showToast(result);
+    }
+
+    @Subscribe
+    public void switchTab(SwitchTab switchTab) {
+        if (switchTab == null) return;
+        switchTab(switchTab.getPosition());
+    }
+
 }

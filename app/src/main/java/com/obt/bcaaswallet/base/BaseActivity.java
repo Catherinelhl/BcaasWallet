@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import com.obt.bcaaswallet.utils.OttoU;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -17,12 +19,15 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private Unbinder unbinder;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getArgs(getIntent().getExtras());
         setContentView(getContentView());
         unbinder = ButterKnife.bind(this);
+        OttoU.getInstance().register(this);
         initViews();
         initListener();
     }

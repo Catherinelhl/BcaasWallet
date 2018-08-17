@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.obt.bcaaswallet.bean.TransactionsBean;
 import com.obt.bcaaswallet.ui.aty.MainActivity;
+import com.obt.bcaaswallet.utils.OttoU;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public abstract class BaseFragment extends Fragment {
             rootView = inflater.inflate(getLayoutRes(), null);
         }
         unbinder = ButterKnife.bind(this, rootView);
+        OttoU.getInstance().register(this);
         return rootView;
     }
 

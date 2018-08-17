@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.event.SwitchTab;
+import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
@@ -103,6 +105,7 @@ public class SendToConfirmPwdActivity extends BaseActivity {
                 if (StringU.isEmpty(pwd)) {
                     showToast("请确认密码的输入！");
                 } else {
+                    OttoU.getInstance().post(new SwitchTab(0));
                     finish();
                 }
             }
