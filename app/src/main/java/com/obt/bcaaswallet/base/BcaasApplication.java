@@ -31,7 +31,6 @@ public class BcaasApplication extends MultiDexApplication {
         super.onCreate();
         instance = this;
         getScreenMeasure();
-        OttoU.getInstance().register(this);
         initDB();
 
     }

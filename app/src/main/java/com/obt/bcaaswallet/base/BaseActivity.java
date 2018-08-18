@@ -87,6 +87,7 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        OttoU.getInstance().unregister(this);
     }
 
     @Override

@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabSelected(int position) {
                 //未选中->选中
-                showFragment(position);
+                replaceFragment(position);
                 switch (position) {
                     case 0:
                         tvTitle.setText(getResources().getString(R.string.main));
@@ -219,18 +219,21 @@ public class MainActivity extends BaseActivity {
         mFragmentList.add(settingFragment);
     }
 
-    private void showFragment(int position) {
+    private void replaceFragment(int position) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         BaseFragment fragment = mFragmentList.get(position);
         currentFragment = fragment;
-        if (!fragment.isAdded()) {
-            ft.add(R.id.fl_module, fragment);
-        }
-        ft.show(fragment);
-        if (currentIndex != position) {
-            ft.hide(mFragmentList.get(currentIndex));
-            currentIndex = position;
-        }
+        ft.replace(R.id.fl_module, fragment);
+
+//    }
+//        if (!fragment.isAdded()) {
+//            ft.add(R.id.fl_module, fragment);
+//        }
+//        ft.show(fragment);
+//        if (currentIndex != position) {
+//            ft.hide(mFragmentList.get(currentIndex));
+//            currentIndex = position;
+//        }
         ft.commitAllowingStateLoss();
     }
 
