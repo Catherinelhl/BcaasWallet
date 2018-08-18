@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSetting"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/d20"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_setting"/>
+        android:layout_margin="@dimen/d16"
+        tools:listitem="@layout/item_setting" />
 
 </LinearLayout>

@@ -8,29 +8,22 @@
     <TextView
         android:id="@+id/tvAlias"
         style="@style/black_text_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/d10"
-        android:textSize="@dimen/text_size_17" />
+        android:layout_marginLeft="@dimen/d10" />
 
     <TextView
         android:id="@+id/tvSettingType"
-        style="@style/marquee_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/item_text_style"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/tvAlias"
         android:layout_marginLeft="@dimen/d5"
         android:layout_marginRight="@dimen/d5"
-        android:layout_toLeftOf="@+id/ivDelete"
-        android:background="@color/transparent"
-        android:text="as,dkfna.djsfnak"
-        android:textColor="@color/black2" />
+        android:layout_toLeftOf="@+id/ibDelete" />
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/ivDelete"
+    <ImageButton
+        android:id="@+id/ibDelete"
         android:layout_width="@dimen/d20"
         android:layout_height="@dimen/d20"
+        android:background="@color/transparent"
         android:layout_alignBottom="@+id/tvSettingType"
         android:layout_alignParentRight="true"
         android:src="@mipmap/icon_delete" />
@@ -39,6 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/d0.2"
         android:layout_alignParentBottom="true"
-        android:background="@color/grey" />
+        android:background="@color/value_black70" />
 
 </RelativeLayout>

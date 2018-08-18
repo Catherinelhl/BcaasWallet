@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class SettingTypesAdapter extends RecyclerView.Adapter<SettingTypesAdapte
         final SettingTypeBean types = settingTypes.get(i);
         if (types == null) return;
         viewHolder.tvSettingType.setText(types.getType());
-        viewHolder.ivDetail.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ibDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 settingItemSelectListener.onItemSelect(types);
@@ -77,13 +78,13 @@ public class SettingTypesAdapter extends RecyclerView.Adapter<SettingTypesAdapte
 
     class viewHolder extends RecyclerView.ViewHolder {
         TextView tvSettingType;
-        AppCompatImageView ivDetail;
+        ImageButton ibDetail;
         RelativeLayout rlSettingTypes;
 
         public viewHolder(View view) {
             super(view);
             tvSettingType = view.findViewById(R.id.tvSettingType);
-            ivDetail = view.findViewById(R.id.ivDetail);
+            ibDetail = view.findViewById(R.id.ibDetail);
             rlSettingTypes = view.findViewById(R.id.rlSettingTypes);
         }
     }

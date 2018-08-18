@@ -1,83 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/inc_header" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/d32"
-        android:layout_marginRight="@dimen/d32"
-        android:scrollbars="none">
 
-        <LinearLayout
+    <LinearLayout
+        style="@style/bg_white_style"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/d16"
+        android:layout_marginRight="@dimen/d16"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTransactionDetailKey"
+            style="@style/item_text_style"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/d20"
+            android:text="@string/transaction_detail_key" />
+
+        <TextView
+            android:id="@+id/tvTransactionDetail"
+            style="@style/black_text_style"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/d10"
+            android:enabled="false"
+            tools:text="289347528.0000000 BCC" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/black_text_style"
-                android:layout_marginTop="@dimen/d20"
-                android:text="@string/my_account_address" />
-
-            <EditText
-                android:id="@+id/etMyAccountAddress"
-                style="@style/edittext_style_nofocus"
-                android:layout_marginTop="@dimen/d10"
-                android:enabled="false" />
+            android:layout_height="@dimen/d0.2"
+            android:layout_below="@+id/tvTransactionBlockTitle"
+            android:layout_marginTop="@dimen/d10"
+            android:background="@color/title_black30" />
 
 
-            <TextView
-                style="@style/black_text_style"
-                android:layout_marginTop="@dimen/d40"
-                android:text="@string/transaction_amount" />
+        <TextView
+            android:id="@+id/tvReceiveAccountKey"
+            style="@style/black_text_style"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/receive_account_address" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d45"
-                android:layout_gravity="center"
-                android:background="@color/transparent"
-                android:gravity="center"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvReceiveAccountValue"
+            style="@style/item_text_style"
 
-                <EditText
-                    android:id="@+id/etTransactionAmount"
-                    style="@style/edittext_style"
-                    android:layout_width="@dimen/d0"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:gravity="center_vertical" />
+            />
 
-                <TextView
-                    android:id="@+id/tvCurrency"
-                    android:layout_width="@dimen/d0"
-                    android:padding="@dimen/d3"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/d5"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_spinner" />
-            </LinearLayout>
+        <TextView
+            style="@style/black_text_style"
+            android:layout_marginTop="@dimen/d40"
+            android:text="@string/transaction_password" />
 
-            <TextView
-                style="@style/black_text_style"
-                android:layout_marginTop="@dimen/d40"
-                android:text="@string/input_pwd" />
+        <include layout="@layout/inc_et_private_key" />
 
-            <EditText
-                android:id="@+id/etInputPwd"
-                style="@style/edittext_style"
-                android:layout_marginTop="@dimen/d20" />
+    </LinearLayout>
 
-            <Button
-                style="@style/btn_style"
-                android:id="@+id/btnSend"
-                android:layout_marginTop="@dimen/d40"
-                android:text="@string/sure" />
-        </LinearLayout>
-    </ScrollView>
+    <Button
+        android:id="@+id/btnSend"
+        style="@style/btn_style"
+        android:layout_marginTop="@dimen/d40"
+        android:text="@string/sure" />
 </LinearLayout>

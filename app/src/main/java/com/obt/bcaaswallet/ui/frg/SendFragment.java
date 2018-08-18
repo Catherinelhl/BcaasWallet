@@ -42,8 +42,6 @@ public class SendFragment extends BaseFragment {
     View vLine;
     @BindView(R.id.spSelectAccountAddress)
     Spinner spSelectAccountAddress;//选择收款账户地址
-    @BindView(R.id.tv_eg)
-    TextView tvEg;
     @BindView(R.id.spSelectReceiveCurrency)
     Spinner spSelectReceiveCurrency;//选择交易发送的币种
     @BindView(R.id.etTransactionAmount)

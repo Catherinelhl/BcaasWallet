@@ -1,12 +1,14 @@
 package com.obt.bcaaswallet.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,7 +59,7 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<AddressManagerAd
         if (addressBean == null) return;
         viewHolder.tvSettingType.setText(addressBean.getAddress());
         viewHolder.tvAlias.setText(addressBean.getAlias());
-        viewHolder.ivDelete.setOnClickListener(new View.OnClickListener() {
+        viewHolder.ibDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemSelect.onItemSelect(addressBean);
@@ -83,14 +85,14 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<AddressManagerAd
     class viewHolder extends RecyclerView.ViewHolder {
         TextView tvSettingType;
         TextView tvAlias;
-        AppCompatImageView ivDelete;
+        ImageButton ibDelete;
         RelativeLayout rlSettingTypes;
 
         public viewHolder(View view) {
             super(view);
             tvSettingType = view.findViewById(R.id.tvSettingType);
             tvAlias = view.findViewById(R.id.tvAlias);
-            ivDelete = view.findViewById(R.id.ivDelete);
+            ibDelete = view.findViewById(R.id.ibDelete);
             rlSettingTypes = view.findViewById(R.id.rlSettingTypes);
         }
     }

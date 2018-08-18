@@ -2,9 +2,12 @@ package com.obt.bcaaswallet.ui.aty;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -27,23 +31,25 @@ import butterknife.BindView;
  */
 public class SendToConfirmPwdActivity extends BaseActivity {
 
-    @BindView(R.id.etMyAccountAddress)
-    EditText etMyAccountAddress;
-    @BindView(R.id.etTransactionAmount)
-    EditText etTransactionAmount;
-    @BindView(R.id.tvCurrency)
-    TextView tvCurrency;
-    @BindView(R.id.etInputPwd)
-    EditText etInputPwd;
-    @BindView(R.id.btnSend)
-    Button btnSend;
+
     @BindView(R.id.ibBack)
     ImageButton ibBack;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;
-
+    @BindView(R.id.tvTransactionDetailKey)
+    TextView tvTransactionDetailKey;
+    @BindView(R.id.tvTransactionDetail)
+    TextView tvTransactionDetail;
+    @BindView(R.id.tvReceiveAccountValue)
+    TextView tvReceiveAccountValue;
+    @BindView(R.id.et_private_key)
+    EditText etPrivateKey;
+    @BindView(R.id.cbPwd)
+    CheckBox cbPwd;
+    @BindView(R.id.btnSend)
+    Button btnSend;
     private String receiveCurrency, receiveAddress, transactionAmount;//获取上一个页面传输过来的接收方的币种以及地址信息,以及交易数额
 
     @Override
@@ -65,14 +71,23 @@ public class SendToConfirmPwdActivity extends BaseActivity {
     public void initViews() {
         ibBack.setVisibility(View.VISIBLE);
         tvTitle.setText(getResources().getString(R.string.send));
-        etTransactionAmount.setText(transactionAmount);
-        etMyAccountAddress.setHint(receiveAddress);
-        tvCurrency.setText(receiveCurrency);
+        tvTransactionDetailKey.setText(String.format("向%s转账", transactionAmount));
+        tvReceiveAccountValue.setHint(receiveAddress);
+        tvTransactionDetail.setText(receiveCurrency);
     }
 
     @Override
     public void initListener() {
-        etInputPwd.addTextChangedListener(new TextWatcher() {
+        cbPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                etPrivateKey.setInputType(isChecked ?
+                        InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);//设置当前私钥显示不可见
+
+            }
+        });
+        etPrivateKey.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -100,7 +115,7 @@ public class SendToConfirmPwdActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //TODO 存储当前的信息，并且返回到首页
-                String pwd = etInputPwd.getText().toString();
+                String pwd = etPrivateKey.getText().toString();
                 if (StringU.isEmpty(pwd)) {
                     showToast("请确认密码的输入！");
                 } else {
@@ -111,4 +126,5 @@ public class SendToConfirmPwdActivity extends BaseActivity {
         });
 
     }
+
 }

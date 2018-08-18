@@ -55,4 +55,7 @@
     <string name="my_account">我的账户</string>
     <string name="balance">余额</string>
     <string name="receive_account">收款账户</string>
+    <string name="transaction_detail_key">向***轉帳</string>
+    <string name="please_input_transaction_password">请输入交易密码</string>
+    <string name="transaction_password">交易密码</string>
 </resources>

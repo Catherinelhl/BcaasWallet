@@ -7,20 +7,22 @@
 
     <RelativeLayout
         style="@style/bg_white_style"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvMyAddressKey"
             style="@style/black_text_style"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/d16"
             android:gravity="center_vertical"
             android:text="@string/my_account" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/d10"
-            android:layout_marginTop="@dimen/d12"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d10"
             android:layout_toRightOf="@+id/tvMyAddressKey"
             android:gravity="right|center_vertical">
 
@@ -61,7 +63,7 @@
                 <View
                     android:id="@+id/v_vertical_line"
                     android:layout_width="@dimen/d0.2"
-                    android:layout_height="@dimen/d30"
+                    android:layout_height="@dimen/d15"
                     android:layout_below="@+id/tvMyAccountAddressValue"
                     android:layout_margin="@dimen/d2"
                     android:layout_toRightOf="@+id/tvBalance"
@@ -110,6 +112,7 @@
         <TextView
             android:id="@+id/tvTransactionBlockTitle"
             style="@style/black_text_style"
+            android:layout_marginTop="@dimen/d20"
             android:text="@string/receive_account" />
 
         <View
@@ -130,9 +133,8 @@
         <Spinner
             android:id="@+id/spSelectAccountAddress"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d38"
+            android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvAccountAddressKey"
-            android:layout_below="@+id/v_line"
             android:layout_marginLeft="@dimen/d5"
             android:layout_marginRight="@dimen/d5"
             android:layout_toRightOf="@+id/tvAccountAddressKey"
@@ -144,20 +146,14 @@
             android:popupBackground="@color/transparent"
             android:spinnerMode="dropdown" />
 
-        <TextView
-            android:id="@+id/tv_eg"
-            style="@style/item_text_style"
-            android:layout_below="@+id/spSelectAccountAddress"
-            android:layout_margin="@dimen/d5"
-            android:text="@string/account_address_eg" />
-
 
         <LinearLayout
             android:id="@+id/llSelectCurrency"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d45"
-            android:layout_below="@+id/tv_eg"
+            android:layout_below="@+id/spSelectAccountAddress"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/d16"
             android:background="@color/transparent"
             android:gravity="center"
             android:orientation="horizontal">
