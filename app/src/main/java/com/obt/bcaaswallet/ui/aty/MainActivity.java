@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.TextView;
 
-import com.hjm.bottomtabbar.BottomTabBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.base.BaseFragment;
 import com.obt.bcaaswallet.bean.TransactionsBean;
 import com.obt.bcaaswallet.event.SwitchTab;
 import com.obt.bcaaswallet.event.UpdateAddressEvent;
@@ -40,11 +43,14 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tvTitle)
     TextView tvTitle;
     @BindView(R.id.tab_bar)
-    BottomTabBar tabBar;
+    BottomNavigationBar tabBar;
     private List<String> currency;//获取所有的币种
     private List<TransactionsBean> allCurrency;//获取所有的币种以及相关的交易信息
 
     private String addressOfUser;//用户的账户地址
+    private List<BaseFragment> mFragmentList;
+    private Fragment currentFragment;
+    private int currentIndex;
 
 
     @Override
@@ -59,24 +65,23 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        mFragmentList = new ArrayList<>();
         initCurrency();
         initCurrencyData();
-        tabBar.init(getSupportFragmentManager(), 720, 1280)
-                .setImgSize(50,
-                        50)
-                .setFontSize(16)
-                .setTabPadding(getResources().getDimensionPixelOffset(R.dimen.d4),
-                        getResources().getDimensionPixelOffset(R.dimen.d3),
-                        getResources().getDimensionPixelOffset(R.dimen.d4))
-                .setChangeColor(getResources().getColor(R.color.black),
-                        getResources().getColor(R.color.black2c))
-                .addTabItem(getString(R.string.main), R.mipmap.icon_home_f, R.mipmap.icon_home, MainFragment.class)
-                .addTabItem(getString(R.string.receive), R.mipmap.icon_receive_f, R.mipmap.icon_receive, ReceiveFragment.class)
-                .addTabItem(getString(R.string.scan), R.mipmap.icon_scan_f, R.mipmap.icon_scan, ScanFragment.class)
-                .addTabItem(getString(R.string.send), R.mipmap.icon_send_f, R.mipmap.icon_send, SendFragment.class)
-                .addTabItem(getString(R.string.setting), R.mipmap.icon_setting_f, R.mipmap.icon_setting, SettingFragment.class);
+        initFragment();
+        initNavigation();
         setMainTitle();
+    }
 
+    private void initNavigation() {
+        tabBar.clearAll();
+        tabBar.addItem(new BottomNavigationItem(R.mipmap.icon_home_f, getString(R.string.main)).setInactiveIconResource(R.mipmap.icon_home))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_receive_f, getString(R.string.receive)).setInactiveIconResource(R.mipmap.icon_receive))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_scan_f, getString(R.string.scan)).setInactiveIconResource(R.mipmap.icon_scan))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_send_f, getString(R.string.send)).setInactiveIconResource(R.mipmap.icon_send))
+                .addItem(new BottomNavigationItem(R.mipmap.icon_setting_f, getString(R.string.setting)).setInactiveIconResource(R.mipmap.icon_setting))
+                .setFirstSelectedPosition(0)
+                .initialise();
     }
 
     private void initCurrency() {
@@ -100,32 +105,41 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        tabBar.setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
+        tabBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
-            public void onTabChange(int position, String name, View view) {
-                String title = getResources().getString(R.string.bcaas_u);
+            public void onTabSelected(int position) {
+                //未选中->选中
+                showFragment(position);
                 switch (position) {
                     case 0:
-                        title = getResources().getString(R.string.bcaas_u);
+                        tvTitle.setText(getResources().getString(R.string.main));
                         break;
                     case 1:
-                        title = getResources().getString(R.string.receive);
+                        tvTitle.setText(getResources().getString(R.string.receive));
                         break;
                     case 2:
-                        title = getResources().getString(R.string.scan);
+                        tvTitle.setText(getResources().getString(R.string.scan));
                         switchTab(0);
                         setMainTitle();
                         intentToCaptureAty();
                         break;
                     case 3:
-                        title = getResources().getString(R.string.send);
+                        tvTitle.setText(getResources().getString(R.string.send));
                         break;
                     case 4:
-                        title = getResources().getString(R.string.setting);
+                        tvTitle.setText(getResources().getString(R.string.setting));
                         break;
-
                 }
-                tvTitle.setText(title);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+                //选中->未选中
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+                //选中->选中
             }
         });
     }
@@ -146,7 +160,7 @@ public class MainActivity extends BaseActivity {
     //切换当前底部栏的tab
     public void switchTab(int position) {
         if (tabBar == null) return;
-        tabBar.setCurrentTab(position);
+        tabBar.selectTab(position);
         if (position == 0) {
             setMainTitle();
         }
@@ -189,6 +203,35 @@ public class MainActivity extends BaseActivity {
     public void switchTab(SwitchTab switchTab) {
         if (switchTab == null) return;
         switchTab(switchTab.getPosition());
+    }
+
+    private void initFragment() {
+        //tab 和 fragment 联动
+        MainFragment mainFragment = MainFragment.newInstance();
+        mFragmentList.add(mainFragment);
+        ReceiveFragment receiveFragment = ReceiveFragment.newInstance();
+        mFragmentList.add(receiveFragment);
+        ScanFragment scanFragment = ScanFragment.newInstance();
+        mFragmentList.add(scanFragment);
+        SendFragment sendFragment = SendFragment.newInstance();
+        mFragmentList.add(sendFragment);
+        SettingFragment settingFragment = SettingFragment.newInstance();
+        mFragmentList.add(settingFragment);
+    }
+
+    private void showFragment(int position) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        BaseFragment fragment = mFragmentList.get(position);
+        currentFragment = fragment;
+        if (!fragment.isAdded()) {
+            ft.add(R.id.fl_module, fragment);
+        }
+        ft.show(fragment);
+        if (currentIndex != position) {
+            ft.hide(mFragmentList.get(currentIndex));
+            currentIndex = position;
+        }
+        ft.commitAllowingStateLoss();
     }
 
 }

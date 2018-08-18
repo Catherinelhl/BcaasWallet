@@ -38,6 +38,12 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
 
     private SettingTypesAdapter settingTypesAdapter;
 
+
+    public static SettingFragment newInstance() {
+        SettingFragment settingFragment = new SettingFragment();
+        return settingFragment;
+    }
+
     @Override
     public int getLayoutRes() {
         return R.layout.frg_setting;

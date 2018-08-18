@@ -25,6 +25,11 @@ public class ReceiveFragment extends BaseFragment {
     @BindView(R.id.tvMyAddress)
     TextView tvMyAddress;
 
+    public static ReceiveFragment newInstance() {
+        ReceiveFragment receiveFragment = new ReceiveFragment();
+        return receiveFragment;
+    }
+
     @Override
     public int getLayoutRes() {
         return R.layout.frg_receive;
@@ -55,4 +60,6 @@ public class ReceiveFragment extends BaseFragment {
     public void initListener() {
 
     }
+
+
 }

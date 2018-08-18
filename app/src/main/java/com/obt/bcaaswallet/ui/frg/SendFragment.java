@@ -57,6 +57,10 @@ public class SendFragment extends BaseFragment {
     private String receiveAddress;//收款的账户地址
     private String receiveCurrency;//收款的币种
 
+    public static SendFragment newInstance() {
+        SendFragment sendFragment=new SendFragment();
+        return sendFragment;
+    }
     @Override
     public int getLayoutRes() {
         return R.layout.frg_send;
@@ -170,5 +174,6 @@ public class SendFragment extends BaseFragment {
         //TODO commitAllowingStateLoss  Can not perform this action after onSaveInstanceState这里Otto暂时会报这个错
         ((MainActivity) activity).switchTab(0);
     }
+
 
 }

@@ -11,6 +11,12 @@ import com.obt.bcaaswallet.base.BaseFragment;
  * 扫描页面
  */
 public class ScanFragment extends BaseFragment {
+
+    public static ScanFragment newInstance() {
+        ScanFragment scanFragment = new ScanFragment();
+        return scanFragment;
+    }
+
     @Override
     public int getLayoutRes() {
         return R.layout.frg_scan;
@@ -27,5 +33,6 @@ public class ScanFragment extends BaseFragment {
     public void initListener() {
 
     }
+
 
 }

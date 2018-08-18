@@ -1,7 +1,7 @@
 package com.obt.bcaaswallet.base;
 
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -11,11 +11,12 @@ import com.obt.bcaaswallet.utils.OttoU;
 
 import org.greenrobot.greendao.database.Database;
 
+
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
-public class BcaasApplication extends Application {
+public class BcaasApplication extends MultiDexApplication {
     private static BcaasApplication instance;
     protected static int screenWidth;
     protected static int screenHeight;

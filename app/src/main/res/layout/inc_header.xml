@@ -3,6 +3,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/d48"
+    android:id="@+id/rlHeader"
     android:background="@color/white">
 
     <ImageButton

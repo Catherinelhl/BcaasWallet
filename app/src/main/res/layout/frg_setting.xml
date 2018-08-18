@@ -9,7 +9,8 @@
         android:id="@+id/rvSetting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/d16"
+        android:layout_marginTop="@dimen/d20"
+        android:background="@color/white"
         tools:listitem="@layout/item_setting" />
 
 </LinearLayout>

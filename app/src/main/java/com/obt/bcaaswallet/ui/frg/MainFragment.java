@@ -41,7 +41,10 @@ public class MainFragment extends BaseFragment {
     private PendingTransactionAdapter pendingTransactionAdapter;//待交易数据
     private List<TransactionsBean> transactionsBeanList;
 
-
+    public static MainFragment newInstance() {
+        MainFragment mainFragment=new MainFragment();
+        return mainFragment;
+    }
     @Override
     public int getLayoutRes() {
         return R.layout.frg_main;
@@ -105,6 +108,7 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
 
             }
         });
