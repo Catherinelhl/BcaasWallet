@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.adapter.SettingTypesAdapter;
 import com.obt.bcaaswallet.base.BaseFragment;
+import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.listener.OnItemSelectListener;
@@ -16,6 +18,8 @@ import com.obt.bcaaswallet.presenter.SettingPresenterImp;
 import com.obt.bcaaswallet.ui.aty.AddressManagerActivity;
 import com.obt.bcaaswallet.ui.aty.CheckWalletInfoActivity;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
+import com.obt.bcaaswallet.utils.L;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.List;
 
@@ -30,6 +34,8 @@ import butterknife.BindView;
 public class SettingFragment extends BaseFragment implements SettingContract.View {
     @BindView(R.id.rvSetting)
     RecyclerView rvSetting;
+    @BindView(R.id.btnLogout)
+    Button btnLogout;
 
     private SettingContract.Presenter presenter;
 
@@ -85,6 +91,33 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
                 }
             }
         });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                L.d("当前账户地址是=》" + BcaasApplication.getWalletAddress());
+                presenter.logout(BcaasApplication.getWalletAddress());
+            }
+        });
+    }
+
+    @Override
+    public void logoutFailure() {
+
+    }
+
+    @Override
+    public void logoutSuccess() {
+
+    }
+
+    @Override
+    public void showLoadingDialog(String loading) {
+
+    }
+
+    @Override
+    public void hideLoadingDialog() {
+
     }
 
 }

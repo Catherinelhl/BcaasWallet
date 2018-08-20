@@ -134,4 +134,18 @@ public class WalletResponseJson implements Serializable {
 		this.genesisVO = genesisVO;
 	}
 
+	@Override
+	public String toString() {
+		return "WalletResponseJson{" +
+				"success=" + success +
+				", code=" + code +
+				", message='" + message + '\'' +
+				", methodName='" + methodName + '\'' +
+				", walletBalance='" + walletBalance + '\'' +
+				", walletAddress='" + walletAddress + '\'' +
+				", genesisVO=" + genesisVO +
+				", transactionChainVO=" + transactionChainVO +
+				", paginationVOList=" + paginationVOList +
+				'}';
+	}
 }

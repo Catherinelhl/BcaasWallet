@@ -19,6 +19,24 @@ public class BcaasApplication extends MultiDexApplication {
     private static BcaasApplication instance;
     protected static int screenWidth;
     protected static int screenHeight;
+    private static String walletAddress;
+    private static String accessToken;
+
+    public static String getAccessToken() {
+        return accessToken;
+    }
+
+    public static void setAccessToken(String accessToken) {
+        BcaasApplication.accessToken = accessToken;
+    }
+
+    public static String getWalletAddress() {
+        return walletAddress;
+    }
+
+    public static void setWalletAddress(String walletAddress) {
+        BcaasApplication.walletAddress = walletAddress;
+    }
 
     //数据库
     /* A flag to show how easily you can switch from standard SQLite to the encrypted SQLCipher. */

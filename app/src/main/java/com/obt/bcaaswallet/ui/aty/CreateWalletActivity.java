@@ -116,14 +116,19 @@ public class CreateWalletActivity extends BaseActivity {
         DaoSession session = ((BcaasApplication) this.getApplicationContext()).getDaoSession();
         WalletInfoDao walletDao = session.getWalletInfoDao();
         WalletInfo walletInfo = new WalletInfo();
-        walletInfo.setBitcoinAddressStr(wallet.getBitcoinAddressStr());
+        String walletAddress = wallet.getBitcoinAddressStr();
+        walletInfo.setBitcoinAddressStr(walletAddress);
         walletInfo.setBitcoinPrivateKeyWIFStr(wallet.getBitcoinPrivateKeyWIFStr());
         walletInfo.setBitcoinPublicKeyStr(wallet.getBitcoinPublicKeyStr());
+        // TODO: 2018/8/20 待定
+        walletInfo.setBlockService("BCC");
         walletInfo.setPassword(password);
+        BcaasApplication.setWalletAddress(walletAddress);
         walletDao.insert(walletInfo);
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.KeyMaps.AccountAddress, wallet.getBitcoinAddressStr());
+        bundle.putString(Constants.KeyMaps.AccountAddress, walletAddress);
         bundle.putString(Constants.KeyMaps.PrivateKey, wallet.getBitcoinPrivateKeyWIFStr());
+        bundle.putString(Constants.KeyMaps.BlockService, "BCC");
         intentToActivity(bundle, WalletCreatedSuccessActivity.class, true);
     }
 }

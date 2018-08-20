@@ -2,17 +2,19 @@ package com.obt.bcaaswallet.presenter;
 
 import com.google.gson.Gson;
 import com.obt.bcaaswallet.R;
-import com.obt.bcaaswallet.base.BaseHttpPresenterImp;
+import com.obt.bcaaswallet.base.BasePresenterImp;
+import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.database.WalletInfo;
 import com.obt.bcaaswallet.encryption.AES;
-import com.obt.bcaaswallet.gson.WalletRequestJson;
+import com.obt.bcaaswallet.gson.WalletVoResponseJson;
+import com.obt.bcaaswallet.interactor.LoginInteractor;
 import com.obt.bcaaswallet.ui.contracts.LoginContracts;
+import com.obt.bcaaswallet.utils.GsonU;
 import com.obt.bcaaswallet.utils.L;
 import com.obt.bcaaswallet.utils.ListU;
 import com.obt.bcaaswallet.utils.StringU;
 import com.obt.bcaaswallet.vo.WalletVO;
-import com.obt.bcaaswallet.interactor.*;
 
 import java.util.List;
 
@@ -31,12 +33,12 @@ import retrofit2.Response;
  * 5：如果有「accessToken」那么就直接进入首页
  * todo  貌似判断Token是否存在应该在Brand页面去检测
  */
-public class LoginPresenterImp extends BaseHttpPresenterImp implements LoginContracts.Presenter {
+public class LoginPresenterImp extends BasePresenterImp implements LoginContracts.Presenter {
 
     private LoginContracts.View view;
 
     public LoginPresenterImp(LoginContracts.View view) {
-        super(view);
+        super();
         this.view = view;
 
     }
@@ -55,7 +57,10 @@ public class LoginPresenterImp extends BaseHttpPresenterImp implements LoginCont
                 //TODO 对当前的参数进行判空「自定义弹框」
                 //检查到当前数据库没有钱包地址数据，那么需要提示用户先创建或者导入钱包
             } else {
-                login(blockService, walletAddress);
+                WalletVO walletVO = new WalletVO();
+                wallet.setBlockService(blockService);
+                wallet.setBitcoinAddressStr(walletAddress);
+                login(walletVO);
             }
 
         }
@@ -71,28 +76,25 @@ public class LoginPresenterImp extends BaseHttpPresenterImp implements LoginCont
     }
 
     @Override
-    public void login(String blockService, String walletAddress) {
+    public void login(final WalletVO walletVO) {
         LoginInteractor loginInteractor = new LoginInteractor();
 
-        String loginUrl = Constants.Domains.TEST_DOMAINANDPORT + Constants.RequestUrl.login;
-        WalletRequestJson walletRequestJson = new WalletRequestJson(blockService, walletAddress);
-        Gson gson = new Gson();
-        String json = gson.toJson(walletRequestJson);
+        final String json = GsonU.encodeToString(walletVO);
         // encryption
         try {
             String encodeJson = AES.encodeCBC_128(json);
-            loginInteractor.login(encodeJson, new Callback<WalletVO>() {
+            loginInteractor.login(encodeJson, new Callback<String>() {
                 @Override
-                public void onResponse(Call<WalletVO> call, Response<WalletVO> response) {
-                    L.d("onResponse==>" + call);
-                    L.d("onResponse==>" + response);
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Gson gson = new Gson();
+                    WalletVoResponseJson walletVOResponse = gson.fromJson(response.body(), WalletVoResponseJson.class);
+                    L.line(walletVOResponse);
+                    parseData(walletVOResponse.getWalletVO());
                 }
 
                 @Override
-                public void onFailure(Call<WalletVO> call, Throwable t) {
-                    L.d("onFailure==>" + call);
-                    L.d("Throwable==>" + call);
-
+                public void onFailure(Call<String> call, Throwable t) {
+                    view.loginFailure(t.getMessage());
                 }
             });
 
@@ -100,21 +102,19 @@ public class LoginPresenterImp extends BaseHttpPresenterImp implements LoginCont
             e.printStackTrace();
         }
 
-//        doRequest(loginUrl, MessageConstants.REQUEST_MOTHOD_POST, walletRequestJson);
     }
 
-    @Override
-    protected void parseData(WalletVO walletVO) {
+    private void parseData(WalletVO walletVO) {
         //得到当前回传的信息，存储当前的accessToken
         String accessToken = walletVO.getAccessToken();
         Constants.LOGGER_INFO.info(accessToken);
         if (StringU.isEmpty(accessToken)) {
             view.loginFailure(getString(R.string.login_failure));
         } else {
+            BcaasApplication.setAccessToken(accessToken);
             // TODO: 2018/8/20 存储当前的token，具体存储方式待跟进
             updateWalletData(accessToken);
         }
-
     }
 
     private void updateWalletData(String accessToken) {

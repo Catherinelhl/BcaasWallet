@@ -1,7 +1,6 @@
 package com.obt.bcaaswallet.ui.aty;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -14,12 +13,10 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
-import com.obt.bcaaswallet.event.LoginSuccess;
-import com.obt.bcaaswallet.gson.WalletRequestJson;
+import com.obt.bcaaswallet.event.ToLogin;
 import com.obt.bcaaswallet.presenter.LoginPresenterImp;
 import com.obt.bcaaswallet.ui.contracts.LoginContracts;
 import com.obt.bcaaswallet.utils.StringU;
-import com.obt.bcaaswallet.utils.WalletU;
 import com.obt.bcaaswallet.vo.WalletVO;
 import com.squareup.otto.Subscribe;
 
@@ -103,7 +100,10 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
 //                    presenter.queryWalletInfo();
                     final String blockService = "BCC";
                     final String walletAddress = "1DmpeQtAmdhiUyUujxiqPVGUfUmCZFuEUC";//WalletU.getWalletAddress();
-                    presenter.login(blockService, walletAddress);
+                    WalletVO walletVO = new WalletVO();
+                    walletVO.setBlockService(blockService);
+                    walletVO.setWalletAddress(walletAddress);
+                    presenter.login(walletVO);
                 } else {
                     showToast(getString(R.string.walletinfo_must_not_null));
                 }
@@ -142,9 +142,10 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
     }
 
     @Subscribe
-    public void loginWalletSuccess(LoginSuccess loginSuccess) {
+    public void loginWalletSuccess(ToLogin loginSuccess) {
         if (loginSuccess == null) return;
-        intentToActivity(MainActivity.class, true);
+        WalletVO walletVO = loginSuccess.getWalletVO();
+        presenter.login(walletVO);
     }
 
 

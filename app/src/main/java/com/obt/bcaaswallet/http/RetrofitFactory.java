@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.http.factory.StringConverterFactory;
+import com.obt.bcaaswallet.http.interceptor.OkHttpInterceptor;
+
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,11 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @since 2018/8/20
  */
 public class RetrofitFactory {
-//    // 创建 OKHttpClient
-//    OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//     builder.connectTimeout(DEFAULT_TIME_OUT,TimeUnit.SECONDS);//连接超时时间
-//     builder.writeTimeout(DEFAULT_TIME_OUT,TimeUnit.SECONDS);//写操作 超时时间
-//     builder.readTimeout(DEFAULT_TIME_OUT,TimeUnit.SECONDS);//读操作超时时间
 //
 //    // 添加公共参数拦截器
 //    BasicParamsInterceptor basicParamsInterceptor = new BasicParamsInterceptor.Builder()
@@ -38,6 +35,10 @@ public class RetrofitFactory {
 
         if (client == null) {
             client = new OkHttpClient.Builder()
+                    .connectTimeout(30000, TimeUnit.SECONDS)
+                    .readTimeout(30000, TimeUnit.SECONDS)
+                    .writeTimeout(30000, TimeUnit.SECONDS)
+                    .addInterceptor(new OkHttpInterceptor())
                     .build();
         }
 
@@ -45,9 +46,10 @@ public class RetrofitFactory {
             stringInstance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .addConverterFactory(new StringConverterFactory())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//Observble
                     .build();
         }
         return stringInstance;

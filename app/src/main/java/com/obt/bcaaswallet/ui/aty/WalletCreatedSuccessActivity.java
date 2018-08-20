@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.constants.Constants;
-import com.obt.bcaaswallet.event.LoginSuccess;
-import com.obt.bcaaswallet.event.SwitchTab;
+import com.obt.bcaaswallet.event.ToLogin;
+import com.obt.bcaaswallet.gson.WalletRequestJson;
 import com.obt.bcaaswallet.utils.OttoU;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -45,7 +45,8 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
     CheckBox cbPwd;
     @BindView(R.id.btn_finish)
     Button btnFinish;
-    private String accountAddress, privateKey;// 账户地址，私钥
+    private String accountAddress, privateKey,blockService;// 账户地址，私钥,区块服务名称
+    private WalletVO walletVO;
 
     @Override
     public int getContentView() {
@@ -57,11 +58,15 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
         if (bundle == null) return;
         accountAddress = bundle.getString(Constants.KeyMaps.AccountAddress);
         privateKey = bundle.getString(Constants.KeyMaps.PrivateKey);
+        blockService = bundle.getString(Constants.KeyMaps.BlockService);
 
     }
 
     @Override
     public void initViews() {
+        walletVO=new WalletVO();
+        walletVO.setWalletAddress(accountAddress);
+        walletVO.setBlockService(blockService);
         ibBack.setVisibility(View.VISIBLE);
         tvAccountAddress.setHint(accountAddress);
         etPrivateKey.setText(privateKey);
@@ -85,7 +90,7 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
         {
             @Override
             public void onClick(View v) {
-                OttoU.getInstance().post(new LoginSuccess());
+                OttoU.getInstance().post(new ToLogin(walletVO));
                 finish();
             }
         });

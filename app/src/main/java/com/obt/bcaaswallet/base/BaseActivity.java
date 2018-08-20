@@ -115,13 +115,4 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
 
     }
 
-    @Override
-    public void requestSuccess(WalletVO walletVO) {
-
-    }
-
-    @Override
-    public void requestFailure(String message) {
-
-    }
 }

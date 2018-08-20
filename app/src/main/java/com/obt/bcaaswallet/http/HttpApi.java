@@ -3,8 +3,9 @@ package com.obt.bcaaswallet.http;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.vo.WalletVO;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Field;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -16,8 +17,8 @@ import retrofit2.http.POST;
  */
 public interface HttpApi {
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @POST(Constants.RequestUrl.login)
-    Call<WalletVO> login(@Field("start") String loginInfo);
+    Call<String> login(@Body RequestBody requestBody);
 
 }

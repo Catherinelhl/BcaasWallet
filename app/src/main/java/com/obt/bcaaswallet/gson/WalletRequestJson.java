@@ -74,5 +74,14 @@ public class WalletRequestJson implements Serializable {
 	public void setTransactionChainVO(TransactionChainVO transactionChainVO) {
 		this.transactionChainVO = transactionChainVO;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "WalletRequestJson{" +
+				"accessToken='" + accessToken + '\'' +
+				", blockService='" + blockService + '\'' +
+				", walletAddress='" + walletAddress + '\'' +
+				", transactionChainVO=" + transactionChainVO +
+				'}';
+	}
 }

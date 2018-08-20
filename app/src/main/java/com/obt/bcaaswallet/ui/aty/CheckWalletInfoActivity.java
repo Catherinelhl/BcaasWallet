@@ -154,13 +154,4 @@ public class CheckWalletInfoActivity extends BaseActivity implements CreateWalle
 
     }
 
-    @Override
-    public void requestSuccess(WalletVO walletVO) {
-
-    }
-
-    @Override
-    public void requestFailure(String message) {
-
-    }
 }

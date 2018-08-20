@@ -52,6 +52,7 @@ public class Constants {
 
         public static final String AccountAddress = "accountAddress";
         public static final String PrivateKey = "privateKey";
+        public static final String BlockService= "blockService";
     }
 
     public static class Domains {

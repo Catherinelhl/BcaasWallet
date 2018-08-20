@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 
 import com.google.gson.Gson;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.encryption.AES;
 import com.obt.bcaaswallet.gson.WalletRequestJson;
 import com.obt.bcaaswallet.ui.contracts.LoginContracts;
@@ -26,32 +27,28 @@ import java.net.URL;
  */
 public abstract class BaseHttpPresenterImp extends BasePresenterImp {
     protected Context context;
-    private BaseView view;
 
-    public BaseHttpPresenterImp(BaseView view) {
+    public BaseHttpPresenterImp() {
         super();
-        this.view = view;
     }
 
 
-    protected void doRequest(String requestUrl, String requestMethod, WalletRequestJson walletRequestJson) {
+    protected <T> void doRequest(String requestUrl, String requestMethod, T walletRequestJson) {
         HttpURLConnection conn = null;
         OutputStream outputStream = null;
         InputStream inputStream = null;
         StringBuilder response = null;
+        requestUrl = Constants.Domains.TEST_DOMAINANDPORT + requestUrl;
+        L.d(requestUrl);
 
         Gson gson = new Gson();
-        if (walletRequestJson == null) return;
-
         try {
             String json = gson.toJson(walletRequestJson);
-
+            L.d(json);
             // encryption
             String encodeJson = AES.encodeCBC_128(json);
 
             URL url = new URL(requestUrl);
-            L.d(url);
-            L.d(json);
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(30000);
             conn.setConnectTimeout(30000);
@@ -81,7 +78,6 @@ public abstract class BaseHttpPresenterImp extends BasePresenterImp {
                 }
                 L.d(response);
                 WalletVO walletVO = gson.fromJson(response.toString(), WalletVO.class);
-                view.requestSuccess(walletVO);
                 System.out.println("[Start] --- response --- [Start]");
                 System.out.println(response);
                 System.out.println("[End] --- response --- [End]");
@@ -89,7 +85,6 @@ public abstract class BaseHttpPresenterImp extends BasePresenterImp {
 
         } catch (Exception e) {
             e.printStackTrace();
-            view.requestFailure(e.getMessage());
         } finally {
             try {
                 if (outputStream != null) {
@@ -102,7 +97,6 @@ public abstract class BaseHttpPresenterImp extends BasePresenterImp {
                     conn.disconnect();
                 }
             } catch (Exception e) {
-                view.requestFailure(e.getMessage());
                 e.printStackTrace();
             }
         }

@@ -94,4 +94,5 @@ public abstract class BaseFragment extends Fragment {
         return ((MainActivity) activity).getAddressOfUser();
     }
 
+
 }

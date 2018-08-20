@@ -4,6 +4,8 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
 import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.constants.MessageConstants;
+import com.obt.bcaaswallet.gson.WalletRequestJson;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
 import com.obt.bcaaswallet.vo.WalletVO;
 
@@ -19,6 +21,7 @@ public class SettingPresenterImp extends BasePresenterImp implements SettingCont
     private SettingContract.View viewInterface;
 
     public SettingPresenterImp(SettingContract.View view) {
+        super();
         this.viewInterface = view;
     }
 
@@ -35,6 +38,14 @@ public class SettingPresenterImp extends BasePresenterImp implements SettingCont
         settingTypes.add(settingTypeBean4);
         return settingTypes;
 
+    }
+
+    @Override
+    public void logout(String walletAddress) {
+        WalletRequestJson walletRequestJson = new WalletRequestJson();
+        walletRequestJson.setWalletAddress(walletAddress);
+        // TODO: 2018/8/20 登出当前账户
+//        doRequest(Constants.RequestUrl.logout, MessageConstants.REQUEST_MOTHOD_POST, walletRequestJson);
     }
 
 }
