@@ -30,6 +30,7 @@
     <color name="grey50">#50888888</color>
     <color name="grey2">#55999999</color>
     <color name="grey3">#55111111</color>
+    <color name="grey20">#20cccccc</color>
     <color name="light_grey">#999999</color>
     <color name="green">#327864</color>
     <color name="light_red">#df5a55</color>

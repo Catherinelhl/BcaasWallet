@@ -14,8 +14,8 @@
     <!-- 边框的宽度和颜色颜色 -->
     <stroke
         android:width="@dimen/d0.2"
-        android:color="@color/theme_grey_line" />
+        android:color="@color/theme_red" />
 
     <!-- 背景色 -->
-    <solid android:color="@color/colorPrimary"></solid>
+    <solid android:color="@color/theme_red"></solid>
 </shape>

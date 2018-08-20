@@ -1,6 +1,6 @@
 package com.obt.bcaaswallet.bean;
 
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 
 import java.io.Serializable;
 
@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class SettingTypeBean implements Serializable {
 
     private String type;
-    private Contants.SettingType tag;
+    private Constants.SettingType tag;
 
-    public SettingTypeBean(String type, Contants.SettingType tag) {
+    public SettingTypeBean(String type, Constants.SettingType tag) {
         super();
         this.tag = tag;
         this.type = type;
@@ -27,11 +27,11 @@ public class SettingTypeBean implements Serializable {
         this.type = type;
     }
 
-    public Contants.SettingType getTag() {
+    public Constants.SettingType getTag() {
         return tag;
     }
 
-    public void setTag(Contants.SettingType tag) {
+    public void setTag(Constants.SettingType tag) {
         this.tag = tag;
     }
 

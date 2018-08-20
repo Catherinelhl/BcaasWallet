@@ -3,14 +3,14 @@ package com.obt.bcaaswallet.ui.aty;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.utils.StringU;
+import com.obt.bcaaswallet.view.PrivateKeyEditText;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,16 +32,14 @@ public class CreateWalletActivity extends BaseActivity {
     ImageButton ibRight;
     @BindView(R.id.rlHeader)
     RelativeLayout rlHeader;
-    @BindView(R.id.et_private_key)
-    EditText etPrivateKey;
-    @BindView(R.id.cbPwd)
-    CheckBox cbPwd;
     @BindView(R.id.tv_password_rule)
     TextView tvPasswordRule;
-    @BindView(R.id.et_password_confirm)
-    EditText etPasswordConfirm;
     @BindView(R.id.btn_sure)
     Button btnSure;
+    @BindView(R.id.pketPwd)
+    PrivateKeyEditText pketPwd;
+    @BindView(R.id.pketConfirmPwd)
+    PrivateKeyEditText pketConfirmPwd;
 
     @Override
     public int getContentView() {
@@ -72,7 +70,18 @@ public class CreateWalletActivity extends BaseActivity {
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intentToActivity(WalletCreatedSuccessActivity.class, true);
+                String pwd = pketPwd.getPrivateKey();
+                String confirmPwd = pketConfirmPwd.getPrivateKey();
+                if (StringU.isEmpty(pwd) || StringU.isEmpty(confirmPwd)) {
+                    showToast(getString(R.string.confirm_pwd_not_null));
+                } else {
+                    if (StringU.equals(pwd, confirmPwd)) {
+                        intentToActivity(WalletCreatedSuccessActivity.class, true);
+                    } else {
+                        showToast(getResources().getString(R.string.confirm_two_pwd_is_consistent));
+                    }
+
+                }
             }
         });
 

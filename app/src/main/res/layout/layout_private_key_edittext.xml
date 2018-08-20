@@ -19,6 +19,7 @@
             style="@style/edittext_style"
             android:layout_centerVertical="true"
             android:layout_marginTop="@dimen/d10"
+            android:hint="@string/input_pwd"
             android:inputType="textPassword"
             android:paddingRight="@dimen/d40" />
 

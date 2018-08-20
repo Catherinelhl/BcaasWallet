@@ -15,13 +15,12 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.event.SwitchTab;
 import com.obt.bcaaswallet.utils.OttoU;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -65,9 +64,9 @@ public class SendToConfirmPwdActivity extends BaseActivity {
     @Override
     public void getArgs(Bundle bundle) {
         if (bundle == null) return;
-        receiveCurrency = bundle.getString(Contants.KeyMaps.RECEIVECURRENCY);
-        receiveAddress = bundle.getString(Contants.KeyMaps.RECEIVEADDRESS);
-        transactionAmount = bundle.getString(Contants.KeyMaps.TRANSACTIONAMOUNT);
+        receiveCurrency = bundle.getString(Constants.KeyMaps.RECEIVECURRENCY);
+        receiveAddress = bundle.getString(Constants.KeyMaps.RECEIVEADDRESS);
+        transactionAmount = bundle.getString(Constants.KeyMaps.TRANSACTIONAMOUNT);
 
 
     }

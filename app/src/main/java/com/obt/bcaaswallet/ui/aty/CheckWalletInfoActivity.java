@@ -18,7 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.bean.TransactionsBean;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.utils.StringU;
 
 import java.util.List;
@@ -67,8 +67,8 @@ public class CheckWalletInfoActivity extends BaseActivity {
     @Override
     public void getArgs(Bundle bundle) {
         if (bundle == null) return;
-        String currencyStr = bundle.getString(Contants.KeyMaps.CURRENCY);
-        String allCurrencyStr = bundle.getString(Contants.KeyMaps.ALLCURRENCY);
+        String currencyStr = bundle.getString(Constants.KeyMaps.CURRENCY);
+        String allCurrencyStr = bundle.getString(Constants.KeyMaps.ALLCURRENCY);
         Gson gson = new Gson();
         if (StringU.notEmpty(currencyStr)) {
             currency = gson.fromJson(currencyStr, new TypeToken<List<String>>() {

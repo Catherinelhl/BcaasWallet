@@ -92,7 +92,7 @@
         <item name="android:layout_marginLeft">@dimen/d16</item>
         <item name="android:layout_marginRight">@dimen/d16</item>
         <item name="android:textSize">@dimen/text_size_20</item>
-        <item name="android:textColor">@color/theme_red</item>
+        <item name="android:textColor">@color/title_black</item>
     </style>
 
     <style name="btn_login_style">

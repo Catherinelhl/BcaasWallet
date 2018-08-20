@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.utils.StringU;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -35,26 +37,29 @@ public class PrivateKeyEditText extends LinearLayout {
     private String title, hint;//声明需要显示的标题以及ethint
     private boolean showTitle, showHint;//是否需要暗示标题或者hint，默认是显示，若果不需要显示，则需要重新赋值
 
-    public PrivateKeyEditText(Context context) {
-        super(context);
-    }
-
     public PrivateKeyEditText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater.from(context).inflate(R.layout.layout_private_key_edittext, null);
-
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_private_key_edittext, this, true);
+        ButterKnife.bind(view);
         //获取自定义属性的值
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.privateKeyStyle);
-        title = typedArray.getString(R.styleable.privateKeyStyle_title);
-        hint = typedArray.getString(R.styleable.privateKeyStyle_hint);
-        typedArray.recycle();
-        LayoutInflater.from(context).inflate(R.layout.layout_private_key_edittext, null);
-        if (StringU.notEmpty(title)) {
-            tvEtTitle.setText(title);
+        if (typedArray != null) {
+            title = typedArray.getString(R.styleable.privateKeyStyle_title);
+            hint = typedArray.getString(R.styleable.privateKeyStyle_hint);
+            showHint = typedArray.getBoolean(R.styleable.privateKeyStyle_showHint, true);
+            showTitle = typedArray.getBoolean(R.styleable.privateKeyStyle_showTitle, true);
+            typedArray.recycle();
+            if (StringU.notEmpty(title)) {
+                tvEtTitle.setText(title);
+            }
+            if (StringU.notEmpty(hint)) {
+                etPrivateKey.setHint(hint);
+            }
+            if (showTitle) {
+                tvEtTitle.setVisibility(showTitle ? VISIBLE : INVISIBLE);
+            }
         }
-        if (StringU.notEmpty(hint)) {
-            etPrivateKey.setHint(hint);
-        }
+
         initView();
     }
 
@@ -69,6 +74,14 @@ public class PrivateKeyEditText extends LinearLayout {
 
             }
         });
+    }
+
+    //返回私钥文本
+    public String getPrivateKey() {
+        if (etPrivateKey == null) {
+            throw new NullPointerException("etPrivateKey is null refrences");
+        }
+        return etPrivateKey.getText().toString();
     }
 
 

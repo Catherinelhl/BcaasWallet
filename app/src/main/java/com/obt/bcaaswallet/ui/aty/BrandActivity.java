@@ -1,14 +1,13 @@
 package com.obt.bcaaswallet.ui.aty;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 
 
 /**
@@ -42,7 +41,7 @@ public class BrandActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler.sendEmptyMessageDelayed(1, Contants.ValueMaps.brandSleepTime);
+                handler.sendEmptyMessageDelayed(1, Constants.ValueMaps.brandSleepTime);
             }
         }).start();
     }

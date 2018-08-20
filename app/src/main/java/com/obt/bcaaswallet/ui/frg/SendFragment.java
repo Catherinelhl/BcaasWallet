@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.base.BaseFragment;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.event.UpdateAddressEvent;
 import com.obt.bcaaswallet.ui.aty.SendToConfirmPwdActivity;
 import com.squareup.otto.Subscribe;
@@ -103,9 +103,9 @@ public class SendFragment extends BaseFragment {
                 //TODO  如果当前页面用户进行了点击切换其他的页面，是否需要保存当前的数据状态
                 //将当前页面的数据传输到下一个页面进行失焦显示
                 Bundle bundle = new Bundle();
-                bundle.putString(Contants.KeyMaps.RECEIVEADDRESS, receiveAddress);
-                bundle.putString(Contants.KeyMaps.RECEIVECURRENCY, receiveCurrency);
-                bundle.putString(Contants.KeyMaps.TRANSACTIONAMOUNT, etTransactionAmount.getText().toString());
+                bundle.putString(Constants.KeyMaps.RECEIVEADDRESS, receiveAddress);
+                bundle.putString(Constants.KeyMaps.RECEIVECURRENCY, receiveCurrency);
+                bundle.putString(Constants.KeyMaps.TRANSACTIONAMOUNT, etTransactionAmount.getText().toString());
                 intentToActivity(bundle, SendToConfirmPwdActivity.class, false);
             }
         });

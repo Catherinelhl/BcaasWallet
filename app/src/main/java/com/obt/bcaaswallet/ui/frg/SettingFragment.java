@@ -10,7 +10,7 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.adapter.SettingTypesAdapter;
 import com.obt.bcaaswallet.base.BaseFragment;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.listener.OnItemSelectListener;
 import com.obt.bcaaswallet.presenter.SettingPresenterImp;
 import com.obt.bcaaswallet.ui.aty.AddressManagerActivity;
@@ -20,9 +20,6 @@ import com.obt.bcaaswallet.ui.contracts.SettingContract;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static com.obt.bcaaswallet.contants.Contants.SettingType.CHECKWALLETINFO;
-import static com.obt.bcaaswallet.contants.Contants.SettingType.MODIFYPOSSWORD;
 
 /**
  * @author catherine.brainwilliam
@@ -73,8 +70,8 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
                         case CHECKWALLETINFO:
                             Gson gson = new Gson();
                             Bundle bundle = new Bundle();
-                            bundle.putString(Contants.KeyMaps.CURRENCY, gson.toJson(getCurrency()));
-                            bundle.putString(Contants.KeyMaps.ALLCURRENCY, gson.toJson(getAllTransactionData()));
+                            bundle.putString(Constants.KeyMaps.CURRENCY, gson.toJson(getCurrency()));
+                            bundle.putString(Constants.KeyMaps.ALLCURRENCY, gson.toJson(getAllTransactionData()));
                             intentToActivity(bundle, CheckWalletInfoActivity.class, false);
                             break;
                         case MODIFYPOSSWORD:

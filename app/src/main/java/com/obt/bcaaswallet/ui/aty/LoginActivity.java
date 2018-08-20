@@ -9,15 +9,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.presenter.LoginPresenterImp;
+import com.obt.bcaaswallet.ui.contracts.LoginContracts;
 import com.obt.bcaaswallet.utils.StringU;
+import com.obt.bcaaswallet.utils.WalletU;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
  * 是否以LoginActivity为当前账户登录的主要Activity，保持此activity不finish，然后跳转创建、或者导入
  * 钱包的界面，操作结束的时候，返回到当前页面，然后进入MainActivity。
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContracts.View {
 
     @BindView(R.id.tv_info)
     TextView tvInfo;
@@ -41,6 +42,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_import_wallet)
     TextView tvImportWallet;
 
+
+    private LoginContracts.Presenter presenter;
+
     @Override
     public void getArgs(Bundle bundle) {
 
@@ -53,6 +57,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        presenter = new LoginPresenterImp(this);
 
     }
 
@@ -90,7 +95,14 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 String password = etPrivateKey.getText().toString();
                 if (StringU.notEmpty(password)) {
-                    intentToActivity(MainActivity.class, true);
+                    final String blockService = "BCC";
+                    final String walletAddress = WalletU.getWalletAddress();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            presenter.login(blockService, walletAddress);
+                        }
+                    }).start();
                 } else {
                     showToast(getString(R.string.walletinfo_must_not_null));
                 }
@@ -107,6 +119,25 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 intentToActivity(ImportWalletActivity.class);
+            }
+        });
+
+    }
+
+    @Override
+    public void loginSuccess() {
+//        intentToActivity(MainActivity.class, true);
+        showToast("success");
+
+    }
+
+    @Override
+    public void loginFailure(final String message) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showToast("failure==>" + message);
+
             }
         });
 
