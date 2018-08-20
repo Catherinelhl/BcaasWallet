@@ -96,7 +96,7 @@
     </style>
 
     <style name="btn_login_style">
-        <item name="android:background">@color/red_b9201a</item>
+        <item name="android:background">@drawable/selector_login_btn_style</item>
         <item name="android:layout_height">@dimen/d48</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginLeft">@dimen/d16</item>

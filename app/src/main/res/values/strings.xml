@@ -10,7 +10,7 @@
     <string name="password_rule">密码至少由八位数字组成</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
-    <string name="remember_password">请牢记密码</string>
+    <string name="remember_password">请牢记密码！</string>
     <string name="account_address">账户地址</string>
     <string name="backup_private_key">备份私钥</string>
     <string name="backup_private_key_detail">这是你钱包的私钥，当密码忘记时，可恢复您的钱包，丢失私钥等于丢失财产。为妥善保存，建议在一张纸上手写下你的私钥信息，以防丢失。</string>
@@ -58,4 +58,5 @@
     <string name="transaction_detail_key">向***轉帳</string>
     <string name="please_input_transaction_password">请输入交易密码</string>
     <string name="transaction_password">交易密码</string>
+    <string name="setpwd">请设置16位字符的密码</string>
 </resources>

@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:private="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/aty_brand"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d0"
-        android:layout_weight="1" />
+    <include layout="@layout/inc_header" />
 
     <LinearLayout
+        style="@style/bg_white_style"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d0"
-        android:layout_marginLeft="@dimen/d32"
-        android:layout_marginRight="@dimen/d32"
+        android:layout_marginTop="@dimen/d60"
         android:layout_weight="2"
         android:orientation="vertical">
 
-        <include layout="@layout/inc_open_wallet_header" />
+        <!--<com.obt.bcaaswallet.view.PrivateKeyEditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--private:hint="@string/setpwd"-->
+        <!--android:layout_height="@dimen/d48" />-->
 
+        <TextView
+            style="@style/black_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password" />
 
-        <EditText
-            android:id="@+id/et_password"
-            style="@style/edittext_style"
-            android:layout_marginTop="@dimen/d20"
-            android:hint="@string/password" />
+        <include layout="@layout/inc_et_private_key" />
 
         <TextView
             android:id="@+id/tv_password_rule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/d4"
-            android:text="@string/password_rule"
+            android:text="@string/remember_password"
             android:textSize="@dimen/text_size_12" />
 
         <EditText
@@ -41,26 +42,14 @@
             android:layout_marginTop="@dimen/d20"
             android:hint="@string/please_input_password_again" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d20">
 
-            <Button
-                android:id="@+id/btn_cancel"
-                style="@style/btn_style"
-                android:layout_width="@dimen/d0"
-                android:layout_weight="1"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/btn_sure"
-                style="@style/btn_style"
-                android:layout_width="@dimen/d0"
-                android:layout_marginLeft="@dimen/d50"
-                android:layout_weight="1"
-                android:text="@string/sure" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_sure"
+            style="@style/btn_style"
+            android:layout_width="@dimen/d0"
+            android:layout_marginTop="@dimen/d15"
+            android:layout_weight="1"
+            android:text="@string/sure" />
 
         <View
             style="@style/line_style"

@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
@@ -38,10 +39,14 @@ public class SendToConfirmPwdActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.ibRight)
     ImageButton ibRight;
+    @BindView(R.id.rlHeader)
+    RelativeLayout rlHeader;
     @BindView(R.id.tvTransactionDetailKey)
     TextView tvTransactionDetailKey;
     @BindView(R.id.tvTransactionDetail)
     TextView tvTransactionDetail;
+    @BindView(R.id.tvReceiveAccountKey)
+    TextView tvReceiveAccountKey;
     @BindView(R.id.tvReceiveAccountValue)
     TextView tvReceiveAccountValue;
     @BindView(R.id.et_private_key)
@@ -126,5 +131,4 @@ public class SendToConfirmPwdActivity extends BaseActivity {
         });
 
     }
-
 }

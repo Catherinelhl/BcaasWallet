@@ -7,10 +7,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -19,11 +24,22 @@ import com.obt.bcaaswallet.base.BaseActivity;
  */
 public class WalletCreatedSuccessActivity extends BaseActivity {
 
-    private EditText etAccountAddress;
-    private EditText etPrivateKey;
-    private Button btnFinish;
-    private TextView tvOpenWalletMethod;
-    private CheckBox cbPassword;
+    @BindView(R.id.ibBack)
+    ImageButton ibBack;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ibRight)
+    ImageButton ibRight;
+    @BindView(R.id.rlHeader)
+    RelativeLayout rlHeader;
+    @BindView(R.id.et_account_address)
+    EditText etAccountAddress;
+    @BindView(R.id.et_private_key)
+    EditText etPrivateKey;
+    @BindView(R.id.cbPwd)
+    CheckBox cbPwd;
+    @BindView(R.id.btn_finish)
+    Button btnFinish;
     private String accountAddress, privateKey;// 账户地址，私钥
 
     @Override
@@ -41,21 +57,16 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
     public void initViews() {
         accountAddress = "akdsfhjaihdsgfoilasjdfiuadshjfnkuiuahdsjfnkahsjznckuiaHbdfw8asiu===";
         privateKey = "34567890-4567890467895678¬";
-        etPrivateKey = findViewById(R.id.et_private_key);
-        cbPassword = findViewById(R.id.cbPwd);
-        etAccountAddress = findViewById(R.id.et_account_address);
-        btnFinish = findViewById(R.id.btn_finish);
         etAccountAddress.setHint(accountAddress);
         etPrivateKey.setText(privateKey);
         etPrivateKey.setFocusable(false);
         etAccountAddress.setFocusable(false);
-        tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
-        tvOpenWalletMethod.setText(getResources().getString(R.string.create_new_wallet));
+        tvTitle.setText(getResources().getString(R.string.create_new_wallet));
     }
 
     @Override
     public void initListener() {
-        cbPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 etPrivateKey.setInputType(isChecked ?

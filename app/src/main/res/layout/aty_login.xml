@@ -38,25 +38,29 @@
             android:text="@string/unlock" />
 
 
+        <TextView
+            android:id="@+id/tv_create_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btn_unlock_wallet"
+            android:layout_marginLeft="@dimen/d12"
+            android:layout_marginTop="@dimen/d20"
+            android:text="@string/create_new_wallet"
+            android:textColor="@color/red_da261f"
+            android:textSize="@dimen/text_size_16" />
 
-            <TextView
-                android:id="@+id/tv_create_wallet"
-                android:layout_width="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/btn_unlock_wallet"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red_b9201a"
-                android:text="@string/create_new_wallet" />
-
-            <TextView
-                android:id="@+id/tv_import_wallet"
-                android:layout_width="wrap_content"
-                android:textColor="@color/red_b9201a"
-                android:layout_alignParentRight="true"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/d50"
-                android:layout_below="@+id/btn_unlock_wallet"
-                android:text="@string/import_wallet" />
+        <TextView
+            android:id="@+id/tv_import_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_unlock_wallet"
+            android:layout_marginRight="@dimen/d12"
+            android:layout_marginTop="@dimen/d20"
+            android:text="@string/import_wallet"
+            android:textColor="@color/red_da261f"
+            android:textSize="@dimen/text_size_16" />
     </RelativeLayout>
 
 

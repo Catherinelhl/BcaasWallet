@@ -2,14 +2,22 @@ package com.obt.bcaaswallet.ui.aty;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.utils.StringU;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -20,10 +28,18 @@ import com.obt.bcaaswallet.utils.StringU;
  */
 public class LoginActivity extends BaseActivity {
 
-    private EditText etPassword;
-    private Button btnUnlockWallet;
-    private Button btnCreateWallet;
-    private Button btnImportWallet;
+    @BindView(R.id.tv_info)
+    TextView tvInfo;
+    @BindView(R.id.et_private_key)
+    EditText etPrivateKey;
+    @BindView(R.id.cbPwd)
+    CheckBox cbPwd;
+    @BindView(R.id.btn_unlock_wallet)
+    Button btnUnlockWallet;
+    @BindView(R.id.tv_create_wallet)
+    TextView tvCreateWallet;
+    @BindView(R.id.tv_import_wallet)
+    TextView tvImportWallet;
 
     @Override
     public void getArgs(Bundle bundle) {
@@ -37,16 +53,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        etPassword = findViewById(R.id.et_password);
-        btnUnlockWallet = findViewById(R.id.btn_unlock_wallet);
-        btnCreateWallet = findViewById(R.id.btn_create_wallet);
-        btnImportWallet = findViewById(R.id.btn_import_wallet);
 
     }
 
     @Override
     public void initListener() {
-        etPassword.addTextChangedListener(new TextWatcher() {
+        etPrivateKey.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -59,15 +71,24 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String pwd=s.toString();
+                String pwd = s.toString();
                 btnUnlockWallet.setPressed(StringU.notEmpty(pwd));
+
+            }
+        });
+        cbPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                etPrivateKey.setInputType(isChecked ?
+                        InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD :
+                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);//设置当前私钥显示不可见
 
             }
         });
         btnUnlockWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String password = etPassword.getText().toString();
+                String password = etPrivateKey.getText().toString();
                 if (StringU.notEmpty(password)) {
                     intentToActivity(MainActivity.class, true);
                 } else {
@@ -76,13 +97,13 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
-        btnCreateWallet.setOnClickListener(new View.OnClickListener() {
+        tvCreateWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intentToActivity(CreateWalletActivity.class);
             }
         });
-        btnImportWallet.setOnClickListener(new View.OnClickListener() {
+        tvImportWallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intentToActivity(ImportWalletActivity.class);

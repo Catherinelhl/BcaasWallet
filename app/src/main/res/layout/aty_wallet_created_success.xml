@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/d20">
 
-    <include layout="@layout/inc_open_wallet_header" />
+    <include layout="@layout/inc_header" />
 
     <TextView
         android:layout_width="match_parent"
