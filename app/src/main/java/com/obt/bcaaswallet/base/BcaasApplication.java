@@ -7,7 +7,6 @@ import android.view.WindowManager;
 
 import com.obt.bcaaswallet.database.DaoMaster;
 import com.obt.bcaaswallet.database.DaoSession;
-import com.obt.bcaaswallet.utils.OttoU;
 
 import org.greenrobot.greendao.database.Database;
 

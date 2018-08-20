@@ -2,11 +2,15 @@ package com.obt.bcaaswallet.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import com.obt.bcaaswallet.utils.L;
 import com.obt.bcaaswallet.utils.OttoU;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -43,9 +47,15 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
         showToast(String.valueOf(res));
     }
 
-    public void showToast(String toastInfo) {
-        System.out.println(toastInfo);
-        Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_SHORT).show();
+    public void showToast(final String toastInfo) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                L.d(toastInfo);
+//                Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     /**
@@ -102,6 +112,16 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
 
     @Override
     public void hideLoadingDialog() {
+
+    }
+
+    @Override
+    public void requestSuccess(WalletVO walletVO) {
+
+    }
+
+    @Override
+    public void requestFailure(String message) {
 
     }
 }

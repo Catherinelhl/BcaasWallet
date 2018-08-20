@@ -1,6 +1,7 @@
 package com.obt.bcaaswallet.ui.aty;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -13,10 +14,14 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.event.LoginSuccess;
+import com.obt.bcaaswallet.gson.WalletRequestJson;
 import com.obt.bcaaswallet.presenter.LoginPresenterImp;
 import com.obt.bcaaswallet.ui.contracts.LoginContracts;
 import com.obt.bcaaswallet.utils.StringU;
 import com.obt.bcaaswallet.utils.WalletU;
+import com.obt.bcaaswallet.vo.WalletVO;
+import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 
@@ -95,14 +100,10 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
             public void onClick(View v) {
                 String password = etPrivateKey.getText().toString();
                 if (StringU.notEmpty(password)) {
+//                    presenter.queryWalletInfo();
                     final String blockService = "BCC";
-                    final String walletAddress = WalletU.getWalletAddress();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            presenter.login(blockService, walletAddress);
-                        }
-                    }).start();
+                    final String walletAddress = "1DmpeQtAmdhiUyUujxiqPVGUfUmCZFuEUC";//WalletU.getWalletAddress();
+                    presenter.login(blockService, walletAddress);
                 } else {
                     showToast(getString(R.string.walletinfo_must_not_null));
                 }
@@ -125,21 +126,26 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
     }
 
     @Override
-    public void loginSuccess() {
-//        intentToActivity(MainActivity.class, true);
-        showToast("success");
-
+    public void noWalletInfo() {
+        // TODO: 2018/8/20  当前没有可用的钱包提示
+        showToast(getString(R.string.no_wallet));
     }
 
     @Override
-    public void loginFailure(final String message) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                showToast("failure==>" + message);
-
-            }
-        });
-
+    public void loginSuccess() {
+        intentToActivity(MainActivity.class, true);
     }
+
+    @Override
+    public void loginFailure(String message) {
+        showToast(message);
+    }
+
+    @Subscribe
+    public void loginWalletSuccess(LoginSuccess loginSuccess) {
+        if (loginSuccess == null) return;
+        intentToActivity(MainActivity.class, true);
+    }
+
+
 }

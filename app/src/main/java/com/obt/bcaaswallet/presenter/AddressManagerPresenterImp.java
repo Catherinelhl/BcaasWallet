@@ -4,7 +4,6 @@ import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.database.Address;
 import com.obt.bcaaswallet.database.AddressDao;
-import com.obt.bcaaswallet.database.DaoSession;
 import com.obt.bcaaswallet.ui.contracts.AddressManagerContract;
 
 import java.util.List;
@@ -16,13 +15,10 @@ import java.util.List;
 public class AddressManagerPresenterImp extends BasePresenterImp implements AddressManagerContract.Presenter {
 
     private AddressManagerContract.View view;
-    private AddressDao addressDao;//声明当前要操作的地址数据库
 
     public AddressManagerPresenterImp(AddressManagerContract.View view) {
         super();
         this.view = view;
-        DaoSession daoSession = ((BcaasApplication) context.getApplicationContext()).getDaoSession();
-        addressDao = daoSession.getAddressDao();
     }
 
     @Override

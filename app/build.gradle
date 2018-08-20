@@ -30,7 +30,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.support:design:28.0.0-rc01'
-    implementation 'com.android.support:multidex:1.0.1'//Android方法数methods超过65536
+    implementation 'com.android.support:multidex:1.0.1'
+    //Android方法数methods超过65536
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':qrcode')
@@ -40,5 +41,15 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     //bitcoinj 需要依赖的库
     implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //配合retrofit
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+    //retrofit 数据转换器
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+
 }
 

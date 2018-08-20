@@ -23,6 +23,7 @@ import org.spongycastle.crypto.signers.ECDSASigner;
 import org.spongycastle.math.ec.ECPoint;
 import org.spongycastle.util.encoders.Base64;
 
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.encryption.Base58;
 import com.subgraph.orchid.encoders.Hex;
 
@@ -116,8 +117,7 @@ public class KeyTool {
 			fromPublicOnly.verifyMessage(tcMessage, signatureBase64Str);
 			verifySueecss = true;
 		} catch (Exception e) {
-			// TODO: 2018/8/18 输出异常信息
-//			Constants.LOGGER_INFO.info("Verify Exception = " + e.getMessage());
+			Constants.LOGGER_INFO.info("Verify Exception = " + e.getMessage());
 		}
 
 		return verifySueecss;

@@ -15,6 +15,10 @@ public class MessageConstants {
     public static final int CODE_200 = 200; // Success
     public static final int CODE_400 = 400; // Failure
 
+    //请求接口的方式
+    public static final String REQUEST_MOTHOD_POST = "POST";
+    public static final String REQUEST_MOTHOD_GET = "GET";
+
     // Common
     public static final String SUCCESS_REGEX = "Regex Success.";
 

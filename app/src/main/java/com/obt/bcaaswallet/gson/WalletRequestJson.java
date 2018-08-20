@@ -22,6 +22,12 @@ public class WalletRequestJson implements Serializable {
 		super();
 	}
 
+	public WalletRequestJson(String blockService, String walletAddress) {
+		super();
+		this.blockService = blockService;
+		this.walletAddress = walletAddress;
+	}
+
 	public WalletRequestJson(String accessToken,String blockService, String walletAddress) {
 		super();
 		this.accessToken = accessToken;

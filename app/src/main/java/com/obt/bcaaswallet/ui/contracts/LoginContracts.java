@@ -9,12 +9,14 @@ import com.obt.bcaaswallet.base.BaseView;
 public interface LoginContracts {
 
     interface View extends BaseView {
-        void loginSuccess();
+        void noWalletInfo();
+        void loginFailure(String message);//登录失败
 
-        void loginFailure(String message);
+        void loginSuccess();
     }
 
     interface Presenter {
+        void queryWalletInfo();
         void login(String blockService,String walletAddress);
     }
 }

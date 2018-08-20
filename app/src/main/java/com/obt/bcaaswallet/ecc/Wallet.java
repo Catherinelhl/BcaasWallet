@@ -1,5 +1,7 @@
 package com.obt.bcaaswallet.ecc;
 
+import com.obt.bcaaswallet.constants.Constants;
+
 import static org.bitcoinj.core.Utils.HEX;
 
 import java.io.Serializable;
@@ -88,8 +90,7 @@ public class Wallet implements Serializable {
 			}
 
 		} catch (Exception e) {
-			// TODO: 2018/8/18 打印错误信息
-//			Constants.LOGGER_INFO.info("Use PrivateKey WIFStr Create Exception ", e);
+			Constants.LOGGER_INFO.info("Use PrivateKey WIFStr Create Exception ", e);
 		}
 
 		return null;

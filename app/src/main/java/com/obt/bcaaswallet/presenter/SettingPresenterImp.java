@@ -5,6 +5,7 @@ import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,6 @@ public class SettingPresenterImp extends BasePresenterImp implements SettingCont
     private SettingContract.View viewInterface;
 
     public SettingPresenterImp(SettingContract.View view) {
-        super();
         this.viewInterface = view;
     }
 
@@ -36,4 +36,5 @@ public class SettingPresenterImp extends BasePresenterImp implements SettingCont
         return settingTypes;
 
     }
+
 }

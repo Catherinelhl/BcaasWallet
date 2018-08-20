@@ -5,7 +5,6 @@ import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.database.Address;
 import com.obt.bcaaswallet.database.AddressDao;
-import com.obt.bcaaswallet.database.DaoSession;
 import com.obt.bcaaswallet.ui.contracts.InsertAddressContract;
 
 /**
@@ -26,8 +25,6 @@ public class InsertAddressPresenterImp extends BasePresenterImp implements Inser
     @Override
     public void saveData(Address address) {
         view.showLoadingDialog(getString(R.string.loading));
-        DaoSession daoSession = ((BcaasApplication) context.getApplicationContext()).getDaoSession();
-        AddressDao addressDao = daoSession.getAddressDao();
         addressDao.insert(address);
         view.saveDataSuccess();
         view.hideLoadingDialog();

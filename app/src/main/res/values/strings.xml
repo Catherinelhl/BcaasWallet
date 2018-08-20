@@ -62,4 +62,6 @@
     <string name="input_pwd_again">请再次输入密码</string>
     <string name="confirm_pwd">确认密码</string>
     <string name="confirm_pwd_not_null">请确认密码输入不为空！</string>
+    <string name="no_wallet">当前没有可用的钱包，请先进行钱包的创建。</string>
+    <string name="login_failure">登录失败，请重试！</string>
 </resources>

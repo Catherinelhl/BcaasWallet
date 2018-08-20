@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.event.LoginSuccess;
+import com.obt.bcaaswallet.event.SwitchTab;
+import com.obt.bcaaswallet.utils.OttoU;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +28,7 @@ import butterknife.ButterKnife;
  */
 public class WalletCreatedSuccessActivity extends BaseActivity {
 
+
     @BindView(R.id.ibBack)
     ImageButton ibBack;
     @BindView(R.id.tvTitle)
@@ -32,8 +37,8 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
     ImageButton ibRight;
     @BindView(R.id.rlHeader)
     RelativeLayout rlHeader;
-    @BindView(R.id.et_account_address)
-    EditText etAccountAddress;
+    @BindView(R.id.tv_account_address)
+    TextView tvAccountAddress;
     @BindView(R.id.et_private_key)
     EditText etPrivateKey;
     @BindView(R.id.cbPwd)
@@ -49,18 +54,19 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
 
     @Override
     public void getArgs(Bundle bundle) {
-
+        if (bundle == null) return;
+        accountAddress = bundle.getString(Constants.KeyMaps.AccountAddress);
+        privateKey = bundle.getString(Constants.KeyMaps.PrivateKey);
 
     }
 
     @Override
     public void initViews() {
-        accountAddress = "akdsfhjaihdsgfoilasjdfiuadshjfnkuiuahdsjfnkahsjznckuiaHbdfw8asiu===";
-        privateKey = "34567890-4567890467895678¬";
-        etAccountAddress.setHint(accountAddress);
+        ibBack.setVisibility(View.VISIBLE);
+        tvAccountAddress.setHint(accountAddress);
         etPrivateKey.setText(privateKey);
         etPrivateKey.setFocusable(false);
-        etAccountAddress.setFocusable(false);
+        tvAccountAddress.setFocusable(false);
         tvTitle.setText(getResources().getString(R.string.create_new_wallet));
     }
 
@@ -79,9 +85,17 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
         {
             @Override
             public void onClick(View v) {
+                OttoU.getInstance().post(new LoginSuccess());
+                finish();
+            }
+        });
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
 
     }
+
 }

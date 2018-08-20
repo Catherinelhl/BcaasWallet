@@ -19,7 +19,9 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.bean.TransactionsBean;
 import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.ui.contracts.CreateWalletContracts;
 import com.obt.bcaaswallet.utils.StringU;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.List;
 
@@ -31,7 +33,7 @@ import butterknife.BindView;
  * <p>
  * 检查当前的钱包信息
  */
-public class CheckWalletInfoActivity extends BaseActivity {
+public class CheckWalletInfoActivity extends BaseActivity implements CreateWalletContracts.View {
     @BindView(R.id.ibBack)
     ImageButton ibBack;
     @BindView(R.id.tvTitle)
@@ -152,4 +154,13 @@ public class CheckWalletInfoActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void requestSuccess(WalletVO walletVO) {
+
+    }
+
+    @Override
+    public void requestFailure(String message) {
+
+    }
 }
