@@ -4,13 +4,16 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.bean.SettingTypeBean;
 import com.obt.bcaaswallet.constants.Constants;
-import com.obt.bcaaswallet.constants.MessageConstants;
 import com.obt.bcaaswallet.gson.WalletRequestJson;
+import com.obt.bcaaswallet.interactor.SettingInteractor;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
-import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @author catherine.brainwilliam
@@ -44,6 +47,18 @@ public class SettingPresenterImp extends BasePresenterImp implements SettingCont
     public void logout(String walletAddress) {
         WalletRequestJson walletRequestJson = new WalletRequestJson();
         walletRequestJson.setWalletAddress(walletAddress);
+        SettingInteractor settingInteractor = new SettingInteractor();
+        settingInteractor.logout(walletAddress, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
         // TODO: 2018/8/20 登出当前账户
 //        doRequest(Constants.RequestUrl.logout, MessageConstants.REQUEST_MOTHOD_POST, walletRequestJson);
     }

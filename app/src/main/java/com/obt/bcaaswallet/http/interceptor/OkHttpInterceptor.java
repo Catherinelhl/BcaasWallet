@@ -16,6 +16,11 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 
+/**
+ * 设置网络请求拦截器
+ * 2018-08-20
+ */
+
 public class OkHttpInterceptor implements Interceptor {
 
     private static final Charset UTF8 = Charset.forName("UTF-8");
