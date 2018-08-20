@@ -8,10 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/red2"
         android:padding="@dimen/d5"
         android:text="@string/bcaas_u"
-        android:textColor="@color/white"
+        android:textColor="@color/red_da261f"
         android:textSize="@dimen/text_size_26"
         android:textStyle="bold" />
 

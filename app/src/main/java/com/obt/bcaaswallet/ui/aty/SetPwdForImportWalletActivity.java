@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.utils.StringU;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -17,11 +22,24 @@ import com.obt.bcaaswallet.utils.StringU;
  * 为新导入的钱包设置密码
  */
 public class SetPwdForImportWalletActivity extends BaseActivity {
-    private EditText etPassword;
-    private EditText etPasswordConfirm;
-    private TextView tvOpenWalletMethod;
-    private Button btnCancel;
-    private Button btnSure;
+    @BindView(R.id.ibBack)
+    ImageButton ibBack;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ibRight)
+    ImageButton ibRight;
+    @BindView(R.id.rlHeader)
+    RelativeLayout rlHeader;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+    @BindView(R.id.tv_password_rule)
+    TextView tvPasswordRule;
+    @BindView(R.id.et_password_confirm)
+    EditText etPasswordConfirm;
+    @BindView(R.id.btn_cancel)
+    Button btnCancel;
+    @BindView(R.id.btn_sure)
+    Button btnSure;
 
     @Override
     public int getContentView() {
@@ -35,12 +53,7 @@ public class SetPwdForImportWalletActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        etPassword = findViewById(R.id.et_password);
-        etPasswordConfirm = findViewById(R.id.et_password_confirm);
-        btnCancel = findViewById(R.id.btn_cancel);
-        btnSure = findViewById(R.id.btn_sure);
-        tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
-        tvOpenWalletMethod.setText(getResources().getString(R.string.import_wallet));
+        tvTitle.setText(getResources().getString(R.string.import_wallet));
 
 
     }
@@ -67,4 +80,6 @@ public class SetPwdForImportWalletActivity extends BaseActivity {
         });
 
     }
+
+
 }

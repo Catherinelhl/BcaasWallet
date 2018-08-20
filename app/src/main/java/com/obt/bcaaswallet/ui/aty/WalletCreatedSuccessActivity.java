@@ -7,10 +7,19 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.event.ToLogin;
+import com.obt.bcaaswallet.gson.WalletRequestJson;
+import com.obt.bcaaswallet.utils.OttoU;
+import com.obt.bcaaswallet.vo.WalletVO;
+
+import butterknife.BindView;
 
 /**
  * @author catherine.brainwilliam
@@ -19,12 +28,25 @@ import com.obt.bcaaswallet.base.BaseActivity;
  */
 public class WalletCreatedSuccessActivity extends BaseActivity {
 
-    private EditText etAccountAddress;
-    private EditText etPrivateKey;
-    private Button btnFinish;
-    private TextView tvOpenWalletMethod;
-    private CheckBox cbPassword;
-    private String accountAddress, privateKey;// 账户地址，私钥
+
+    @BindView(R.id.ibBack)
+    ImageButton ibBack;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ibRight)
+    ImageButton ibRight;
+    @BindView(R.id.rlHeader)
+    RelativeLayout rlHeader;
+    @BindView(R.id.tv_account_address)
+    TextView tvAccountAddress;
+    @BindView(R.id.et_private_key)
+    EditText etPrivateKey;
+    @BindView(R.id.cbPwd)
+    CheckBox cbPwd;
+    @BindView(R.id.btn_finish)
+    Button btnFinish;
+    private String accountAddress, privateKey,blockService;// 账户地址，私钥,区块服务名称
+    private WalletVO walletVO;
 
     @Override
     public int getContentView() {
@@ -33,29 +55,29 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
 
     @Override
     public void getArgs(Bundle bundle) {
-
+        if (bundle == null) return;
+        accountAddress = bundle.getString(Constants.KeyMaps.AccountAddress);
+        privateKey = bundle.getString(Constants.KeyMaps.PrivateKey);
+        blockService = bundle.getString(Constants.KeyMaps.BlockService);
 
     }
 
     @Override
     public void initViews() {
-        accountAddress = "akdsfhjaihdsgfoilasjdfiuadshjfnkuiuahdsjfnkahsjznckuiaHbdfw8asiu===";
-        privateKey = "34567890-4567890467895678¬";
-        etPrivateKey = findViewById(R.id.et_private_key);
-        cbPassword = findViewById(R.id.cbPwd);
-        etAccountAddress = findViewById(R.id.et_account_address);
-        btnFinish = findViewById(R.id.btn_finish);
-        etAccountAddress.setHint(accountAddress);
+        walletVO=new WalletVO();
+        walletVO.setWalletAddress(accountAddress);
+        walletVO.setBlockService(blockService);
+        ibBack.setVisibility(View.VISIBLE);
+        tvAccountAddress.setHint(accountAddress);
         etPrivateKey.setText(privateKey);
         etPrivateKey.setFocusable(false);
-        etAccountAddress.setFocusable(false);
-        tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
-        tvOpenWalletMethod.setText(getResources().getString(R.string.create_new_wallet));
+        tvAccountAddress.setFocusable(false);
+        tvTitle.setText(getResources().getString(R.string.create_new_wallet));
     }
 
     @Override
     public void initListener() {
-        cbPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cbPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 etPrivateKey.setInputType(isChecked ?
@@ -68,9 +90,17 @@ public class WalletCreatedSuccessActivity extends BaseActivity {
         {
             @Override
             public void onClick(View v) {
+                OttoU.getInstance().post(new ToLogin(walletVO));
+                finish();
+            }
+        });
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
 
     }
+
 }

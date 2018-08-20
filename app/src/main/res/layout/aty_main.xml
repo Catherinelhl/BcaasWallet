@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.aty.MainActivity">
+    android:background="@color/theme_grey">
 
-    <RelativeLayout
+    <include layout="@layout/inc_header" />
+
+    <FrameLayout
+        android:id="@+id/fl_module"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d48">
+        android:layout_height="@dimen/d0"
+        android:layout_weight="1"
+        android:layout_marginBottom="@dimen/d16"
+        android:showDividers="none" />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@color/red2"
-            android:gravity="center"
-            android:padding="@dimen/d5"
-            android:text="@string/bcaas_u" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d0.2"
-            android:layout_alignParentBottom="true"
-            android:background="@color/light_grey" />
-
-    </RelativeLayout>
-
-    <com.hjm.bottomtabbar.BottomTabBar
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:bnbMode="mode_fixed"
+        android:background="@color/white" />
+
 </LinearLayout>

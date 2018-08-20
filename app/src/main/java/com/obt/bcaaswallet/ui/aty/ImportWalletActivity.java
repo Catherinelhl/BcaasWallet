@@ -3,10 +3,15 @@ package com.obt.bcaaswallet.ui.aty;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author catherine.brainwilliam
@@ -14,9 +19,18 @@ import com.obt.bcaaswallet.base.BaseActivity;
  */
 public class ImportWalletActivity extends BaseActivity {
 
-    private TextView tvOpenWalletMethod;
-    private Button btnCancel;
-    private Button btnSure;
+    @BindView(R.id.ibBack)
+    ImageButton ibBack;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ibRight)
+    ImageButton ibRight;
+    @BindView(R.id.rlHeader)
+    RelativeLayout rlHeader;
+    @BindView(R.id.btn_cancel)
+    Button btnCancel;
+    @BindView(R.id.btn_sure)
+    Button btnSure;
 
     @Override
     public int getContentView() {
@@ -30,10 +44,7 @@ public class ImportWalletActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        tvOpenWalletMethod = findViewById(R.id.tvOpenWalletMethod);
-        btnCancel = findViewById(R.id.btn_cancel);
-        btnSure = findViewById(R.id.btn_sure);
-        tvOpenWalletMethod.setText(getResources().getString(R.string.import_wallet));
+        tvTitle.setText(getResources().getString(R.string.import_wallet));
 
     }
 
@@ -53,4 +64,5 @@ public class ImportWalletActivity extends BaseActivity {
         });
 
     }
+
 }

@@ -1,67 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/d20">
+    android:background="@color/theme_grey"
+    android:orientation="vertical">
 
-    <include layout="@layout/inc_open_wallet_header" />
+    <include layout="@layout/inc_header" />
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        style="@style/bg_white_style"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d20"
-        android:text="@string/account_address"
-        android:textColor="@color/black" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_account_address"
-        style="@style/edittext_style"
-        android:focusable="false"
-        tool:hint="@string/account_address" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d20"
+            android:text="@string/account_address"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d20"
-        android:text="@string/backup_private_key"
-        android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/tv_account_address"
+            style="@style/item_text_style"
+            android:layout_marginTop="@dimen/d10" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/backup_private_key_detail"
-        android:textColor="@color/grey" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d0.2"
+            android:layout_margin="@dimen/d10"
+            android:background="@color/title_black" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d10">
+        <TextView
+            style="@style/black_text_style"
+            android:layout_marginTop="@dimen/d20"
+            android:text="@string/backup_private_key" />
 
-        <EditText
-            android:id="@+id/et_private_key"
-            style="@style/edittext_style"
-            android:inputType="textPassword"
-            android:paddingRight="@dimen/d40" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d16"
+            android:text="@string/backup_private_key_detail"
+            android:textColor="@color/value_black70" />
 
-        <CheckBox
-            android:id="@+id/cbPwd"
-            android:layout_width="@dimen/d32"
-            android:layout_height="@dimen/d32"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/selector_cb_password"
-            android:checked="false"
-            android:gravity="center" />
-    </RelativeLayout>
+        <include layout="@layout/inc_et_private_key" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/d50"
-        android:background="@drawable/selector_btn_style"
+        style="@style/btn_style"
+        android:layout_marginTop="@dimen/d30"
         android:text="@string/finish" />
 
 </LinearLayout>

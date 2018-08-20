@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/transparent"
-    android:gravity="left"
+    android:gravity="left|center"
+    android:layout_gravity="left|center"
     android:padding="@dimen/d5"
-    android:textColor="@color/black"
-    android:textSize="@dimen/text_size_15" />
+    android:textColor="@color/title_black"
+    android:textSize="@dimen/text_size_14" />

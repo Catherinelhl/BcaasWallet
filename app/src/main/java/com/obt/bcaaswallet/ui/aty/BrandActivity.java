@@ -1,21 +1,26 @@
 package com.obt.bcaaswallet.ui.aty;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
-import com.obt.bcaaswallet.contants.Contants;
+import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.presenter.BrandPresenterImp;
+import com.obt.bcaaswallet.ui.contracts.BrandContracts;
+import com.obt.bcaaswallet.vo.WalletVO;
 
 
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
-public class BrandActivity extends BaseActivity {
+public class BrandActivity extends BaseActivity implements BrandContracts.View {
+
+
+    private BrandContracts.Presenter presenter;
 
     @Override
     public void getArgs(Bundle bundle) {
@@ -27,7 +32,14 @@ public class BrandActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            intentToActivity(LoginActivity.class,true);
+            int code = msg.what;
+            if (code == 1) {
+                intentToActivity(LoginActivity.class, true);
+            } else {
+                intentToActivity(
+                        MainActivity.class, true);
+
+            }
         }
     };
 
@@ -38,11 +50,12 @@ public class BrandActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-
+        presenter = new BrandPresenterImp(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                handler.sendEmptyMessageDelayed(1, Contants.ValueMaps.brandSleepTime);
+                presenter.queryWalletInfo();
+//                handler.sendEmptyMessageDelayed(1, Constants.ValueMaps.brandSleepTime);
             }
         }).start();
     }
@@ -51,4 +64,17 @@ public class BrandActivity extends BaseActivity {
     public void initListener() {
 
     }
+
+    @Override
+    public void noWalletInfo() {
+        handler.sendEmptyMessage(1);
+
+    }
+
+    @Override
+    public void onLogin() {
+        handler.sendEmptyMessage(2);
+
+    }
+
 }
