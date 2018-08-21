@@ -23,7 +23,10 @@ public interface MainContracts {
         void getWalletWaitingToReceiveBlock();
 
         void checkANClientIPInfo(String from);
+
         void resetAuthNodeInfo(WalletInfo walletInfo);
+
+        void startTCPConnectToGetReceiveBlock();//开始TCP连线，请求未处理的交易
     }
 }
 

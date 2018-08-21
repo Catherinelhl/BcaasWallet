@@ -1,5 +1,6 @@
 package com.obt.bcaaswallet.presenter;
 
+import com.google.gson.Gson;
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.base.BcaasApplication;
@@ -10,7 +11,9 @@ import com.obt.bcaaswallet.gson.WalletRequestJson;
 import com.obt.bcaaswallet.gson.WalletResponseJson;
 import com.obt.bcaaswallet.gson.WalletVoRequestJson;
 import com.obt.bcaaswallet.gson.WalletVoResponseJson;
+import com.obt.bcaaswallet.http.ReceiveThread;
 import com.obt.bcaaswallet.interactor.MainInteractor;
+import com.obt.bcaaswallet.listener.TCPReceiveBlockListener;
 import com.obt.bcaaswallet.ui.contracts.MainContracts;
 import com.obt.bcaaswallet.utils.GsonU;
 import com.obt.bcaaswallet.utils.L;
@@ -90,7 +93,6 @@ public class MainPresenterImp extends BasePresenterImp implements MainContracts.
                 if (walletVoResponseJson.getSuccess()) {
                     view.resetAuthNodeSuccess();
                     getANAddress(walletVoResponseJson.getWalletVO());
-                    getReceiveBlockDataByTCP();
                 }
             }
 
@@ -99,10 +101,6 @@ public class MainPresenterImp extends BasePresenterImp implements MainContracts.
                 view.resetAuthNodeFailure(t.getMessage());
             }
         });
-    }
-
-    private void getReceiveBlockDataByTCP() {
-        // TODO: 2018/8/21 TCP 长连接
     }
 
     private void getANAddress(WalletVO walletVO) {
@@ -125,7 +123,10 @@ public class MainPresenterImp extends BasePresenterImp implements MainContracts.
         // TODO: 2018/8/21 暂时先存储需要的两个参数，到时候需要再添加
         ANClientIpInfo anClientIpInfo = new ANClientIpInfo();
         anClientIpInfo.setInternalIp(clientIpInfoVO.getInternalIp());
+        anClientIpInfo.setExternalIp(clientIpInfoVO.getExternalIp());
+        anClientIpInfo.setExternalPort(clientIpInfoVO.getExternalPort());
         anClientIpInfo.setRpcPort(clientIpInfoVO.getRpcPort());
+        anClientIpInfo.setInternalPort(clientIpInfoVO.getInternalPort());
         clientIpInfoDao.insert(anClientIpInfo);
     }
 
@@ -150,11 +151,58 @@ public class MainPresenterImp extends BasePresenterImp implements MainContracts.
                 }
                 ANClientIpInfo anClientIpInfo = clientIpInfos.get(0);
                 clientIpInfoVO.setInternalIp(anClientIpInfo.getInternalIp());
+                anClientIpInfo.setExternalIp(clientIpInfoVO.getExternalIp());
+                anClientIpInfo.setExternalPort(clientIpInfoVO.getExternalPort());
                 clientIpInfoVO.setRpcPort(anClientIpInfo.getRpcPort());
+                anClientIpInfo.setInternalPort(clientIpInfoVO.getInternalPort());
                 BcaasApplication.setClientIpInfoVO(clientIpInfoVO);
 
             }
         }
 
     }
+
+    /*开启连线
+     * 1：通过TCP传给服务器的数据不需要加密
+     * 2:开始socket连线之后，然后Http请求该接口，通知服务器可以下发数据了。
+     * */
+    @Override
+    public void startTCPConnectToGetReceiveBlock() {
+        WalletInfo walletInfo = getWalletInfo();
+        if (walletInfo == null) {
+            return;
+        }
+        WalletRequestJson walletRequestJson = new WalletRequestJson(walletInfo.getAccessToken(),
+                walletInfo.getBlockService(), walletInfo.getBitcoinAddressStr());
+        String json = GsonU.encodeToString(walletRequestJson);
+        String ip = BcaasApplication.getInternalIp();
+        int port = BcaasApplication.getInternalPort();
+        ReceiveThread sendActionThread = new ReceiveThread(ip, port, json + "\n", tcpReceiveBlockListener);
+        sendActionThread.start();
+
+    }
+
+    //监听Tcp数据返回
+    TCPReceiveBlockListener tcpReceiveBlockListener = new TCPReceiveBlockListener() {
+        @Override
+        public void httpToRequestReceiverBlock() {
+            getWalletWaitingToReceiveBlock();
+        }
+
+        @Override
+        public void receiveBlockData(String data) {
+            L.d("tcpReceiveBlockListener", data);
+            Gson gson = new Gson();
+            if (StringU.notEmpty(data)) {
+                WalletResponseJson walletResponseJson = gson.fromJson(data, WalletResponseJson.class);
+                L.d(walletResponseJson);
+            }
+
+        }
+
+        @Override
+        public void tcpConnectFailure(String message) {
+            // TODO: 2018/8/21 TCP 连接异常，发起重新连接？
+        }
+    };
 }

@@ -80,7 +80,8 @@ public class MainActivity extends BaseActivity implements MainContracts.View {
         initFragment();
         initNavigation();
         setMainTitle();
-        presenter.getWalletWaitingToReceiveBlock();
+        presenter.startTCPConnectToGetReceiveBlock();
+
     }
 
     private void initNavigation() {
@@ -253,7 +254,7 @@ public class MainActivity extends BaseActivity implements MainContracts.View {
     @Override
     public void resetAuthNodeSuccess() {
         //todo 重新请求AN地址成功，开始建立TCP
-        presenter.getWalletWaitingToReceiveBlock();
+        presenter.startTCPConnectToGetReceiveBlock();
     }
 
     @Override

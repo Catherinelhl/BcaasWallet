@@ -45,6 +45,7 @@ public class BcaasApplication extends MultiDexApplication {
         return clientIpInfoVO.getInternalIp();
     }
 
+    //Http需要连接的port
     public static int getRpcPort() {
         if (clientIpInfoVO == null) {
             // TODO: 2018/8/21 如果内网端口为空，是否有个默认的
@@ -52,6 +53,16 @@ public class BcaasApplication extends MultiDexApplication {
             return 0;
         }
         return clientIpInfoVO.getRpcPort();
+    }
+
+    //TCP连接需要的port
+    public static int getInternalPort() {
+        if (clientIpInfoVO == null) {
+            // TODO: 2018/8/21 如果内网端口为空，是否有个默认的
+//            return 57463;
+            return 0;
+        }
+        return clientIpInfoVO.getInternalPort();
     }
 
     @Override

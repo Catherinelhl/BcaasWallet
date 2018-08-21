@@ -145,7 +145,10 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
         // TODO: 2018/8/21 暂时先存储需要的两个参数，到时候需要再添加
         ANClientIpInfo anClientIpInfo = new ANClientIpInfo();
         anClientIpInfo.setInternalIp(clientIpInfoVO.getInternalIp());
+        anClientIpInfo.setExternalIp(clientIpInfoVO.getExternalIp());
+        anClientIpInfo.setExternalPort(clientIpInfoVO.getExternalPort());
         anClientIpInfo.setRpcPort(clientIpInfoVO.getRpcPort());
+        anClientIpInfo.setInternalPort(clientIpInfoVO.getInternalPort());
         clientIpInfoDao.insert(anClientIpInfo);
         BcaasApplication.setClientIpInfoVO(clientIpInfoVO);
     }
