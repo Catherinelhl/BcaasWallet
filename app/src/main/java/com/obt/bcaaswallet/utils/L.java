@@ -36,6 +36,6 @@ public class L {
     }
 
     public static <T> void line(T info) {
-        Log.i(Constants.KeyMaps.TAG, "==============$info");
+        Log.i(Constants.KeyMaps.TAG, "======" + info.toString());
     }
 }

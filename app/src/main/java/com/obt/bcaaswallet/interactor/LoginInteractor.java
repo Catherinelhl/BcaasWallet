@@ -18,8 +18,14 @@ import retrofit2.Callback;
  */
 public class LoginInteractor {
 
+    public void login(RequestBody body, Callback<String> callBackListener) {
+        HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
+        Call<String> call = httpApi.login(body);
+        call.enqueue(callBackListener);
+    }
+
     public void login(String walletInfo, Callback<String> callBackListener) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), walletInfo);
+       RequestBody body= RequestBody.create(MediaType.parse("application/json"), walletInfo);
         HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
         Call<String> call = httpApi.login(body);
         call.enqueue(callBackListener);

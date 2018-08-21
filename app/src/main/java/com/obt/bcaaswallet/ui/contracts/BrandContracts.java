@@ -11,7 +11,8 @@ public interface BrandContracts {
 
     interface View extends BaseView{
         void noWalletInfo();
-        void onLogin();
+        void online();
+        void offline();
     }
 
     interface Presenter {

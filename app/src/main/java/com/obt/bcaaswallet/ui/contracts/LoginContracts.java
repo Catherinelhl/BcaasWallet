@@ -17,7 +17,7 @@ public interface LoginContracts {
     }
 
     interface Presenter {
-        void queryWalletInfo();
+        void queryWalletInfo(String password);
         void login(WalletVO walletVO);
     }
 }

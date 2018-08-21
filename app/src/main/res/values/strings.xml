@@ -65,4 +65,8 @@
     <string name="no_wallet">当前没有可用的钱包，请先进行钱包的创建。</string>
     <string name="login_failure">登录失败，请重试！</string>
     <string name="logout">退出登录</string>
+    <string name="logout_failure">退出当前账户失败。</string>
+    <string name="dataexceptionofaccount">账户数据异常！</string>
+    <string name="data_error">获取数据异常。</string>
+    <string name="localdata_exception">用户本地数据异常。</string>
 </resources>

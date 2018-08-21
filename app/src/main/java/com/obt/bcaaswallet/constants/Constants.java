@@ -86,4 +86,9 @@ public class Constants {
         public static final String getLatestBlockAndBalance = "/wallet/getLatestBlockAndBalance";//获取最新的区块和Wallet余额 AN
 
     }
+
+    public class BlockService {
+        // TODO: 2018/8/20 待定
+        public static final String BCC="BCC";
+    }
 }

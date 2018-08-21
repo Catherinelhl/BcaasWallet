@@ -25,7 +25,7 @@ import butterknife.Unbinder;
  * @author catherine.brainwilliam
  * @since 2018/8/15
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     private View rootView;
     protected Context context;
@@ -94,5 +94,27 @@ public abstract class BaseFragment extends Fragment {
         return ((MainActivity) activity).getAddressOfUser();
     }
 
+    public void logout() {
+        ((MainActivity) activity).logout();
+    }
 
+    @Override
+    public void showLoadingDialog(String loading) {
+
+    }
+
+    @Override
+    public void hideLoadingDialog() {
+
+    }
+
+    @Override
+    public void success(String message) {
+        showToast(message);
+    }
+
+    @Override
+    public void failure(String message) {
+        showToast(message);
+    }
 }

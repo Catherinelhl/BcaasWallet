@@ -11,6 +11,12 @@ import com.obt.bcaaswallet.ecc.Wallet;
  */
 public class WalletU {
 
+    /* 自动创建钱包信息*/
+    public static Wallet getWalletInfo() {
+        return getWalletInfo("");
+    }
+
+    /*通过WIF格式的私钥来创建钱包*/
     public static Wallet getWalletInfo(String privateKeyWIFStr) {
         if (StringU.isEmpty(privateKeyWIFStr)) {
             return Wallet.createWallet();

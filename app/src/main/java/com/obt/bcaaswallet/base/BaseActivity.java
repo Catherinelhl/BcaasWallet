@@ -115,4 +115,13 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
 
     }
 
+    @Override
+    public void failure(String message) {
+        showToast(message);
+    }
+
+    @Override
+    public void success(String message) {
+        showToast(message);
+    }
 }

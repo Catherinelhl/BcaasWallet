@@ -72,9 +72,14 @@ public class BrandActivity extends BaseActivity implements BrandContracts.View {
     }
 
     @Override
-    public void onLogin() {
+    public void online() {
         handler.sendEmptyMessage(2);
 
     }
 
+    @Override
+    public void offline() {
+        handler.sendEmptyMessage(1);
+
+    }
 }

@@ -18,6 +18,7 @@ import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,21 +46,31 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
 
 
     @Override
-    public void queryWalletInfo() {
+    public void queryWalletInfo(String password) {
         List<WalletInfo> walletInfos = getAllWallets();
         if (ListU.isEmpty(walletInfos)) {
             view.noWalletInfo();
         } else {
             WalletInfo wallet = walletInfos.get(0);//得到当前的钱包
+            // TODO: 2018/8/21 当前App可以有多个钱包在线么？还是保持唯一
+            for (WalletInfo walletInfo : walletInfos) {
+                //todo  如果当前可以多个账户存在，要这样去遍历得到账户？不对，这样输入错误的密码不就不知道了。
+                if (StringU.equals(walletInfo.getPassword(), password)) {
+                    wallet = walletInfo;
+                    L.d("需要登入的钱包是==》" + wallet);
+
+                }
+            }
             String walletAddress = wallet.getBitcoinAddressStr();
             String blockService = wallet.getBlockService();
             if (StringU.isEmpty(blockService) || StringU.isEmpty(walletAddress)) {
                 //TODO 对当前的参数进行判空「自定义弹框」
                 //检查到当前数据库没有钱包地址数据，那么需要提示用户先创建或者导入钱包
+                view.loginFailure(context.getString(R.string.localdata_exception));
             } else {
                 WalletVO walletVO = new WalletVO();
-                wallet.setBlockService(blockService);
-                wallet.setBitcoinAddressStr(walletAddress);
+                walletVO.setBlockService(blockService);
+                walletVO.setWalletAddress(walletAddress);
                 login(walletVO);
             }
 
@@ -76,13 +87,13 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
     }
 
     @Override
-    public void login(final WalletVO walletVO) {
+    public void login(WalletVO walletVO) {
         LoginInteractor loginInteractor = new LoginInteractor();
-
         final String json = GsonU.encodeToString(walletVO);
-        // encryption
+        L.line("login===>" + json);
         try {
             String encodeJson = AES.encodeCBC_128(json);
+            RequestBody body = GsonU.beanToRequestBody(walletVO);
             loginInteractor.login(encodeJson, new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
@@ -106,12 +117,16 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
 
     private void parseData(WalletVO walletVO) {
         //得到当前回传的信息，存储当前的accessToken
+        if (walletVO == null) {
+            throw new NullPointerException(" loginPresenterImp parseData walletVO is null");
+        }
         String accessToken = walletVO.getAccessToken();
         Constants.LOGGER_INFO.info(accessToken);
         if (StringU.isEmpty(accessToken)) {
             view.loginFailure(getString(R.string.login_failure));
         } else {
             BcaasApplication.setAccessToken(accessToken);
+            BcaasApplication.setWalletAddress(walletVO.getWalletAddress());
             // TODO: 2018/8/20 存储当前的token，具体存储方式待跟进
             updateWalletData(accessToken);
         }

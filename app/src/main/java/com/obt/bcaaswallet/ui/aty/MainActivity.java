@@ -237,4 +237,7 @@ public class MainActivity extends BaseActivity {
         ft.commitAllowingStateLoss();
     }
 
+    public void logout() {
+        intentToActivity(LoginActivity.class, true);
+    }
 }

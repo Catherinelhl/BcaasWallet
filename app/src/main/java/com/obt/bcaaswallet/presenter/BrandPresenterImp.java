@@ -2,12 +2,21 @@ package com.obt.bcaaswallet.presenter;
 
 import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.database.WalletInfo;
+import com.obt.bcaaswallet.gson.WalletVoRequestJson;
+import com.obt.bcaaswallet.gson.WalletVoResponseJson;
+import com.obt.bcaaswallet.interactor.VerifyInteractor;
 import com.obt.bcaaswallet.ui.contracts.BrandContracts;
+import com.obt.bcaaswallet.utils.GsonU;
+import com.obt.bcaaswallet.utils.L;
 import com.obt.bcaaswallet.utils.ListU;
 import com.obt.bcaaswallet.utils.StringU;
 import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @author catherine.brainwilliam
@@ -22,10 +31,12 @@ import java.util.List;
 public class BrandPresenterImp extends BasePresenterImp implements BrandContracts.Presenter {
 
     private BrandContracts.View view;
+    VerifyInteractor verifyInteractor;
 
     public BrandPresenterImp(BrandContracts.View view) {
         super();
         this.view = view;
+        verifyInteractor = new VerifyInteractor();
 
     }
 
@@ -36,25 +47,28 @@ public class BrandPresenterImp extends BasePresenterImp implements BrandContract
         if (ListU.isEmpty(walletInfos)) {
             view.noWalletInfo();
         } else {
+            L.d("数据库共有==" + walletInfos.size() + "==条数据；");
+            for (WalletInfo walletInfo : walletInfos) {
+                L.d(walletInfo);
+            }
             WalletInfo wallet = walletInfos.get(0);//得到当前的钱包
             String walletAddress = wallet.getBitcoinAddressStr();
             String blockService = wallet.getBlockService();
             String accessToken = wallet.getAccessToken();
-            if (StringU.isEmpty(accessToken)) {
-                //有钱包，但是没有token
-                view.noWalletInfo();
-            } else {
-                WalletVO walletVO = new WalletVO();
-                walletVO.setAccessToken(accessToken);
-                walletVO.setWalletAddress(walletAddress);
-                walletVO.setBlockService(blockService);
-                verifyToken(walletVO);
-            }
-
             if (StringU.isEmpty(blockService) || StringU.isEmpty(walletAddress)) {
                 //检查到当前数据库没有钱包地址数据，那么需要提示用户先创建或者导入钱包
                 view.noWalletInfo();
             } else {
+                if (StringU.isEmpty(accessToken)) {
+                    //有钱包，但是没有token
+                    view.noWalletInfo();
+                } else {
+                    WalletVO walletVO = new WalletVO();
+                    walletVO.setAccessToken(accessToken);
+                    walletVO.setWalletAddress(walletAddress);
+                    walletVO.setBlockService(blockService);
+                    verifyToken(walletVO);
+                }
 
             }
 
@@ -71,9 +85,29 @@ public class BrandPresenterImp extends BasePresenterImp implements BrandContract
     }
 
     //验证当前的token是否可用
-    private void verifyToken(WalletVO walletVO) {
-        // TODO: 2018/8/20 验证token
-//        doRequest(Constants.RequestUrl.verify, MessageConstants.REQUEST_MOTHOD_POST, walletVO);
+    private void verifyToken(final WalletVO walletVO) {
+        WalletVoRequestJson walletVoRequestJson = new WalletVoRequestJson(walletVO);
+        verifyInteractor.verify(GsonU.beanToRequestBody(walletVoRequestJson), new Callback<WalletVoResponseJson>() {
+            @Override
+            public void onResponse(Call<WalletVoResponseJson> call, Response<WalletVoResponseJson> response) {
+                L.d("verifyToken response==>" + response.body());
+                WalletVoResponseJson walletVoResponseJson = response.body();
+                if (walletVoResponseJson == null) {
+                    view.noWalletInfo();
+                } else {
+                    if (walletVoResponseJson.getSuccess()) {
+                        view.online();
+                    } else {
+                        view.failure(walletVoResponseJson.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WalletVoResponseJson> call, Throwable t) {
+                view.noWalletInfo();
+            }
+        });
     }
 
 

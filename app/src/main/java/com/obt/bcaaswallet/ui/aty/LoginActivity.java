@@ -97,13 +97,13 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
             public void onClick(View v) {
                 String password = etPrivateKey.getText().toString();
                 if (StringU.notEmpty(password)) {
-//                    presenter.queryWalletInfo();
-                    final String blockService = "BCC";
-                    final String walletAddress = "1DmpeQtAmdhiUyUujxiqPVGUfUmCZFuEUC";//WalletU.getWalletAddress();
-                    WalletVO walletVO = new WalletVO();
-                    walletVO.setBlockService(blockService);
-                    walletVO.setWalletAddress(walletAddress);
-                    presenter.login(walletVO);
+                    presenter.queryWalletInfo(password);
+//                    final String blockService = "BCC";
+//                    final String walletAddress = "1DmpeQtAmdhiUyUujxiqPVGUfUmCZFuEUC";//WalletU.getWalletAddress();
+//                    WalletVO walletVO = new WalletVO();
+//                    walletVO.setBlockService(blockService);
+//                    walletVO.setWalletAddress(walletAddress);
+//                    presenter.login(walletVO);
                 } else {
                     showToast(getString(R.string.walletinfo_must_not_null));
                 }

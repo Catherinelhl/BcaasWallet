@@ -9,4 +9,8 @@ public interface BaseView {
 
     void hideLoadingDialog();
 
+    void failure(String message);
+
+    void success(String message);
+
 }
