@@ -19,8 +19,8 @@ public class L {
     private L() {
     }
 
-    public static void d() {
-        Log.d(Constants.KeyMaps.TAG, "");
+    public static <T> void d(String tag, T info) {
+        Log.d(Constants.KeyMaps.TAG, tag + "==>" + info.toString());
     }
 
     public static <T> void d(T info) {

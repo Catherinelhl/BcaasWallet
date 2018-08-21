@@ -36,8 +36,9 @@ public class BrandActivity extends BaseActivity implements BrandContracts.View {
             if (code == 1) {
                 intentToActivity(LoginActivity.class, true);
             } else {
-                intentToActivity(
-                        MainActivity.class, true);
+                Bundle bundle=new Bundle();
+                bundle.putString(Constants.KeyMaps.From,Constants.ValueMaps.FROM_BRAND);
+                intentToActivity(bundle,MainActivity.class, true);
 
             }
         }

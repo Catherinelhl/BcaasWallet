@@ -5,6 +5,7 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BasePresenterImp;
 import com.obt.bcaaswallet.base.BcaasApplication;
 import com.obt.bcaaswallet.constants.Constants;
+import com.obt.bcaaswallet.database.ANClientIpInfo;
 import com.obt.bcaaswallet.database.WalletInfo;
 import com.obt.bcaaswallet.encryption.AES;
 import com.obt.bcaaswallet.gson.WalletVoResponseJson;
@@ -14,6 +15,7 @@ import com.obt.bcaaswallet.utils.GsonU;
 import com.obt.bcaaswallet.utils.L;
 import com.obt.bcaaswallet.utils.ListU;
 import com.obt.bcaaswallet.utils.StringU;
+import com.obt.bcaaswallet.vo.ClientIpInfoVO;
 import com.obt.bcaaswallet.vo.WalletVO;
 
 import java.util.List;
@@ -100,7 +102,12 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
                     Gson gson = new Gson();
                     WalletVoResponseJson walletVOResponse = gson.fromJson(response.body(), WalletVoResponseJson.class);
                     L.line(walletVOResponse);
-                    parseData(walletVOResponse.getWalletVO());
+                    if (walletVOResponse.getSuccess()) {
+                        parseData(walletVOResponse.getWalletVO());
+                    } else {
+                        view.loginFailure(response.message());
+                    }
+
                 }
 
                 @Override
@@ -120,16 +127,27 @@ public class LoginPresenterImp extends BasePresenterImp implements LoginContract
         if (walletVO == null) {
             throw new NullPointerException(" loginPresenterImp parseData walletVO is null");
         }
+        getANAddress(walletVO);
         String accessToken = walletVO.getAccessToken();
         Constants.LOGGER_INFO.info(accessToken);
         if (StringU.isEmpty(accessToken)) {
             view.loginFailure(getString(R.string.login_failure));
         } else {
-            BcaasApplication.setAccessToken(accessToken);
-            BcaasApplication.setWalletAddress(walletVO.getWalletAddress());
+            saveWalletInfo(walletVO);
             // TODO: 2018/8/20 存储当前的token，具体存储方式待跟进
             updateWalletData(accessToken);
         }
+    }
+
+    private void getANAddress(WalletVO walletVO) {
+        ClientIpInfoVO clientIpInfoVO = walletVO.getClientIpInfoVO();
+        L.d("getANAddress", clientIpInfoVO);
+        // TODO: 2018/8/21 暂时先存储需要的两个参数，到时候需要再添加
+        ANClientIpInfo anClientIpInfo = new ANClientIpInfo();
+        anClientIpInfo.setInternalIp(clientIpInfoVO.getInternalIp());
+        anClientIpInfo.setRpcPort(clientIpInfoVO.getRpcPort());
+        clientIpInfoDao.insert(anClientIpInfo);
+        BcaasApplication.setClientIpInfoVO(clientIpInfoVO);
     }
 
     private void updateWalletData(String accessToken) {

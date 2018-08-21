@@ -17,7 +17,7 @@ import retrofit2.Callback;
 public class VerifyInteractor {
 
     public void verify(RequestBody body, Callback<WalletVoResponseJson> callBackListener) {
-        HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
+        HttpApi httpApi = RetrofitFactory.getInstance().create(HttpApi.class);
         Call<WalletVoResponseJson> call = httpApi.verify(body);
         call.enqueue(callBackListener);
     }

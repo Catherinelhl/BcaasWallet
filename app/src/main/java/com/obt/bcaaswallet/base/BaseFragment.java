@@ -90,8 +90,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     public String getAddressOfUser() {//获取用户的账户地址
-        if (activity == null) return null;
-        return ((MainActivity) activity).getAddressOfUser();
+        return BcaasApplication.getWalletAddress();
     }
 
     public void logout() {

@@ -120,7 +120,7 @@ public class CreateWalletActivity extends BaseActivity {
         walletInfo.setBitcoinPublicKeyStr(wallet.getBitcoinPublicKeyStr());
         walletInfo.setBlockService(Constants.BlockService.BCC);
         walletInfo.setPassword(password);
-        BcaasApplication.setWalletAddress(walletAddress);//将当前的账户地址赋给Application，这样就不用每次都去操作数据库
+        BcaasApplication.setWalletInfo(walletInfo);//将当前的账户地址赋给Application，这样就不用每次都去操作数据库
         insertWalletInfoInDB(walletInfo);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KeyMaps.AccountAddress, walletAddress);

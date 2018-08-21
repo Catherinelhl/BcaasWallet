@@ -48,14 +48,9 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView 
     }
 
     public void showToast(final String toastInfo) {
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                L.d(toastInfo);
-//                Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_SHORT).show();
+        L.d(toastInfo);
+        Toast.makeText(BcaasApplication.context(), toastInfo, Toast.LENGTH_SHORT).show();
 
-            }
-        });
     }
 
     /**

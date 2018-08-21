@@ -2,7 +2,6 @@ package com.obt.bcaaswallet.interactor;
 
 import com.obt.bcaaswallet.http.HttpApi;
 import com.obt.bcaaswallet.http.RetrofitFactory;
-import com.obt.bcaaswallet.vo.WalletVO;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -19,14 +18,14 @@ import retrofit2.Callback;
 public class LoginInteractor {
 
     public void login(RequestBody body, Callback<String> callBackListener) {
-        HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
+        HttpApi httpApi = RetrofitFactory.getInstance().create(HttpApi.class);
         Call<String> call = httpApi.login(body);
         call.enqueue(callBackListener);
     }
 
     public void login(String walletInfo, Callback<String> callBackListener) {
        RequestBody body= RequestBody.create(MediaType.parse("application/json"), walletInfo);
-        HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
+        HttpApi httpApi = RetrofitFactory.getInstance().create(HttpApi.class);
         Call<String> call = httpApi.login(body);
         call.enqueue(callBackListener);
     }

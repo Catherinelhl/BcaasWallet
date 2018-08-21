@@ -69,4 +69,6 @@
     <string name="dataexceptionofaccount">账户数据异常！</string>
     <string name="data_error">获取数据异常。</string>
     <string name="localdata_exception">用户本地数据异常。</string>
+    <string name="walletdata_failure">钱包数据获取失败。</string>
+    <string name="null_wallet">获取的钱包信息为空。</string>
 </resources>

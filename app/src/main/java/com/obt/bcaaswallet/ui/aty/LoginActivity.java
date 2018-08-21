@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.event.ToLogin;
 import com.obt.bcaaswallet.presenter.LoginPresenterImp;
 import com.obt.bcaaswallet.ui.contracts.LoginContracts;
@@ -133,7 +134,9 @@ public class LoginActivity extends BaseActivity implements LoginContracts.View {
 
     @Override
     public void loginSuccess() {
-        intentToActivity(MainActivity.class, true);
+        Bundle bundle=new Bundle();
+        bundle.putString(Constants.KeyMaps.From,Constants.ValueMaps.FROM_LOGIN);
+        intentToActivity(bundle,MainActivity.class, true);
     }
 
     @Override

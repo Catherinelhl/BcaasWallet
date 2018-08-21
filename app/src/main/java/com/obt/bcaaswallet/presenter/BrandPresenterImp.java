@@ -96,8 +96,10 @@ public class BrandPresenterImp extends BasePresenterImp implements BrandContract
                     view.noWalletInfo();
                 } else {
                     if (walletVoResponseJson.getSuccess()) {
+                        saveWalletInfo(walletVO);
                         view.online();
                     } else {
+                        view.offline();
                         view.failure(walletVoResponseJson.getMessage());
                     }
                 }

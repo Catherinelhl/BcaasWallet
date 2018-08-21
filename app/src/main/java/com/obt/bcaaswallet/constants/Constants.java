@@ -33,6 +33,10 @@ public class Constants {
         public static final String BLOCK_TYPE_RECEIVE = "Receive";
         public static final String BLOCK_TYPE_CHANGE = "Change";
 
+        public static final int TIMEOUTTIME = 30000;
+
+        public static final String FROM_BRAND = "brand";
+        public static final String FROM_LOGIN = "login";
     }
 
     public enum SettingType {//定义一下设置的类型
@@ -52,7 +56,8 @@ public class Constants {
 
         public static final String AccountAddress = "accountAddress";
         public static final String PrivateKey = "privateKey";
-        public static final String BlockService= "blockService";
+        public static final String BlockService = "blockService";
+        public static String From = "from";//来自
     }
 
     public static class Domains {
@@ -89,6 +94,6 @@ public class Constants {
 
     public class BlockService {
         // TODO: 2018/8/20 待定
-        public static final String BCC="BCC";
+        public static final String BCC = "BCC";
     }
 }

@@ -17,7 +17,7 @@ import retrofit2.Callback;
 public class SettingInteractor {
 
     public void logout(RequestBody body, Callback<WalletVoResponseJson> callBackListener) {
-        HttpApi httpApi = RetrofitFactory.getStringInstance().create(HttpApi.class);
+        HttpApi httpApi = RetrofitFactory.getInstance().create(HttpApi.class);
         Call<WalletVoResponseJson> call = httpApi.logout(body);
         call.enqueue(callBackListener);
     }
