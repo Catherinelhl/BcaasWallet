@@ -10,6 +10,8 @@ import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.presenter.BrandPresenterImp;
 import com.obt.bcaaswallet.ui.contracts.BrandContracts;
+import com.obt.bcaaswallet.utils.LL;
+import com.obt.bcaaswallet.utils.PreferenceU;
 import com.obt.bcaaswallet.vo.WalletVO;
 
 
@@ -50,7 +52,9 @@ public class BrandActivity extends BaseActivity implements BrandContracts.View {
 
     @Override
     public void initViews() {
+        PreferenceU.getInstance(this).saveFloat("brand",0.01f);
         presenter = new BrandPresenterImp(this);
+        LL.d("initViews");
         new Thread(new Runnable() {
             @Override
             public void run() {
