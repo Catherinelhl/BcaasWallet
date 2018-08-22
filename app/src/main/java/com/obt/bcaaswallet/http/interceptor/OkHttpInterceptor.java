@@ -37,7 +37,7 @@ public class OkHttpInterceptor implements Interceptor {
         // 比如: --> POST http://121.40.227.8:8088/api http/1.1
         String requestStartMessage = "--> " + request.method() + ' ' + request.url() + ' ' + protocol;
 
-        L.d("requestStartMessage = " + requestStartMessage);
+        L.line("requestStartMessage = " + requestStartMessage);
 
         // 打印 Response
         Response response;
@@ -58,7 +58,7 @@ public class OkHttpInterceptor implements Interceptor {
             Charset charset = UTF8;
             if (contentLength != 0) {
                 // 获取Response的body的字符串 并打印
-                L.line(" response = " + buffer.clone().readString(charset));
+                L.line(" http response data==> " + buffer.clone().readString(charset));
             }
         }
         return response;

@@ -112,23 +112,27 @@ public class CreateWalletActivity extends BaseActivity {
 
     private void createWalletInfo(String password) {
         //创建钱包，并且保存钱包的公钥，私钥，地址，密码
-        Wallet wallet = WalletU.getWalletInfo("");
-        DaoSession session = ((BcaasApplication) this.getApplicationContext()).getDaoSession();
-        WalletInfoDao walletDao = session.getWalletInfoDao();
+        Wallet wallet = WalletU.getWalletInfo();
         WalletInfo walletInfo = new WalletInfo();
         String walletAddress = wallet.getBitcoinAddressStr();
         walletInfo.setBitcoinAddressStr(walletAddress);
         walletInfo.setBitcoinPrivateKeyWIFStr(wallet.getBitcoinPrivateKeyWIFStr());
         walletInfo.setBitcoinPublicKeyStr(wallet.getBitcoinPublicKeyStr());
-        // TODO: 2018/8/20 待定
-        walletInfo.setBlockService("BCC");
+        walletInfo.setBlockService(Constants.BlockService.BCC);
         walletInfo.setPassword(password);
-        BcaasApplication.setWalletAddress(walletAddress);
-        walletDao.insert(walletInfo);
+        BcaasApplication.setWalletInfo(walletInfo);//将当前的账户地址赋给Application，这样就不用每次都去操作数据库
+        insertWalletInfoInDB(walletInfo);
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KeyMaps.AccountAddress, walletAddress);
         bundle.putString(Constants.KeyMaps.PrivateKey, wallet.getBitcoinPrivateKeyWIFStr());
-        bundle.putString(Constants.KeyMaps.BlockService, "BCC");
+        bundle.putString(Constants.KeyMaps.BlockService, Constants.BlockService.BCC);
         intentToActivity(bundle, WalletCreatedSuccessActivity.class, true);
+    }
+
+
+    private void insertWalletInfoInDB(WalletInfo walletInfo) {
+        DaoSession session = ((BcaasApplication) this.getApplicationContext()).getDaoSession();
+        WalletInfoDao walletDao = session.getWalletInfoDao();
+        walletDao.insert(walletInfo);
     }
 }

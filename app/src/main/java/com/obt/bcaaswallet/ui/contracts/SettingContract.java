@@ -13,7 +13,7 @@ public interface SettingContract {
     interface View  extends BaseView{
         void logoutSuccess();
 
-        void logoutFailure();
+        void logoutFailure(String message);
     }
 
     interface Presenter {

@@ -15,8 +15,11 @@ import com.obt.bcaaswallet.R;
 import com.obt.bcaaswallet.base.BaseActivity;
 import com.obt.bcaaswallet.base.BaseFragment;
 import com.obt.bcaaswallet.bean.TransactionsBean;
+import com.obt.bcaaswallet.constants.Constants;
 import com.obt.bcaaswallet.event.SwitchTab;
 import com.obt.bcaaswallet.event.UpdateAddressEvent;
+import com.obt.bcaaswallet.presenter.MainPresenterImp;
+import com.obt.bcaaswallet.ui.contracts.MainContracts;
 import com.obt.bcaaswallet.ui.frg.MainFragment;
 import com.obt.bcaaswallet.ui.frg.ReceiveFragment;
 import com.obt.bcaaswallet.ui.frg.ScanFragment;
@@ -38,7 +41,7 @@ import butterknife.BindView;
  * <p>
  * 进入当前钱包首页
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainContracts.View {
 
     @BindView(R.id.tvTitle)
     TextView tvTitle;
@@ -47,15 +50,19 @@ public class MainActivity extends BaseActivity {
     private List<String> currency;//获取所有的币种
     private List<TransactionsBean> allCurrency;//获取所有的币种以及相关的交易信息
 
-    private String addressOfUser;//用户的账户地址
     private List<BaseFragment> mFragmentList;
     private Fragment currentFragment;
     private int currentIndex;
 
+    private String from;//记录是从那里跳入到当前的首页
+
+    private MainContracts.Presenter presenter;
+
 
     @Override
     public void getArgs(Bundle bundle) {
-
+        if (bundle == null) return;
+        from = bundle.getString(Constants.KeyMaps.From);
     }
 
     @Override
@@ -65,12 +72,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        presenter = new MainPresenterImp(this);
         mFragmentList = new ArrayList<>();
+        presenter.checkANClientIPInfo(from);
         initCurrency();
         initCurrencyData();
         initFragment();
         initNavigation();
         setMainTitle();
+        presenter.startTCPConnectToGetReceiveBlock();
+
     }
 
     private void initNavigation() {
@@ -82,6 +93,7 @@ public class MainActivity extends BaseActivity {
                 .addItem(new BottomNavigationItem(R.mipmap.icon_setting_f, getString(R.string.setting)).setInactiveIconResource(R.mipmap.icon_setting))
                 .setFirstSelectedPosition(0)
                 .initialise();
+        tabBar.selectTab(0, true);
     }
 
     private void initCurrency() {
@@ -170,10 +182,6 @@ public class MainActivity extends BaseActivity {
         tvTitle.setText(getResources().getString(R.string.bcaas_u));
     }
 
-    public String getAddressOfUser() {
-        addressOfUser = "ajkdbfnaskdjbfjhasdbf===";
-        return addressOfUser;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -224,17 +232,33 @@ public class MainActivity extends BaseActivity {
         BaseFragment fragment = mFragmentList.get(position);
         currentFragment = fragment;
         ft.replace(R.id.fl_module, fragment);
-
-//    }
-//        if (!fragment.isAdded()) {
-//            ft.add(R.id.fl_module, fragment);
-//        }
-//        ft.show(fragment);
-//        if (currentIndex != position) {
-//            ft.hide(mFragmentList.get(currentIndex));
-//            currentIndex = position;
-//        }
         ft.commitAllowingStateLoss();
     }
 
+    public void logout() {
+        intentToActivity(LoginActivity.class, true);
+    }
+
+    @Override
+    public void responseSuccess() {
+        // 响应responseSuccess
+        // TODO: 2018/8/21 记得删除
+        showToast("与AN成功建立连接。");
+    }
+
+    @Override
+    public void resetAuthNodeFailure(String message) {
+        showToast(message);
+    }
+
+    @Override
+    public void resetAuthNodeSuccess() {
+        //todo 重新请求AN地址成功，开始建立TCP
+        presenter.startTCPConnectToGetReceiveBlock();
+    }
+
+    @Override
+    public void noAnClientInfo() {
+        //需要重新reset
+    }
 }

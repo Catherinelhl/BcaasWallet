@@ -12,13 +12,13 @@ import retrofit2.Callback;
  * @author catherine.brainwilliam
  * @since 2018/8/20
  * <p>
- * 设置的网络
+ * 验证当前账户
  */
-public class SettingInteractor {
+public class VerifyInteractor {
 
-    public void logout(RequestBody body, Callback<WalletVoResponseJson> callBackListener) {
+    public void verify(RequestBody body, Callback<WalletVoResponseJson> callBackListener) {
         HttpApi httpApi = RetrofitFactory.getInstance().create(HttpApi.class);
-        Call<WalletVoResponseJson> call = httpApi.logout(body);
+        Call<WalletVoResponseJson> call = httpApi.verify(body);
         call.enqueue(callBackListener);
     }
 

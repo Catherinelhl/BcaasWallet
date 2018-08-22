@@ -7,6 +7,8 @@ import java.io.Serializable;
 /**
  * @author catherine.brainwilliam
  * @since 2018/8/20
+ *
+ * 响应SFN 数据格式
  */
 public class WalletVoResponseJson implements Serializable {
 

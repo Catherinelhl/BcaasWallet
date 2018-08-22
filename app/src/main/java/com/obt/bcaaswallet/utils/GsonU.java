@@ -2,12 +2,15 @@ package com.obt.bcaaswallet.utils;
 
 
 import com.google.gson.Gson;
+import com.obt.bcaaswallet.encryption.AES;
 import com.obt.bcaaswallet.http.ParameterizedTypeImpl;
 
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.adapter.rxjava.Result;
 
 
@@ -45,5 +48,34 @@ public class GsonU {
         if (bean == null) return null;
         Gson gson = new Gson();
         return gson.toJson(bean);
+    }
+
+    /*   encryption */
+    public static <T> String AESJsonBean(T jsonBean) {
+        if (jsonBean == null) {
+            throw new NullPointerException("AESJsonBean jsonBean is null");
+        }
+        String json = GsonU.encodeToString(jsonBean);
+        // encryption
+        String encodeJson = null;
+        try {
+            encodeJson = AES.encodeCBC_128(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encodeJson;
+    }
+
+    public static RequestBody stringToRequestBody(String str) {
+        if (StringU.isEmpty(str)) return null;
+        return RequestBody.create(MediaType.parse("application/json"), str);
+    }
+
+    public static <T> RequestBody beanToRequestBody(T jsonBean) {
+        String str = AESJsonBean(jsonBean);
+        if (StringU.isEmpty(str)) {
+            throw new NullPointerException("beanToRequestBody str is null");
+        }
+        return RequestBody.create(MediaType.parse("application/json"), str);
     }
 }

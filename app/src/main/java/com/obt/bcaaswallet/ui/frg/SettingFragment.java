@@ -19,7 +19,7 @@ import com.obt.bcaaswallet.ui.aty.AddressManagerActivity;
 import com.obt.bcaaswallet.ui.aty.CheckWalletInfoActivity;
 import com.obt.bcaaswallet.ui.contracts.SettingContract;
 import com.obt.bcaaswallet.utils.L;
-import com.obt.bcaaswallet.vo.WalletVO;
+import com.obt.bcaaswallet.utils.StringU;
 
 import java.util.List;
 
@@ -95,29 +95,26 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
             @Override
             public void onClick(View v) {
                 L.d("当前账户地址是=》" + BcaasApplication.getWalletAddress());
+                String address = BcaasApplication.getWalletAddress();
+                if (StringU.isEmpty(address)) {
+                    showToast(getString(R.string.dataexceptionofaccount));
+                    return;
+                }
+
                 presenter.logout(BcaasApplication.getWalletAddress());
             }
         });
     }
 
     @Override
-    public void logoutFailure() {
-
+    public void logoutFailure(String message) {
+        showToast(getString(R.string.logout_failure));
     }
 
     @Override
     public void logoutSuccess() {
-
+        logout();
     }
 
-    @Override
-    public void showLoadingDialog(String loading) {
-
-    }
-
-    @Override
-    public void hideLoadingDialog() {
-
-    }
 
 }
